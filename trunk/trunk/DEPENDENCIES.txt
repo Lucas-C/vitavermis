@@ -1,0 +1,7 @@
+# This file is intended to list all the project dependencies
+
+Slick (build=274, see slick.jar/version)
+-> jogg & jorbis (son)
+-> LWJGL
+
+SnakeYAML (v1.11)
