@@ -1,0 +1,16 @@
+# Work In Progress
+
+[Lucas]
+DONE:
+	- setup base classes (Main...)
+	- plugin checkstyle
+	- plugin findbugs
+	- plugin YEdit 
+	- début de code/réflexion sur les fichiers de conf
+
+TODO:
+	- ajouter exceptions Checkstyle
+	- example of Junit test
+	- use Ant ?
+	- use log system comme log4j/slf4j ?
+
