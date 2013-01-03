@@ -1,4 +1,5 @@
 # This file is intended to explain how to setup the needed tools to develop on the project
+# Authors Cimon Lucas
 
 #---------------#
 # Eclipse setup #
