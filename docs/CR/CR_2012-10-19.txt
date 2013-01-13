@@ -1,0 +1,46 @@
+COMPTE-RENDU DE LA RÉUNION DU 19/10/2012
+----------------------------------------
+
+Les personnes présentes étaient : Gaetan, Kévin, Matthieu, Nicolas, Quentin
+
+1. ON SE MOTIVE
+      
+   Nous avons jugé utile de faire le point sur la motivation des gens.
+   Trop peu de gens participent à chaque réunion, pas une seule n'a encore rassemblé tout le monde.
+   Même problème pour les mails : très peu de personnes répondent aux mails, même s'ils portent le tag IMPORTANT.
+   
+   Si l'on ne redresse pas la barre maintenant, nous allons droit dans le mur, bande de flans.
+   
+2. REPONDRE AUX MAILS IMPORTANTS (et aux autres ça serait encore mieux)
+   
+   Nous proposons donc de fixer une date limite de réponse aux mails portant le tag IMPORTANT de 3 ou 4 jours.
+   Passé ce délai, nous considérerions que les personnes qui n'on pas répondu approuvent le contenu du mail.
+   Ceux qui n'auraient pas la possibilité répondre à cette exigence pourraient :
+   - soit contacter un autre membre pour être mis au courant et donner sa réponse,
+   - soit bénéficier exceptionnellement et personnellement d'un délai supplémentaire.
+   
+3. MAIS FAUT Y ALLER MOLLO QUAND MEME...
+      
+   Il faut cependant rappeler que le projet se fait sur le temps libre des membres.
+   Et que certains d'entre eux ont un emploi du temps déjà correctement fourni.
+   
+4. ON S'ORGANISE, ON PLANIFIE
+   
+   Nous proposons également l'établissement d'un planning ou de diagramme
+   afin de lister l'ensemble des tâches qui nous permettront d'atteindre notre but.
+   J'ai commencé un semblant de bout de brouillon d'exemple sur le wiki (page Planning).
+   Le but est de savoir où l'on va et comment qu'on y va.
+   Pas de date, juste des tâches qui seront raffinés petit à petit.
+
+6. ON SE MET D'ACCORD
+   
+   Tous les membres présents lors de la réunion se sont prononcés favorablement pour travailler
+   sur Vita Vermis (cf. pad scénarios). Si tout le monde approuve cette décision, le contenu du pad
+   sera archivé sur le dépot SVN pour laisser place à aux premières réflexions sur Vita Vermis.
+   Le pad sera maintenu par Toof pour structurer le tout.
+
+5. ON SE BOUGE LE DERCHE
+   
+   Enfin, l'équipe des devs doit décider rapidement du langage et de la librairie qu'elle utilisera
+   pour ensuite créer un prototype, commun cette fois. Nous pensons en effet que lancer la machine
+   redonnera un coup de jus à la motivation générale.

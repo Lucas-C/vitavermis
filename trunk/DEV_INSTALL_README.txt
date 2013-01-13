@@ -1,9 +1,10 @@
 # This file is intended to explain how to setup the needed tools to develop on the project
-# Authors Cimon Lucas
 
 #---------------#
 # Eclipse setup #
 #---------------#
+
+IMPORTANT: use 'trunk/' as the project root
 
 # Linux (tested under Ubuntu 11.10)
 
@@ -20,9 +21,6 @@ sudo update-alternatives --config jar
 #-----------------#
 # Eclipse plugins #
 #-----------------#
-
-# Yedit: YAML files editor
-Eclipse : Help -> Install New Software : http://dadacoalition.org/yedit/
 
 # Checkstyle: source code analyzer
 Eclipse : Help -> Install New Software : http://eclipse-cs.sf.net/update/
@@ -56,3 +54,8 @@ echo "deb http://opensource.wandisco.com/ubuntu lucid svn17" | sudo tee /etc/apt
 sudo wget -q http://opensource.wandisco.com/wandisco-debian.gpg -O- | sudo apt-key add -
 sudo apt-get update
 sudo apt-get dist-upgrade
+
+# Yedit: YAML files editor
+Eclipse : Help -> Install New Software : http://dadacoalition.org/yedit/
+
+

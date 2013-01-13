@@ -1,0 +1,150 @@
+Delivered-To: lucas.cimon@gmail.com
+Received: by 10.43.47.69 with SMTP id ur5csp724416icb;
+        Thu, 23 Aug 2012 05:41:32 -0700 (PDT)
+Received: by 10.216.220.89 with SMTP id n67mr872448wep.73.1345725692170;
+        Thu, 23 Aug 2012 05:41:32 -0700 (PDT)
+Return-Path: <tafnico@orange.fr>
+Received: from smtp.smtpout.orange.fr (smtp04.smtpout.orange.fr. [80.12.242.126])
+        by mx.google.com with ESMTP id dp1si18607156wib.9.2012.08.23.05.41.31;
+        Thu, 23 Aug 2012 05:41:32 -0700 (PDT)
+Received-SPF: pass (google.com: best guess record for domain of tafnico@orange.fr designates 80.12.242.126 as permitted sender) client-ip=80.12.242.126;
+Authentication-Results: mx.google.com; spf=pass (google.com: best guess record for domain of tafnico@orange.fr designates 80.12.242.126 as permitted sender) smtp.mail=tafnico@orange.fr
+Received: from wwinf1f18 ([10.232.36.62])
+	by mwinf5d07 with ME
+	id qChX1j00D1LSsoA03ChXEv; Thu, 23 Aug 2012 14:41:31 +0200
+Date: Thu, 23 Aug 2012 14:41:31 +0200 (CEST)
+From: nicolas tafforeau <tafnico@orange.fr>
+Reply-To: nicolas tafforeau <tafnico@orange.fr>
+To: lucas.cimon@gmail.com, Matthieu <matthieu.lenogue@gmail.com>, 
+	01.elliotJ@gmail.com, kevin <kev.bremond@gmail.com>, 
+	Quentin <toof09@hotmail.com>, 
+	=?UTF-8?Q?Aur=C3=A9lien?= <aurelien.narbe@yahoo.fr>, 
+	gaetan Gautier <g.a.e.t.a.n@orange.fr>
+Message-ID: <1838261368.40454.1345725691263.JavaMail.www@wwinf1f18>
+Subject: =?UTF-8?Q?[PROJET]_Compte-rendu_r=C3=A9union_du_21/08/2012?=
+MIME-Version: 1.0
+Content-Type: multipart/alternative; 
+	boundary="----=_Part_40453_1145979152.1345725691261"
+X-Originating-IP: [213.30.132.38]
+X-WUM-FROM: |~|
+X-WUM-TO: |~||~||~||~||~||~||~|
+X-WUM-REPLYTO: |~|
+
+------=_Part_40453_1145979152.1345725691261
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+
+Personnes pr=C3=A9sentes : Lucas, Nicolas, Kevin, Quentin, Matthieu (1/5), =
+Aur=C3=A9lien
+Prises de notes : Nicolas
+=C2=A0
+Th=C3=A8me de la r=C3=A9union=C2=A0: Trouver le langage utilis=C3=A9 pour l=
+e jeu.
+=C2=A0
+Outils
+- Mumble pour les r=C3=A9unions=C2=A0: cr=C3=A9ation d=E2=80=99adresse jeta=
+ble pour faire un serveur gratuit de 5 jours.
+=C2=A0
+Gestionnaire de version
+- Mail de Matthieu=C2=A0: petit travail =C3=A0 faire pour ceux qui ne l=E2=
+=80=99ont pas fait.
+=C2=A0
+D=C3=A9tail des langages sur le pad de DEV.
+=C2=A0
+Ont =C3=A9t=C3=A9 =C3=A9cart=C3=A9 les logiciels =C2=AB=C2=A0clef en main=
+=C2=A0=C2=BB, pr=C3=A9f=C3=A9rence du d=C3=A9veloppement en code et non =C3=
+=A0 la souris.
+=C2=A0
+Description rapide des diff=C3=A9rents langages ainsi que leur biblioth=C3=
+=A8que graphique.
+R=C3=A9sultat=C2=A0: les langages les plus connues=C2=A0: C / C++ / java
+=C2=A0
+Reste =C3=A0 choisir parmi C, C++ et Java=C2=A0: plus de d=C3=A9tail en att=
+ente de la part de Mat et j=C3=A9sus qui connaissent mieux ces langages et =
+voir lequel est le mieux.
+=C2=A0
+Suite aux discussions, on part sur un jeu plut=C3=B4t 2D
+=C2=A0
+Pour les dev, une fois le langage trouv=C3=A9 d=C3=A9veloppement d=E2=80=99=
+une d=C3=A9mo personnelle par dev (d=C3=A9tail plus loin)
+Apr=C3=A8s la d=C3=A9mo personnelle, d=C3=A9mo en commun
+=C2=A0
+Cr=C3=A9atif avanc=C3=A9 sur l=E2=80=99histoire du jeu.
+=C2=A0
+Prochaine r=C3=A9union
+- La date de la prochaine r=C3=A9union (g=C3=A9n=C3=A9rale) a =C3=A9t=C3=A9=
+ fix=C3=A9e au mardi 29 ao=C3=BBt 18h
+- Ordres du jour :
+=C2=A0 =C2=A0 -=C2=A0Charte=C2=A0=C2=A0=C2=A0
+=C2=A0 =C2=A0 -=C2=A0Choix d'une licence
+=C2=A0 =C2=A0 -=C2=A0Bilan de la r=C3=A9colte d'inspirations et discussion =
+des caract=C3=A9ristiques du jeu
+=C2=A0 =C2=A0 -=C2=A0Choix du nom de code
+=C2=A0 =C2=A0 -=C2=A0Choix du langage utilis=C3=A9
+=C2=A0 =C2=A0 - cahier des charge de la d=C3=A9mo
+=C2=A0
+D=C3=A9mo simple
+-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=C2=A0Plateforme simple
+=C2=A0 -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 Perso princi=
+pal=C2=A0: loutre
+=C2=A0 -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 Ennemi=C2=A0=
+: nain qui lance du caca
+=C2=A0 -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 Utilisation =
+: seulement du clavier pour d=C3=A9placement de la loutre (haut bas gauche =
+droite) et saut ?
+=C2=A0 -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 But du jeu :=
+ =C3=A9viter le caca lanc=C3=A9 par les nains, loutre poss=C3=A8de quelques=
+ points de vie.
+Image commune=20
+-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0Loutre, nain, caca, image =
+de la plateforme
+------=_Part_40453_1145979152.1345725691261
+Content-Type: text/html; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+
+<p class="MsoNormal" style="margin-bottom: .0001pt;"><strong>Personnes pr&eacute;sentes</strong> : Lucas, Nicolas, Kevin, Quentin, Matthieu (1/5), Aur&eacute;lien</p>
+<p class="MsoNormal" style="margin-bottom: .0001pt;">Prises de notes : Nicolas</p>
+<p class="MsoNormal" style="margin-bottom: .0001pt;">&nbsp;</p>
+<p class="MsoNormal" style="margin-bottom: .0001pt;"><strong><span style="text-decoration: underline;">Th&egrave;me de la r&eacute;union</span></strong>&nbsp;: Trouver le langage utilis&eacute; pour le jeu.</p>
+<p class="MsoNormal" style="margin-bottom: .0001pt;">&nbsp;</p>
+<p class="MsoNormal" style="margin-bottom: .0001pt;"><strong>Outils</strong></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt;">- Mumble pour les r&eacute;unions&nbsp;: cr&eacute;ation d&rsquo;adresse jetable pour faire un serveur gratuit de 5 jours.</p>
+<p class="MsoNormal" style="margin-bottom: .0001pt;">&nbsp;</p>
+<p class="MsoNormal" style="margin-bottom: .0001pt;"><strong>Gestionnaire de version</strong></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt;">- Mail de Matthieu&nbsp;: petit travail &agrave; faire pour ceux qui ne l&rsquo;ont pas fait.</p>
+<p class="MsoNormal" style="margin-bottom: .0001pt;">&nbsp;</p>
+<p class="MsoNormal" style="margin-bottom: .0001pt;">D&eacute;tail des langages sur le pad de DEV.</p>
+<p class="MsoNormal" style="margin-bottom: .0001pt;">&nbsp;</p>
+<p class="MsoNormal" style="margin-bottom: .0001pt;">Ont &eacute;t&eacute; &eacute;cart&eacute; les logiciels &laquo;&nbsp;clef en main&nbsp;&raquo;, pr&eacute;f&eacute;rence du d&eacute;veloppement en code et non &agrave; la souris.</p>
+<p class="MsoNormal" style="margin-bottom: .0001pt;">&nbsp;</p>
+<p class="MsoNormal" style="margin-bottom: .0001pt;">Description rapide des diff&eacute;rents langages ainsi que leur biblioth&egrave;que graphique.</p>
+<p class="MsoNormal" style="margin-bottom: .0001pt;">R&eacute;sultat&nbsp;: les langages les plus connues&nbsp;: C / C++ / java</p>
+<p class="MsoNormal" style="margin-bottom: .0001pt;">&nbsp;</p>
+<p class="MsoNormal" style="margin-bottom: .0001pt;">Reste &agrave; choisir parmi C, C++ et Java&nbsp;: plus de d&eacute;tail en attente de la part de Mat et j&eacute;sus qui connaissent mieux ces langages et voir lequel est le mieux.</p>
+<p class="MsoNormal" style="margin-bottom: .0001pt;">&nbsp;</p>
+<p class="MsoNormal" style="margin-bottom: .0001pt;">Suite aux discussions, on part sur un jeu plut&ocirc;t 2D</p>
+<p class="MsoNormal" style="margin-bottom: .0001pt;">&nbsp;</p>
+<p class="MsoNormal" style="margin-bottom: .0001pt;">Pour les dev, une fois le langage trouv&eacute; d&eacute;veloppement d&rsquo;une d&eacute;mo personnelle par dev (d&eacute;tail plus loin)</p>
+<p class="MsoNormal" style="margin-bottom: .0001pt;">Apr&egrave;s la d&eacute;mo personnelle, d&eacute;mo en commun</p>
+<p class="MsoNormal" style="margin-bottom: .0001pt;">&nbsp;</p>
+<p class="MsoNormal" style="margin-bottom: .0001pt;">Cr&eacute;atif avanc&eacute; sur l&rsquo;histoire du jeu.</p>
+<p class="MsoNormal" style="margin-bottom: .0001pt;">&nbsp;</p>
+<p class="MsoNormal" style="margin-bottom: .0001pt;"><strong><span style="text-decoration: underline;">Prochaine r&eacute;union</span></strong></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt;">- La date de la prochaine r&eacute;union (g&eacute;n&eacute;rale) a &eacute;t&eacute; fix&eacute;e au mardi 29 ao&ucirc;t 18h</p>
+<p class="MsoNormal" style="margin-bottom: .0001pt;">- Ordres du jour :</p>
+<p class="MsoNormal" style="margin-bottom: .0001pt;">&nbsp; &nbsp; -&nbsp;Charte&nbsp;&nbsp;&nbsp;</p>
+<p class="MsoNormal" style="margin-bottom: .0001pt;">&nbsp; &nbsp; -&nbsp;Choix d'une licence</p>
+<p class="MsoNormal" style="margin-bottom: .0001pt;">&nbsp; &nbsp; -&nbsp;Bilan de la r&eacute;colte d'inspirations et discussion des caract&eacute;ristiques du jeu</p>
+<p class="MsoNormal" style="margin-bottom: .0001pt;">&nbsp; &nbsp; -&nbsp;Choix du nom de code</p>
+<p class="MsoNormal" style="margin-bottom: .0001pt;">&nbsp; &nbsp; -&nbsp;Choix du langage utilis&eacute;</p>
+<p class="MsoNormal" style="margin-bottom: .0001pt;">&nbsp; &nbsp; - cahier des charge de la d&eacute;mo</p>
+<p class="MsoNormal" style="margin-bottom: .0001pt;">&nbsp;</p>
+<p class="MsoNormal" style="margin-bottom: .0001pt;"><strong><span style="text-decoration: underline;">D&eacute;mo simple</span></strong></p>
+<p class="MsoNormal" style="margin-top: 0cm; margin-right: 0cm; margin-bottom: .0001pt; margin-left: 36.0pt; text-indent: -18.0pt; mso-list: l0 level1 lfo1;"><!--[if !supportLists]-->-<span style="font-size: 7pt; font-family: 'Times New Roman';">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</span><!--[endif]-->Plateforme simple</p>
+<p class="MsoNormal" style="margin-top: 0cm; margin-right: 0cm; margin-bottom: .0001pt; margin-left: 36.0pt; text-indent: -18.0pt; mso-list: l0 level1 lfo1;"><!--[if !supportLists]-->&nbsp; -<span style="font-size: 7pt; font-family: 'Times New Roman';">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><!--[endif]-->Perso principal&nbsp;: loutre</p>
+<p class="MsoNormal" style="margin-top: 0cm; margin-right: 0cm; margin-bottom: .0001pt; margin-left: 36.0pt; text-indent: -18.0pt; mso-list: l0 level1 lfo1;"><!--[if !supportLists]-->&nbsp; -<span style="font-size: 7pt; font-family: 'Times New Roman';">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><!--[endif]-->Ennemi&nbsp;: nain qui lance du caca</p>
+<p class="MsoNormal" style="margin-top: 0cm; margin-right: 0cm; margin-bottom: .0001pt; margin-left: 36.0pt; text-indent: -18.0pt; mso-list: l0 level1 lfo1;"><!--[if !supportLists]-->&nbsp; -<span style="font-size: 7pt; font-family: 'Times New Roman';">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><!--[endif]-->Utilisation : seulement du clavier pour d&eacute;placement de la loutre (haut bas gauche droite) et saut ?</p>
+<p class="MsoNormal" style="margin-top: 0cm; margin-right: 0cm; margin-bottom: .0001pt; margin-left: 36.0pt; text-indent: -18.0pt; mso-list: l0 level1 lfo1;"><!--[if !supportLists]-->&nbsp; -<span style="font-size: 7pt; font-family: 'Times New Roman';">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><!--[endif]-->But du jeu : &eacute;viter le caca lanc&eacute; par les nains, loutre poss&egrave;de quelques points de vie.</p>
+<p class="MsoNormal" style="margin-bottom: .0001pt;"><strong><span style="text-decoration: underline;">Image commune </span></strong></p>
+<p class="MsoNormal" style="margin-top: 0cm; margin-right: 0cm; margin-bottom: .0001pt; margin-left: 36.0pt; text-indent: -18.0pt; mso-list: l0 level1 lfo1;"><!--[if !supportLists]-->-<span style="font-size: 7pt; font-family: 'Times New Roman';">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span><!--[endif]-->Loutre, nain, caca, image de la plateforme</p>
+------=_Part_40453_1145979152.1345725691261--
