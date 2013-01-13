@@ -1,0 +1,212 @@
+Delivered-To: lucas.cimon@gmail.com
+Received: by 10.42.44.129 with SMTP id b1csp1391icf;
+        Tue, 7 Aug 2012 16:28:36 -0700 (PDT)
+Received: by 10.204.133.193 with SMTP id g1mr6452811bkt.2.1344382115863;
+        Tue, 07 Aug 2012 16:28:35 -0700 (PDT)
+Return-Path: <g.a.e.t.a.n@orange.fr>
+Received: from smtp.smtpout.orange.fr (smtp08.smtpout.orange.fr. [80.12.242.130])
+        by mx.google.com with ESMTP id ht6si21809850bkc.79.2012.08.07.16.28.34;
+        Tue, 07 Aug 2012 16:28:35 -0700 (PDT)
+Received-SPF: pass (google.com: best guess record for domain of g.a.e.t.a.n@orange.fr designates 80.12.242.130 as permitted sender) client-ip=80.12.242.130;
+Authentication-Results: mx.google.com; spf=pass (google.com: best guess record for domain of g.a.e.t.a.n@orange.fr designates 80.12.242.130 as permitted sender) smtp.mail=g.a.e.t.a.n@orange.fr
+Received: from [127.0.0.1] ([90.12.106.78])
+	by mwinf5d16 with ME
+	id jzUY1j00F1hWctm03zUZzf; Wed, 08 Aug 2012 01:28:34 +0200
+Message-ID: <5021A49F.7010901@orange.fr>
+Date: Wed, 08 Aug 2012 01:28:31 +0200
+From: Gaetan Gautier <g.a.e.t.a.n@orange.fr>
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:14.0) Gecko/20120713 Thunderbird/14.0
+MIME-Version: 1.0
+To: lucas.cimon@gmail.com, Matthieu <matthieu.lenogue@gmail.com>, 
+ 01.elliotJ@gmail.com, kevin <kev.bremond@gmail.com>, 
+ Nico <tafnico@orange.fr>,
+ Quentin <toof09@hotmail.com>, =?ISO-8859-1?Q?Aur=E9lien?=
+ <aurelien.narbe@yahoo.fr>
+Subject: [PROJET] Compte-rendu =?ISO-8859-1?Q?r=E9union_du_07/08/2012?=
+Content-Type: multipart/alternative;
+ boundary="------------010600070506040705000407"
+X-Antivirus: avast! (VPS 120807-1, 07/08/2012), Outbound message
+X-Antivirus-Status: Clean
+
+This is a multi-part message in MIME format.
+--------------010600070506040705000407
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 8bit
+
+Personnes présentes : Gaetan, Lucas, Nico, Kevin, Quentin, Elliot, Matthieu
+Prises de notes : Gaetan
+
+*Charte*
+- Il serait intéressant de mettre sur papier certains points (par 
+exemple fixer des règles ou définir des rôles, tel que le coordinateur)
+- Un premier jet va être rédigé par Lucas et envoyé par mail. Il sera 
+discuté lors de la prochaine réunion et soumis à vote
+- Lucas a été désigné pour chercher des exemples de chartes existantes 
+sur le web
+
+*Outils*
+- Une page listant les différents outils utilisés pour le projet est 
+créée sur le wiki : 
+http://steamingplatypus.wikispaces.com/Projet+-+les+outils
+
+*Gestion de versions*
+- Un logiciel de gestion de versions sera utilisé pour tout ou partie 
+des ressources du projet
+- Il a été décidé d'utiliser Subversion, SVN pour les intimes
+- Assembla (http://www.assembla.com/) a été évoqué en tant qu'hébergeur 
+(pas sûr du nom)
+- Matthieu a été désigné pour former les non-initiés à SVN, choisir un 
+hébergeur et créer un premier dépôt de test
+     -> liens vers tuto et cours sur la page des outils
+
+*Récolte d'inspirations*
+- Afin de mieux cadrer les préférences de chacun, il est intéressant que 
+chacun indique des jeux pouvant servir d'inspiration
+- Kevin a été désigné pour envoyer le mail à chacun
+- Kevin, Elliot et Quentin ont été désignés pour traiter les résultats
+- Un bilan sera fait lors de la prochaine réunion, ce qui permettra de 
+commencer à décider des caractéristiques du jeu (type de jeu, univers, ...)
+
+*Licence*
+- Il est important de décider sous quel type de licence sera placé notre 
+projet
+- Gaetan a été désigné pour faire un récapitulatif des licences 
+existantes sur le wiki
+- La licence sera choisie lors de la prochaine réunion
+
+*Nom de code*
+- Il serait intéressant de fixer un nom de code (nom provisoire) pour 
+notre projet
+- Un pad a été créé afin de rassembler les différentes propositions
+- Le nom de code définitif sera fixé lors de la prochaine réunion
+
+*Réunion devs*
+- Une réunion des développeurs aura lieu vendredi 10 août
+- Seront abordés : les outils et langages à disposition, l'organisation 
+de l'équipe de développement, le prototype
+- Les personnes ne faisant pas partie de l'équipe de développement 
+peuvent aussi participer pour apprendre mais sont priées de ne pas 
+perturber la réunion
+
+*Prochaine réunion*
+- La date de la prochaine réunion a été fixée au mardi 21 août
+- Ordres du jour :
+     + Charte
+     + Choix d'une licence
+     + Bilan de la récolte d'inspirations et discussion des 
+caractéristiques du jeu
+     + Bilan de la réunion des développeurs
+     + Choix du nom de code
+
+------------------------------------------------------------------------------------------------------------------------------
+
+- Si la date de la prochaine réunion pose problème, merci de le signaler 
+le plus rapidement possible. (je dis ça parce que moi je suis pas encore 
+fixé ^^')
+
+- Afin de faciliter la tâche du preneur de note et de permettre aux 
+absents de ne rien louper, Mumble permet d'enregistrer les 
+conversations. Si tout le monde est d'accord, nous utiliserons cette 
+fonctionnalité dès la prochaine réunion.
+
+- En y repensant, ça risque d'être dur pour moi de faire la réunion devs 
+vendredi étant donné que je pars en vacances le lendemain matin... 
+j'essaie de vous tenir au courant
+
+--------------010600070506040705000407
+Content-Type: text/html; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
+
+<html>
+  <head>
+
+    <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+  </head>
+  <body bgcolor="#FFFFFF" text="#000000">
+    Personnes pr&eacute;sentes : Gaetan, Lucas, Nico, Kevin, Quentin, Elliot,
+    Matthieu<br>
+    Prises de notes : Gaetan<br>
+    <br>
+    <b>Charte</b><br>
+    - Il serait int&eacute;ressant de mettre sur papier certains points (par
+    exemple fixer des r&egrave;gles ou d&eacute;finir des r&ocirc;les, tel que le
+    coordinateur)<br>
+    - Un premier jet va &ecirc;tre r&eacute;dig&eacute; par Lucas et envoy&eacute; par mail. Il
+    sera discut&eacute; lors de la prochaine r&eacute;union et soumis &agrave; vote<br>
+    - Lucas a &eacute;t&eacute; d&eacute;sign&eacute; pour chercher des exemples de chartes
+    existantes sur le web<br>
+    <br>
+    <b>Outils</b><br>
+    - Une page listant les diff&eacute;rents outils utilis&eacute;s pour le projet est
+    cr&eacute;&eacute;e sur le wiki :
+    <a class="moz-txt-link-freetext" href="http://steamingplatypus.wikispaces.com/Projet+-+les+outils">http://steamingplatypus.wikispaces.com/Projet+-+les+outils</a><br>
+    <br>
+    <b>Gestion de versions</b><br>
+    - Un logiciel de gestion de versions sera utilis&eacute; pour tout ou
+    partie des ressources du projet<br>
+    - Il a &eacute;t&eacute; d&eacute;cid&eacute; d'utiliser Subversion, SVN pour les intimes<br>
+    - Assembla (<a class="moz-txt-link-freetext" href="http://www.assembla.com/">http://www.assembla.com/</a>) a &eacute;t&eacute; &eacute;voqu&eacute; en tant
+    qu'h&eacute;bergeur (pas s&ucirc;r du nom)<br>
+    - Matthieu a &eacute;t&eacute; d&eacute;sign&eacute; pour former les non-initi&eacute;s &agrave; SVN, choisir
+    un h&eacute;bergeur et cr&eacute;er un premier d&eacute;p&ocirc;t de test<br>
+    &nbsp;&nbsp;&nbsp; -&gt; liens vers tuto et cours sur la page des outils<br>
+    <br>
+    <b>R&eacute;colte d'inspirations</b><br>
+    - Afin de mieux cadrer les pr&eacute;f&eacute;rences de chacun, il est int&eacute;ressant
+    que chacun indique des jeux pouvant servir d'inspiration<br>
+    - Kevin a &eacute;t&eacute; d&eacute;sign&eacute; pour envoyer le mail &agrave; chacun<br>
+    - Kevin, Elliot et Quentin ont &eacute;t&eacute; d&eacute;sign&eacute;s pour traiter les
+    r&eacute;sultats<br>
+    - Un bilan sera fait lors de la prochaine r&eacute;union, ce qui permettra
+    de commencer &agrave; d&eacute;cider des caract&eacute;ristiques du jeu (type de jeu,
+    univers, ...)<br>
+    <br>
+    <b>Licence</b><br>
+    - Il est important de d&eacute;cider sous quel type de licence sera plac&eacute;
+    notre projet<br>
+    - Gaetan a &eacute;t&eacute; d&eacute;sign&eacute; pour faire un r&eacute;capitulatif des licences
+    existantes sur le wiki<br>
+    - La licence sera choisie lors de la prochaine r&eacute;union<br>
+    <br>
+    <b>Nom de code</b><br>
+    - Il serait int&eacute;ressant de fixer un nom de code (nom provisoire)
+    pour notre projet<br>
+    - Un pad a &eacute;t&eacute; cr&eacute;&eacute; afin de rassembler les diff&eacute;rentes propositions<br>
+    - Le nom de code d&eacute;finitif sera fix&eacute; lors de la prochaine r&eacute;union<br>
+    <br>
+    <b>R&eacute;union devs</b><br>
+    - Une r&eacute;union des d&eacute;veloppeurs aura lieu vendredi 10 ao&ucirc;t<br>
+    - Seront abord&eacute;s : les outils et langages &agrave; disposition,
+    l'organisation de l'&eacute;quipe de d&eacute;veloppement, le prototype<br>
+    - Les personnes ne faisant pas partie de l'&eacute;quipe de d&eacute;veloppement
+    peuvent aussi participer pour apprendre mais sont pri&eacute;es de ne pas
+    perturber la r&eacute;union<br>
+    <br>
+    <b>Prochaine r&eacute;union</b><br>
+    - La date de la prochaine r&eacute;union a &eacute;t&eacute; fix&eacute;e au mardi 21 ao&ucirc;t<br>
+    - Ordres du jour :<br>
+    &nbsp;&nbsp;&nbsp; + Charte<br>
+    &nbsp;&nbsp;&nbsp; + Choix d'une licence<br>
+    &nbsp;&nbsp;&nbsp; + Bilan de la r&eacute;colte d'inspirations et discussion des
+    caract&eacute;ristiques du jeu<br>
+    &nbsp;&nbsp;&nbsp; + Bilan de la r&eacute;union des d&eacute;veloppeurs<br>
+    &nbsp;&nbsp;&nbsp; + Choix du nom de code<br>
+    <br>
+------------------------------------------------------------------------------------------------------------------------------<br>
+    <br>
+    - Si la date de la prochaine r&eacute;union pose probl&egrave;me, merci de le
+    signaler le plus rapidement possible. (je dis &ccedil;a parce que moi je
+    suis pas encore fix&eacute; ^^')<br>
+    <br>
+    - Afin de faciliter la t&acirc;che du preneur de note et de permettre aux
+    absents de ne rien louper, Mumble permet d'enregistrer les
+    conversations. Si tout le monde est d'accord, nous utiliserons cette
+    fonctionnalit&eacute; d&egrave;s la prochaine r&eacute;union.<br>
+    <br>
+    - En y repensant, &ccedil;a risque d'&ecirc;tre dur pour moi de faire la r&eacute;union
+    devs vendredi &eacute;tant donn&eacute; que je pars en vacances le lendemain
+    matin... j'essaie de vous tenir au courant<br>
+  </body>
+</html>
+
+--------------010600070506040705000407--

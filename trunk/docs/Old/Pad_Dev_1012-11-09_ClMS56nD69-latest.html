@@ -1,0 +1,232 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Language" content="en-us" />
+<title>/ClMS56nD69</title>
+</head>
+<body>###### DevPad for SaladeRenoir videogame<br
+/><br
+/>Voici le pad pour les devs du projet<br
+/><br
+/>Un première chose intéressante serait de lister les différents outils (softwares) dispos pour les différents langages que nous pourrions utiliser :<br
+/><br
+/>### Questions: prévoir éditeur ? Ou fichiers de level txt ?<br
+/><br
+/><br
+/>### Logiciels "clefs en main"<br
+/><a href="http://jeux.developpez.com/telecharger/index/categorie/155/Logiciels-de-creation-de-jeux">http://jeux.developpez.com/telecharger/index/categorie/155/Logiciels-de-creation-de-jeux</a><br
+/><br
+/><br
+/>### Languages<br
+/><br
+/>+ C/C++ :<br
+/>-DirectX (moteur 3D)<br
+/>-OpenGL (moteur 3D)<br
+/>-Ogre3D (C'est un moteur 3D ca ... yes)<br
+/>-SDL (moteur graphique 2D + son)<br
+/>-SFML (moteur graphique 2D + son, C++) : <a href="http://www.sfml-dev.org/tutorials/1.6/">http://www.sfml-dev.org/tutorials/1.6/</a><br
+/><br
+/>-Box2d (moteur physique 2D)<br
+/>-PhysX (moteur physique)<br
+/>-Allegro (moteur complet je crois)<br
+/><br
+/>+ Java (portable, "lourd", )<br
+/><a href="http://slick.cokeandcode.com/static.php?page=demos">http://slick.cokeandcode.com/static.php?page=demos</a><br
+/>lui-même basé sur <a href="http://www.lwjgl.org/documentation.php">http://www.lwjgl.org/documentation.php</a><br
+/>-&gt; vidéo: <a href="http://fabiensanglard.net/Prototyp/index.php">http://fabiensanglard.net/Prototyp/index.php</a><br
+/>JMonkey : <a href="http://jmonkeyengine.com/">http://jmonkeyengine.com/</a><br
+/><br
+/>+ C# / XNA<br
+/><br
+/>+ Flash (Beurk) (avec FlashDevelop&amp;FlashPunk) : <a href="http://flashpunk.net/tutorials/">http://flashpunk.net/tutorials/</a><br
+/><br
+/>+ Lua<br
+/>-Love : <a href="https://love2d.org/wiki/Main_Page">https://love2d.org/wiki/Main_Page</a><br
+/><a href="http://springrts.com/wiki/Games">http://springrts.com/wiki/Games</a><br
+/>-Polycode<br
+/><br
+/># Bibliothèques/moteur<br
+/><a href="http://jeux.developpez.com/telecharger/index/categorie/557/Bibliotheques">http://jeux.developpez.com/telecharger/index/categorie/557/Bibliotheques</a><br
+/><a href="http://en.wikipedia.org/wiki/List_of_game_engines">http://en.wikipedia.org/wiki/List_of_game_engines</a><br
+/><br
+/>### Coding style<br
+/>- tabulations 4/8 chars ?<br
+/>- 80 charactères par ligne si possible ?<br
+/>- Nommage :<br
+/>&nbsp;&nbsp;&nbsp; - méthodes commencent par minuscule ?<br
+/>&nbsp;&nbsp;&nbsp; - préfixe des attributs des classes : a_<br
+/>- commenter tous les prototypes au format Doxygen<br
+/>- methodes de display/debug pour chaque classe ? ("toString"...)<br
+/>- macros de dbg ? Traces, assert, verifyElse dumpInFile...<br
+/><br
+/># C++ specific<br
+/>- une référence pour C++ : <a href="http://google-styleguide.googlecode.com/svn/trunk/cppguide.xml">http://google-styleguide.googlecode.com/svn/trunk/cppguide.xml</a> et aussi <a href="http://lxr.linux.no/linux/Documentation/CodingStyle">http://lxr.linux.no/linux/Documentation/CodingStyle</a><br
+/>- 0/NULL/nullptr : <a href="http://h-deb.clg.qc.ca/Sujets/Divers--cplusplus/CPP--NULL.html">http://h-deb.clg.qc.ca/Sujets/Divers--cplusplus/CPP--NULL.html</a><br
+/>- Prog ~fonctionnelle ? (static...)<br
+/>- Fichiers templates/inlines ?<br
+/>- quels types primitives favoriser ? int ? long ? int32_t ?<br
+/><br
+/><br
+/><br
+/>############### Réunion du 2012/11/09<br
+/><br
+/>On va dire qu'on est dans une section de commentaires:<br
+/><br
+/>DONE:<br
+/>- créer la classe<br
+/><br
+/>TODO:<br
+/>- gérer les params d'affichage<br
+/>- prendre en compte brouillard de guerre<br
+/>- améliorer les perfs<br
+/>- réutiliser le code de MaClasse<br
+/><br
+/><br
+/>main() {<br
+/>&nbsp;&nbsp;&nbsp;&nbsp;<br
+/>&nbsp;&nbsp;&nbsp; slick:init()<br
+/>&nbsp;&nbsp;&nbsp;&nbsp;<br
+/>&nbsp;&nbsp;&nbsp; while (true) {<br
+/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; slick:update()<br
+/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; slick:render()<br
+/>&nbsp;&nbsp;&nbsp; }<br
+/>}<br
+/><br
+/><br
+/>class PhysicElem {<br
+/>&nbsp;&nbsp;&nbsp; Vect2d cumulForce;<br
+/>&nbsp;&nbsp;&nbsp; Vect2d cumulTorque;<br
+/>&nbsp;&nbsp;&nbsp;&nbsp;<br
+/>&nbsp;&nbsp;&nbsp; void applyForce(Vect2d force, Vect2d applicationPt) {<br
+/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; //update cumulForce<br
+/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; //update cumulTorque<br
+/>&nbsp;&nbsp;&nbsp; }<br
+/>&nbsp;&nbsp;&nbsp;&nbsp;<br
+/>&nbsp;&nbsp;&nbsp; Vect2d computeSpeed() {<br
+/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // compute speed<br
+/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; cumulTorque = 0;<br
+/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; cumulForce = 0;<br
+/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return speed<br
+/>&nbsp;&nbsp;&nbsp; }<br
+/>}<br
+/><br
+/><br
+/>PhysicElem hero; // une banane ou larry<br
+/><br
+/>// Durant la même frame physique :<br
+/><br
+/>// Le héro marche sur un bumper (gros ressort)<br
+/>hero.applyForce(Vect2d(0, 100)):<br
+/>..<br
+/>// Le héro subit la gravité<br
+/>hero.applyForce(Vect2d(0, -10)):<br
+/>..<br
+/>// Le héro est déplacé vers la droite par le joueur qui appuie sur la touche droite<br
+/>hero.applyForce(Vect2d(30, 0)):<br
+/><br
+/>...<br
+/><br
+/>// Calcul des nouvelles positions de tous les PhysicElem<br
+/>Vect2d newSpeed = hero.computeSpeed();<br
+/><br
+/>Vect2d newPos = Pos + deltaT * newSpeed;<br
+/><br
+/><br
+/><br
+/>Description d'une attaque :<br
+/>- type de dégâts : en une fois, perso transmet dégâts en continu...<br
+/>- valeur des dégâts :<br
+/>- cooldown avant prochaine attaque : durée<br
+/>- combos possibles ? lesquels ?<br
+/>- mouvement possible durant attaque ? / déplacement forcé du perso<br
+/>- durée de l'attaque<br
+/>- durée de l'animation (peut être &gt; que celle de l'attaque)<br
+/>- quelle animation ? quels sons ?<br
+/>- effet de zone -&gt; taille de la zone ?<br
+/><br
+/>+ projectiles ?<br
+/><br
+/>Description d'un projectile :<br
+/>- vitesse<br
+/>- type de dégâts<br
+/>- valeur dégâts<br
+/>- masque de collision ? -&gt; quels objets peut-il percuter<br
+/><br
+/>Description d'une animation :<br
+/>- vitesse fixée<br
+/>- durée fixée<br
+/><br
+/>Collisions pdt un mouvement :<br
+/>- quel type de résolution : tout-ou-rien ou calcul du point d'intersection ?<br
+/>- prendre en compte épaisseur des objets<br
+/><br
+/>Catalogue des élements :<br
+/>- comme déterminer quel object se trouve à l'emplacement (x,y) ? Ou bien sur une trajectoire donnée ?<br
+/>- différence objets statiques / dynamiques ?<br
+/><br
+/><br
+/>1- Fonctionnalités du proto<br
+/>** sol plat + plateformes rectangulaires<br
+/>** perso rectangulaire<br
+/>&nbsp;&nbsp;&nbsp; ** déplacement<br
+/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ** de gauche à droite<br
+/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ** sauter&nbsp;<br
+/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ** déclenche animation sur perso<br
+/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ** force initiale verticale vers le haut<br
+/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ** contrôle aérien<br
+/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ** pas double saut<br
+/>&nbsp;&nbsp;&nbsp; ** barre de vie : 3<br
+/>** un ennemi<br
+/>&nbsp;&nbsp;&nbsp; ** barre de vie : 5<br
+/>&nbsp;&nbsp;&nbsp; ** déplacement<br
+/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ** de gauche à droite<br
+/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ** en cas de collision, change de direction<br
+/>&nbsp;&nbsp;&nbsp; ** dégâts de contact : 1<br
+/>** une attaque<br
+/>&nbsp;&nbsp;&nbsp; ** déclenche une animation sur perso<br
+/>&nbsp;&nbsp;&nbsp; ** lancer un projectile<br
+/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ** animation en boucle sur projectile<br
+/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ** mouvement horizontal<br
+/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ** vitesse continue<br
+/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ** explose : fait des dégâts et disparaît<br
+/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ** dégâts : 1<br
+/><br
+/>2- On se répartit les tâches<br
+/>** Gaëtan<br
+/>&nbsp;&nbsp;&nbsp; ** phase 1 : animation<br
+/>&nbsp;&nbsp;&nbsp; ** phase 2 :<br
+/>** Lucas<br
+/>&nbsp;&nbsp;&nbsp; ** phase 1 : loader xml, checkstyle, findbugs, code review tool<br
+/>&nbsp;&nbsp;&nbsp; ** phase 2 :<br
+/>** Nico<br
+/>&nbsp;&nbsp;&nbsp; ** phase 1 : yphisic<br
+/>&nbsp;&nbsp;&nbsp; ** phase 2 :<br
+/><br
+/>3- On décide des données et interfaces qu'on partage<br
+/><br
+/>class GameState {<br
+/>&nbsp;&nbsp;&nbsp; StaticEntity statObjects;<br
+/>&nbsp;&nbsp;&nbsp; DynamicEntity dynObjects;<br
+/>}<br
+/><br
+/>4-Contraintes de dev:<br
+/>** javadoc<br
+/>** coding style<br
+/>** mode de DEBUG activable<br
+/>** pas de nombre magique -&gt; mettre tous les paramètres en fichier de conf<br
+/>** Eclipse pour tout le monde<br
+/><br
+/><br
+/><br
+/>Code review&nbsp;<br
+/><ul><li>~ Review Board&nbsp;</li
+><li>+ -~ Google Code Review&nbsp;<ul><li>~ GoogleApps&nbsp;</li
+><li>~ CodeGoogle&nbsp;</li></ul
+></li
+><li>~ rietveld&nbsp;</li
+><li>~ Code Remarks&nbsp;</li
+><li>~ GitHub&nbsp;<br/><br
+/></li></ul
+></body>
+</html>
