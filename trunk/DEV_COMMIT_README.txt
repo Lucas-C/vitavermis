@@ -5,7 +5,7 @@
 #-----------#
 
     * check that findbugs & checkstyle don't complain :
-        java -jar tools/checkstyle-5.6/checkstyle-5.6-all.jar -c tools/checkstyle.xml $(find src/ -type f)
+        java -Dbasedir=. -jar tools/checkstyle-5.6/checkstyle-5.6-all.jar -c tools/vitavermis_checkstyle.xml $(find src/ -type f)
         tools/findbugs-2.0.2/bin/findbugs -textui -auxclasspath lib/slick.jar bin/
     * run the following command to remove tabs and trailing spaces in source code
         tools/notabs.sh src/

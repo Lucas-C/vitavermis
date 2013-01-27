@@ -5,19 +5,22 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 
+import ppg.vitavermis.config.staticfield.Param;
 import ppg.vitavermis.input.InputMgr;
 import ppg.vitavermis.physics.PhysicsMgr;
 import ppg.vitavermis.render.RenderMgr;
 
 
 public class GameLoop extends BasicGame {
+	@Param static String windowName;
+
 	final GameState		gameState;
 	final RenderMgr		renderer;
 	final PhysicsMgr	physics;
 	final InputMgr		input;
 
 	GameLoop(GameState gs) {
-		super(gs.appConfig.windowName);
+		super(windowName);
 		this.gameState	= gs;
 		this.input		= new InputMgr();
 		this.physics	= new PhysicsMgr();
