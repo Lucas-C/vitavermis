@@ -1,0 +1,16 @@
+#-----#
+# SVN #
+#-----#
+
+# Svn ignore
+svn propset svn:ignore PATTERN DIR
+
+# Get all svn props
+svn propget -R svn:ignore .
+
+# Rm added then removed files
+svn status | grep '!M' | awk '{print $2}' | xargs svn rm #--force
+
+# Display even ignored files
+svn status --no-ignore
+
