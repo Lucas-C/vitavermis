@@ -1,5 +1,0 @@
-/Common/Projets/GameDev/ProjetJV/platypusvapeur/tests/shit_test_sfml/SFML/src/SFML/Audio/CMakeFiles/sfml-audio.dir
-/Common/Projets/GameDev/ProjetJV/platypusvapeur/tests/shit_test_sfml/SFML/src/SFML/Graphics/CMakeFiles/sfml-graphics.dir
-/Common/Projets/GameDev/ProjetJV/platypusvapeur/tests/shit_test_sfml/SFML/src/SFML/Network/CMakeFiles/sfml-network.dir
-/Common/Projets/GameDev/ProjetJV/platypusvapeur/tests/shit_test_sfml/SFML/src/SFML/System/CMakeFiles/sfml-system.dir
-/Common/Projets/GameDev/ProjetJV/platypusvapeur/tests/shit_test_sfml/SFML/src/SFML/Window/CMakeFiles/sfml-window.dir
