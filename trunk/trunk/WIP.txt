@@ -7,10 +7,21 @@ DONE:
 	- plugin findbugs
 	- plugin YEdit 
 	- début de code/réflexion sur les fichiers de conf
+	- @Param intégré
+	- tests avec Junit
+	- configuration & cmd-line checkstyle & findbug
 
-TODO:
-	- ajouter exceptions Checkstyle
-	- example of Junit test
-	- use Ant ?
+IMPROVMENTS:
+    - @Param :
+        - lists
+        - default.conf file, + rules for which other to use
+    - Set<ClassT> generateModels(ClassT.class)
+        ---> read conf files in ClassT/ subdir
+        ---> for each one:
+            - instanciate a new
+            - assign avery field found in the config file :
+                + if exist a 'name' field : use the config file name
+                && consider potential @ConfigAliases annotations
+            - if 'init' method defined, call it
 	- use log system comme log4j/slf4j ?
 
