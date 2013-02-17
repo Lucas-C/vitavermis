@@ -57,7 +57,7 @@ public class StaticFieldLoaderTest {
 	public final void processInitializedFieldTest() throws NoSuchFieldException {
 		Field okField = THIS_CLASS.getDeclaredField("initializedField");
 		processField(okField, THIS_CLASS.getName(), configParamsTable);
-		assertEquals("INIT", initializedField);
+		assertEquals("INITIALIZED_FIELD", initializedField);
 	}
 
 	@Test(expected = StaticFieldLoadingError.class)

@@ -20,9 +20,6 @@ public class ClassScannerTest {
 	    	Param.class,
 	    	StaticFieldLoader.class,
 	    	StaticFieldLoadingError.class,
-	    	ClassScannerTest.class,
-	    	ConfigFilesLoader.class,
-	    	StaticFieldLoaderTest.class,
 		};
 		final Set<Class<?>> expected = new HashSet<Class<?>>(Arrays.asList(expectedArray));
 		assertEquals(expected, classes);
