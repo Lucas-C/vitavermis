@@ -3,32 +3,93 @@ package ppg.vitavermis.testCreation;
 import java.util.ArrayList;
 
 import org.newdawn.slick.Image;
-import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Vector2f;
-import ppg.vitavermis.items.ItemsPhy;
+
+import ppg.vitavermis.config.staticfield.Param;
+import ppg.vitavermis.items.*;
+import org.newdawn.slick.SlickException;
+
 
 
 /**
  * Fichier test pour chargement object
  * @author parpaing
- * @version 1.0
+ * @version 1.01
  *
  */
 
-public class creation {
-	ArrayList<ItemsPhy> liste = null;
+public final class creation {
+	ArrayList<Item> liste = null;
+//	@Param static int windowWidth;
+//	@Param static int windowHeight;
+	public static int windowWidth = 800;
+	public static int windowHeight = 600;
 	
 	public creation(){
 	}
 	
-	public ArrayList<ItemsPhy> getListe() {
+	public ArrayList<Item> getListe() {
 		return liste;
 	}
 
 	public void init() throws SlickException {
 		
+		
+		liste = new ArrayList<Item>();
+		// hero
+		MainCharcacterItem hero = new MainCharcacterItem(new Image("data/rond.png"));
+		hero.setPosition(new Vector2f(350,350));
+		liste.add(hero);
+		// Mur droit
+		Background murD = new Background(new Image("data/rectangle.png") , new String("Mur droit") );
+		murD.setHeight(windowHeight);
+		murD.setWidth(10);
+		murD.setPosition(new Vector2f(windowWidth - 10, 0));
+		liste.add(murD);
+		// Mur gauche
+		Background murG = new Background(new Image("data/rectangle.png") , new String("Mur gauche") );
+		murG.setHeight(windowHeight);
+		murG.setWidth(10);
+		murG.setPosition(new Vector2f(0, 0));
+		liste.add(murG);
+		// sol
+		Background sol = new Background(new Image("data/rectangle.png") , new String("Sol") );
+		sol.setHeight(10);
+		sol.setWidth(windowWidth);
+		sol.setPosition(new Vector2f(0, windowHeight - 10));
+		liste.add(sol);
+		PlateformeItem plateform1 = new PlateformeItem(new Image("data/rectangle.png") , new String("plateform1"));
+		plateform1.setHeight(10);
+		plateform1.setWidth(150);
+		plateform1.setPosition(new Vector2f(100,150));
+		plateform1.setCelerity(new Vector2f((float)0.5,0));
+		liste.add(plateform1);
+		PlateformeItem plateform2 = new PlateformeItem(new Image("data/rectangle.png") , new String("plateform2"));
+		plateform2.setHeight(10);
+		plateform2.setWidth(150);
+		plateform2.setPosition(new Vector2f(200,250));
+		plateform2.setCelerity(new Vector2f((float)0.3,0));
+		liste.add(plateform2);
+		PlateformeItem plateform3 = new PlateformeItem(new Image("data/rectangle.png") , new String("plateform3"));
+		plateform3.setHeight(10);
+		plateform3.setWidth(150);
+		plateform3.setPosition(new Vector2f(300,350));
+		plateform3.setCelerity(new Vector2f((float)0.4,0));
+		liste.add(plateform3);
+		PlateformeItem plateform4 = new PlateformeItem(new Image("data/rectangle.png") , new String("plateform4"));
+		plateform4.setHeight(10);
+		plateform4.setWidth(150);
+		plateform4.setPosition(new Vector2f(50,450));
+		plateform4.setCelerity(new Vector2f((float)0.2,0));
+		liste.add(plateform4);
+		Background toit = new Background(new Image("data/rectangle.png") , new String("toit"));
+		toit.setHeight(10);
+		toit.setWidth(windowWidth);
+		toit.setPosition(new Vector2f(0,0));
+		liste.add(toit);
+		/*
 		liste = new ArrayList<ItemsPhy>();
-		//*
+		
 		ItemsPhy item1 = new ItemsPhy(new Vector2f(50, 50), new Image("data/rond.png"), true, 1, 0);
 		item1.setCelerity( new Vector2f((float) 0, (float) 0) );
 		item1.getItemModel().com = new String("bal");
@@ -56,7 +117,7 @@ public class creation {
 		murGauche.setHeight( 600 );
 		murGauche.setWidth( 10 );
 		liste.add(murGauche); 
-		//*
+		
 		ItemsPhy item4 = new ItemsPhy(new Vector2f(200, 570),new Image("data/rectangle.png") , false, 0, 0);
 		item4.setHeight(item4.getItemModel().getImage().getHeight());
 		item4.setWidth(item4.getItemModel().getImage().getWidth());
@@ -100,7 +161,7 @@ public class creation {
 		item11.setHeight( 3 );
 		item11.setWidth( 10 );
 		liste.add(item11);
-		//*
+		
 		ItemsPhy newItem1 = new ItemsPhy(new Vector2f(210,470), new Image("data/rectangle.png"), false, 0, 0);
 		newItem1.getItemModel().com = new String("1");
 		newItem1.setHeight(newItem1.getItemModel().getImage().getHeight()+ 30);
@@ -161,6 +222,7 @@ public class creation {
 		newItem7.setHeight(newItem7.getItemModel().getImage().getHeight() + 20);
 		newItem7.setWidth(newItem7.getItemModel().getImage().getWidth() - 20);
 		liste.add(newItem7);
+		*/
 		/* */
 		/*
 		int i = 0;

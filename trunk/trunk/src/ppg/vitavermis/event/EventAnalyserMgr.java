@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import org.newdawn.slick.geom.Vector2f;
 
-import ppg.vitavermis.items.ItemsPhy;
+import ppg.vitavermis.items.Item;
 import ppg.vitavermis.physics.ForceDefinition;
 import ppg.vitavermis.physics.PhysicsMgr;
 
@@ -26,11 +26,12 @@ public class EventAnalyserMgr {
 		
 	}
 	
-	public void update(ArrayList<ItemsPhy> liste, int delta) {
-		ItemsPhy master = liste.get(0);
+	public void update(ArrayList<Item> liste, int delta) {
+		/*
+		Item master = liste.get(0);
 		master.setNumber_contact(Math.max(0, master.getNumber_contact() - 1));
 		master.setJumping(Math.max(0, master.getJumping() -1 ));
-		for (ItemsPhy item : liste) {
+		for (Item item : liste) {
 			if (master.rectangle().intersects(item.rectangle()) == true) {
 				if (master != item ) {
 					switch ( PhysicsMgr.position_item(master, item)) {
@@ -67,6 +68,7 @@ public class EventAnalyserMgr {
 				}
 			}
 		}
+		*/
 	}
-
+	
 }
