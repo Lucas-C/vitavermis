@@ -11,7 +11,7 @@ import org.newdawn.slick.SlickException;
 import ppg.vitavermis.config.staticfield.Param;
 import ppg.vitavermis.event.EventAnalyserMgr;
 import ppg.vitavermis.input.InputMgr;
-import ppg.vitavermis.items.ItemsPhy;
+import ppg.vitavermis.items.Item;
 import ppg.vitavermis.physics.PhysicsMgr;
 import ppg.vitavermis.render.RenderMgr;
 import ppg.vitavermis.testCreation.creation;
@@ -27,11 +27,13 @@ public class GameLoop extends BasicGame {
 	
 	final creation		crea;				// phase de test
 	final EventAnalyserMgr event;
-	ArrayList<ItemsPhy> listeItems = null;
+	ArrayList<Item> listeItems = null;
 	private boolean debug_mode_rectangle = false;
 	private boolean debug_mode_com = false;
 	private boolean debug_mode_reset = false;
 	public static boolean debug_mode_up_down = false;
+	private boolean delta_mode = false;
+	private boolean incrementation_delta = false;
 	
 	public int count = 0;
 	
@@ -57,18 +59,53 @@ public class GameLoop extends BasicGame {
 
 	@Override
 	public void update(GameContainer _gc, int delta) throws SlickException {
-		count ++;
-		if (count == 2) {
-			//System.exit(0);
+		/* test pour le debug et avoir une même vitesse 
+		if (delta <3 ){
+		*/
+		//System.out.println(delta);
+		delta = 10;
+		if ( delta_mode != true ) {
+			if ( delta > 10 ){
+				delta = 10;
+			}
+			count ++;
+			if (count == 2) {
+				//System.exit(0);
+			}
+			input.update(_gc.getInput(), listeItems.get(0));
+			physics.update(listeItems, delta);
+			//event.update(listeItems, delta);	
+		
+			//System.out.println("-----------------");
+			//System.out.println(delta);
+			
+			if (debug_mode_reset == true) {
+				debug_mode_reset = false;
+				init(_gc);
+			}
+		} else {
+			delta = 0 ;
+			if ( incrementation_delta ) {
+				delta = 10;
+				incrementation_delta = false;
+				count ++;
+				if (count == 2) {
+					//System.exit(0);
+				}
+				input.update(_gc.getInput(), listeItems.get(0));
+				physics.update(listeItems, delta);
+				//event.update(listeItems, delta);		
+		
+				//System.out.println("-----------------");
+				System.out.println(delta);
+			
+				if (debug_mode_reset == true) {
+					debug_mode_reset = false;
+					init(_gc);
+				}
+			}
 		}
-		input.update(_gc.getInput(), listeItems.get(0));
-		physics.update(listeItems, delta);
-		event.update(listeItems, delta);
-		//System.out.println("-----------------");
-		if (debug_mode_reset == true) {
-			debug_mode_reset = false;
-			init(_gc);
-		}
+		
 	}
 
 	@Override
@@ -76,6 +113,8 @@ public class GameLoop extends BasicGame {
 		renderer.render(_g, listeItems, debug_mode_rectangle, debug_mode_com);
 	}
 	
+	
+	/* deplacer dans les input) */
 	@Override
     public void keyPressed(int key, char c)
     {
@@ -98,8 +137,17 @@ public class GameLoop extends BasicGame {
     	if ( key == Input.KEY_4) {
     		debug_mode_up_down = !debug_mode_up_down;
     	}
+    	// gestion de delat (etape par etape)
+    	if ( key == Input.KEY_5) {
+    		delta_mode = !delta_mode;
+    		System.out.println("------------------------------------------");
+    		System.out.println("debug mode delta " + delta_mode);
+    	}
+    	if ( key == Input.KEY_ADD ) {
+    		incrementation_delta =! incrementation_delta;
 
+    	}
     }
-
+	
 
 }
