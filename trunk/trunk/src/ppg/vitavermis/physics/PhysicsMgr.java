@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import org.newdawn.slick.geom.Vector2f;
 import ppg.vitavermis.items.Background;
 import ppg.vitavermis.items.Item;
-import ppg.vitavermis.items.MainCharcacterItem;
+import ppg.vitavermis.items.MainCharacterItem;
 import ppg.vitavermis.items.MobileItem;
 import ppg.vitavermis.items.PlateformeItem;
 
@@ -18,7 +18,7 @@ import ppg.vitavermis.items.PlateformeItem;
 public class PhysicsMgr {
 	
 	/**
-	 * Initialisation de toute les constantes de force (chargement à paritr d'un fichier de config
+	 * Initialisation de toute les constantes de force (chargement ï¿½ paritr d'un fichier de config
 	 * 
 	 */
 	public void init()  {
@@ -41,11 +41,11 @@ public class PhysicsMgr {
 //			System.out.println("update loop " + item.com);
 			if (item instanceof MobileItem) {
 				// liberation de tout les contact de MainCharacter
-				if (item instanceof MainCharcacterItem) {
+				if (item instanceof MainCharacterItem) {
 //					System.out.println(((MobileItem) item).getCelerity());
 //					System.out.println(((MobileItem) item).getCumulForce());
-					((MainCharcacterItem) item).setContact(false);
-					((MainCharcacterItem) item).setContactItem(null);
+					((MainCharacterItem) item).setContact(false);
+					((MainCharacterItem) item).setContactItem(null);
 				}
 //				System.out.println("changement de position boocle " + item.com);
 				if (item instanceof PlateformeItem) {
@@ -68,9 +68,9 @@ public class PhysicsMgr {
 	public static void jump(Item item) {
 		Item contactItem = null;
 			
-		if (item instanceof MainCharcacterItem) {
-			if (((MainCharcacterItem) item).isContact()) {
-				contactItem = ((MainCharcacterItem) item).getContactItem();
+		if (item instanceof MainCharacterItem) {
+			if (((MainCharacterItem) item).isContact()) {
+				contactItem = ((MainCharacterItem) item).getContactItem();
 				if (contactItem != null) {
 					switch (itemPosition(item, contactItem)) {
 					case 1:
@@ -151,7 +151,7 @@ public class PhysicsMgr {
 	}
 
 	/**
-	 * fonction qui va créer un rectangle de déplacement puis voir les item à l'intérieur et arreté le mobile item en fonction de ses items
+	 * fonction qui va crï¿½er un rectangle de dï¿½placement puis voir les item ï¿½ l'intï¿½rieur et arretï¿½ le mobile item en fonction de ses items
 	 * 
 	 * @param itemMobile
 	 * @param liste
@@ -159,7 +159,7 @@ public class PhysicsMgr {
 	 */
 
 	// supposition 
-	// par definition si un element est dans le rectangle l'objet mobile le touche (ce qui est faux mais peut être considérer comme vrai à petite échelle)
+	// par definition si un element est dans le rectangle l'objet mobile le touche (ce qui est faux mais peut ï¿½tre considï¿½rer comme vrai ï¿½ petite ï¿½chelle)
 	public final void intertsection2(MobileItem itemMobile, ArrayList<Item> liste, Vector2f destination) {
 		
 		// position, celerity, cumulforce temporaire de notre mobile item
@@ -183,14 +183,14 @@ public class PhysicsMgr {
 			System.out.println("destination : " + destination);
 			System.out.println("new position ::" + newPosition);
 			
-			System.out.println("rectangle formé :: " + rect);
+			System.out.println("rectangle formï¿½ :: " + rect);
 			System.out.println(rect.intersects(item.rectangle()));
 			*/
 			if (rect.intersects(item.rectangle()) && (itemMobile != item)) {
 //				System.out.println("-- 1");
-				if (itemMobile instanceof MainCharcacterItem) {
-					((MainCharcacterItem) itemMobile).setContact(true);
-					((MainCharcacterItem) itemMobile).setContactItem(item);
+				if (itemMobile instanceof MainCharacterItem) {
+					((MainCharacterItem) itemMobile).setContact(true);
+					((MainCharacterItem) itemMobile).setContactItem(item);
 				}
 
 				if (item instanceof Background) {
@@ -198,10 +198,10 @@ public class PhysicsMgr {
 					replacePositionIntersection(itemMobile, item, destination, newPosition, newCelerity, newCumulforce);
 				} else {
 					if (item instanceof PlateformeItem) {
-						// fonction de traitement spé Plateform
+						// fonction de traitement spï¿½ Plateform
 						replacePositionIntersection(itemMobile, item, destination, newPosition, newCelerity, newCumulforce);
 					} else {
-						// application de force supplementaire sur les item deplaçable
+						// application de force supplementaire sur les item deplaï¿½able
 					}
 				}
 			}
@@ -275,7 +275,7 @@ public class PhysicsMgr {
 	public final void replacePositionIntersection(MobileItem itemMobile, Item item, Vector2f destination, 
 			Vector2f newPosition, Vector2f newCelerity, Vector2f newCumulforce) {
 		
-		// astuce prendre l'élement avec sa taille ne plus pour pouvoir tester corecctement le changement de position
+		// astuce prendre l'ï¿½lement avec sa taille ne plus pour pouvoir tester corecctement le changement de position
 		//boolean upBegin = (itemMobile.getPosition().y - item.getPosition().y < 0);
 		boolean upChange = upChange(itemMobile, item, destination);
 		//boolean downBegin = (itemMobile.getPosition().y - item.getPosition().y > 0);
@@ -295,16 +295,16 @@ public class PhysicsMgr {
 		System.out.println("new position ::" + newPosition);
 		System.out.println("position : " + pos);
 		*/
-		// pour l'instant on donne priorité au vetical par rapport à l'orizontal
+		// pour l'instant on donne prioritï¿½ au vetical par rapport ï¿½ l'orizontal
 		// si un itemMobile est up => ! down de meme pour left et Right
 		switch (pos) {
 			case 1:
 				if (upChange) {
 					// item_mobile is up to the item
 //					System.out.println("up");
-					// test par rapport au différente intersection
+					// test par rapport au diffï¿½rente intersection
 					if (newPosition.y > item.getPosition().y - itemMobile.getHeight()) {
-						newPosition.y = item.getPosition().y - itemMobile.getHeight() + 1; // + 1 pour garder le contact et ne pas faire tremblé l'objet
+						newPosition.y = item.getPosition().y - itemMobile.getHeight() + 1; // + 1 pour garder le contact et ne pas faire tremblï¿½ l'objet
 					}
 					newCumulforce.y = Math.min(0, itemMobile.getCumulForce().y);
 					newCelerity.y = Math.min(0, itemMobile.getCelerity().y);
@@ -320,7 +320,7 @@ public class PhysicsMgr {
 				if (downChange) {
 //					System.out.println("down");
 //					System.out.println(item.getPosition().y + " -+- " + itemMobile.getHeight());
-					// test par rapport au différente intersection
+					// test par rapport au diffï¿½rente intersection
 					if (newPosition.y < item.getPosition().y + item.getHeight()) {
 						newPosition.y = item.getPosition().y + item.getHeight();
 					}
@@ -331,7 +331,7 @@ public class PhysicsMgr {
 			case 3:
 				if (leftChange) {
 //					System.out.println("left");
-					// test par rapport au différente intersection
+					// test par rapport au diffï¿½rente intersection
 					if (newPosition.x > item.getPosition().x - itemMobile.getWidth()) {
 						newPosition.x = item.getPosition().x - itemMobile.getWidth();
 					}
@@ -429,11 +429,11 @@ public class PhysicsMgr {
 			item.getCumulForce().x = item.getCumulForce().x / (item.getMassCategory() + 3);
 			item.getCelerity().x = item.getCelerity().x / (item.getMassCategory() + 3);
 		}*/
-		if (item instanceof MainCharcacterItem) {
-			if (((MainCharcacterItem) item).isContact()) {
-				if (((MainCharcacterItem) item).getContactItem() instanceof PlateformeItem) {
-					if ( Math.abs(((MainCharcacterItem) item).getCelerity().x) <= 
-							Math.abs(((PlateformeItem) ((MainCharcacterItem) item).getContactItem()).getCelerity().x)) {
+		if (item instanceof MainCharacterItem) {
+			if (((MainCharacterItem) item).isContact()) {
+				if (((MainCharacterItem) item).getContactItem() instanceof PlateformeItem) {
+					if ( Math.abs(((MainCharacterItem) item).getCelerity().x) <= 
+							Math.abs(((PlateformeItem) ((MainCharacterItem) item).getContactItem()).getCelerity().x)) {
 						
 					} else {
 						System.out.println("1");

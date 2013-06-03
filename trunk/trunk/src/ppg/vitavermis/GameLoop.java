@@ -59,7 +59,7 @@ public class GameLoop extends BasicGame {
 
 	@Override
 	public void update(GameContainer _gc, int delta) throws SlickException {
-		/* test pour le debug et avoir une même vitesse 
+		/* test pour le debug et avoir une mÃªme vitesse 
 		if (delta <3 ){
 		*/
 		//System.out.println(delta);

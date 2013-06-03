@@ -1,9 +1,9 @@
 package ppg.vitavermis.config.staticfield;
 
+import java.lang.annotation.IncompleteAnnotationException;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -27,9 +27,8 @@ import java.util.Set;
 public final class StaticFieldLoader {
 
 	private StaticFieldLoader() { }	
-	
-	public static void loadFields() {
-		final String pkgName = ppg.vitavermis.config.Settings.ROOT_PACKAGE;
+
+	public static void loadFields(String pkgName, String configFileName) {
    		System.out.println("[INFO] START Static fields loading in " + pkgName);
 		// 1 - Get target classes
 		Set<Class<?>> classes = ClassScanner.getPackageClasses(pkgName);
@@ -37,7 +36,7 @@ public final class StaticFieldLoader {
 			System.out.println("[WARNING] No classes found");
 		}
 		// 2 - Read config files & load their values in table
-		final Map<String, Object> configParamsTable = ConfigFilesLoader.readParameters();
+		final Map<String, Object> configParamsTable = ConfigFilesLoader.readParameters(configFileName);
 		if (configParamsTable.isEmpty()) {
 			System.out.println("[WARNING] No configuration files found");
 		}
@@ -64,10 +63,10 @@ public final class StaticFieldLoader {
 		}
 		// 1 - Check if @Param is correctly used 
 		if (!isFieldStatic(field)) {
-			throw new StaticFieldLoadingError("Field " + displayName + " annoted with @Param should be static");
+			throw new IncompleteAnnotationException(Param.class, "Annoted field " + displayName + " should be static");
 		}
 		if (isFieldFinal(field)) {
-			throw new StaticFieldLoadingError("Field " + displayName + " annoted with @Param should not be final");
+			throw new IncompleteAnnotationException(Param.class, "Annoted field " + displayName + " should not be final");
 		}
 		// (2 )- Warn if field already initialized (Reflection API needs to know if the field is static to check its value)
 		// 3 - Lookup field name then alias in config table (with and then without prefix naming)
@@ -85,7 +84,7 @@ public final class StaticFieldLoader {
 			}
 		}
 		// 4 - If still nothing found, throw an error
-		throw new StaticFieldLoadingError("No configuration parameter found for uninitialized field " + displayName + " annoted with @Param");
+		throw new IncompleteAnnotationException(Param.class, "No configuration parameter found for uninitialized annoted field " + displayName);
 	}
 
 	// VisibleForTesting

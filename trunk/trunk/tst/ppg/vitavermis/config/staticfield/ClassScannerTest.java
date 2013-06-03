@@ -7,8 +7,6 @@ import java.util.Set;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
-// TODO: test with .jar
-
 public class ClassScannerTest {
 	
 	@Test
@@ -18,8 +16,7 @@ public class ClassScannerTest {
 	    	ClassScanner.class,
 	    	ConfigFilesLoader.class,
 	    	Param.class,
-	    	StaticFieldLoader.class,
-	    	StaticFieldLoadingError.class,
+	    	StaticFieldLoader.class
 		};
 		final Set<Class<?>> expected = new HashSet<Class<?>>(Arrays.asList(expectedArray));
 		assertEquals(expected, classes);

@@ -1,5 +1,6 @@
 package ppg.vitavermis.config.staticfield;
 
+import java.lang.annotation.IncompleteAnnotationException;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 import java.util.HashMap;
@@ -10,8 +11,6 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 import static ppg.vitavermis.config.staticfield.StaticFieldLoader.*;
-
-// TODO: test with boolean, integers, double
 
 public class StaticFieldLoaderTest {
 	
@@ -60,19 +59,19 @@ public class StaticFieldLoaderTest {
 		assertEquals("INITIALIZED_FIELD", initializedField);
 	}
 
-	@Test(expected = StaticFieldLoadingError.class)
+	@Test(expected = IncompleteAnnotationException.class)
 	public final void processNonStaticFieldTest() throws NoSuchFieldException {
 		Field errField = THIS_CLASS.getDeclaredField("nonStaticField");
 		processField(errField, THIS_CLASS.getName(), configParamsTable);
 	}
 
-	@Test(expected = StaticFieldLoadingError.class)
+	@Test(expected = IncompleteAnnotationException.class)
 	public final void processFinalFieldTest() throws NoSuchFieldException {
 		Field errField = THIS_CLASS.getDeclaredField("FINAL_FIELD");
 		processField(errField, THIS_CLASS.getName(), configParamsTable);
 	}
 
-	@Test(expected = StaticFieldLoadingError.class)
+	@Test(expected = IncompleteAnnotationException.class)
 	public final void processFieldNoConfig() throws NoSuchFieldException {
 		Field errField = THIS_CLASS.getDeclaredField("noConfigField");
 		processField(errField, THIS_CLASS.getName(), configParamsTable);
