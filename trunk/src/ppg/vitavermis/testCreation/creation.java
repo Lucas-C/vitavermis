@@ -37,7 +37,7 @@ public final class creation {
 		
 		liste = new ArrayList<Item>();
 		// hero
-		MainCharcacterItem hero = new MainCharcacterItem(new Image("data/rond.png"));
+		MainCharacterItem hero = new MainCharacterItem(new Image("data/rond.png"));
 		hero.setPosition(new Vector2f(350,350));
 		liste.add(hero);
 		// Mur droit
@@ -124,7 +124,7 @@ public final class creation {
 		item4.getPosition().y = item3.getPosition().y - item4.getHeight();
 		item4.getItemModel().com = new String("block");
 		//liste.add(item4);
-		// monté
+		// montï¿½
 		ItemsPhy item5 = new ItemsPhy(new Vector2f(450,570), new Image("data/rectangle.png"), false, 0, 0);
 		item5.getItemModel().com = new String("M1");
 		item5.setHeight( 3 );

@@ -101,7 +101,7 @@ public class Item {
 		return position;
 	}
 
-	// pas utilisé
+	// pas utilisÃ©
 	/**
 	 * setter for position
 	 * @param position a new item's position

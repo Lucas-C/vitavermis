@@ -41,9 +41,26 @@ Click-droit sur projet VitaVermis -> RunAs -> Run Configurations
 * Choisir ppg.vitavermis.Main comme "Main class"
 * Dans Arguments->VM arguments ajouter -Djava.library.path=exec
 
-#EXPORT:
+##Eclipse export:
 Project righ click -> Export -> Runnable JAR
 Puis copier le dossier "data/" dans DemoLucas.jar (c'est une archive au format .zip en fait)
+
+##Manual export::
+cd trunk/
+#1-Compile
+rm -rf bin/*
+libs="src/" ; for f in lib/*.jar; do libs="$libs:$f"; done
+javac -cp $libs -d bin/ $(find src/ -name *.java)
+#2-Pack
+mkdir lib_extracted
+for file in $(find ../lib/ -name *.jar | grep -v mockito); do jar xf $file; done
+cd ..
+jar cmf MANIFEST.MF exec/VitaVermis.jar -C bin/ ppg/ -C lib_extracted/ . data/
+rm -rf lib_extracted
+#3-Run!
+cd exec
+java -cp . -jar VitaVermis.jar
+# To be sure you're using the correct Java : namei $(which java)
 
 #--------#
 # Others #

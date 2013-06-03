@@ -78,7 +78,7 @@ public class MobileItem extends Item {
 		return cumulForce;
 	}
 	
-	// pas utilisé
+	// pas utilisÃ©
 	/**
 	 * setter for cumulForce
 	 * @param cumulForce a new item's cumulForce

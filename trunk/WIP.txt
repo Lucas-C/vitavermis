@@ -10,6 +10,7 @@ DONE:
 	- @Param intégré
 	- tests avec Junit
 	- configuration & cmd-line checkstyle & findbug
+    - .jar config loading
 
 IMPROVMENTS:
     - @Param :

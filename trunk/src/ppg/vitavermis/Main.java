@@ -7,7 +7,7 @@ import ppg.vitavermis.config.staticfield.Param;
 import ppg.vitavermis.config.staticfield.StaticFieldLoader;
 
 public final class Main {
-	/*
+	
 	@Param static int windowWidth;
 	@Param static int windowHeight;
 	@Param static int fpsBool;
@@ -15,10 +15,10 @@ public final class Main {
 	@Param static int intervalBool;
 	@Param static int setMinimumLogicUpdateInterval;
 	@Param static int setMaximumLogicUpdateInterval;
-	*/
+	
 	
 	public Main() throws SlickException {
-		//StaticFieldLoader.loadFields();
+		StaticFieldLoader.loadFields("ppg.vitavermis", "/data/config.properties");
 		
 		// print system infos
 		System.out.println("Arch=" + System.getProperty("sun.arch.data.model") + "bits");	

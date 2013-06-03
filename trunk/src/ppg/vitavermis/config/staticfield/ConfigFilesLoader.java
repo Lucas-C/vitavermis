@@ -1,8 +1,8 @@
 package ppg.vitavermis.config.staticfield;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.net.URL;
+import java.security.ProviderException;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
@@ -12,16 +12,20 @@ public final class ConfigFilesLoader {
 
 	private ConfigFilesLoader() { }
 
-	static Map<String, Object> readParameters() {
-		final String configFile = ppg.vitavermis.config.Settings.CONFIG_FILE_NAME;
+	static Map<String, Object> readParameters(String configFileName) {
 		Properties props = new Properties();
+		URL configResource = ConfigFilesLoader.class.getResource(configFileName);
+		if (configResource == null) {
+			throw new ProviderException("Cannot load property file " + configFileName);
+		}
 		try {
-			props.load(new FileInputStream(configFile));
+			props.load(configResource.openStream());
 		} catch (IOException e) {
-			throw new StaticFieldLoadingError("Cannot load property file " + configFile, e);
+			throw new ProviderException("Cannot read property file " + configFileName, e);
 		}
 		
 		Map<String, Object> configTable = new HashMap<String, Object>();
+		@SuppressWarnings("unchecked")
 		Enumeration<String> keys = (Enumeration<String>) props.propertyNames();
 		while (keys.hasMoreElements()) {
 			String key = keys.nextElement();
