@@ -14,7 +14,7 @@ import ppg.vitavermis.input.InputMgr;
 import ppg.vitavermis.items.Item;
 import ppg.vitavermis.physics.PhysicsMgr;
 import ppg.vitavermis.render.RenderMgr;
-import ppg.vitavermis.testCreation.creation;
+import ppg.vitavermis.testCreation.Scene;
 
 
 public class GameLoop extends BasicGame {
@@ -25,9 +25,9 @@ public class GameLoop extends BasicGame {
 	final PhysicsMgr	physics;
 	final InputMgr		input;
 	
-	final creation		crea;				// phase de test
+	final Scene		scene;				// phase de test
 	final EventAnalyserMgr event;
-	ArrayList<Item> listeItems = null;
+	ArrayList<Item> itemsList = null;
 	private boolean debug_mode_rectangle = false;
 	private boolean debug_mode_com = false;
 	private boolean debug_mode_reset = false;
@@ -43,7 +43,7 @@ public class GameLoop extends BasicGame {
 		this.input		= new InputMgr();
 		this.physics	= new PhysicsMgr();
 		this.renderer	= new RenderMgr();
-		this.crea 		= new creation();
+		this.scene 		= new Scene();
 		this.event      = new EventAnalyserMgr();
 	}
 
@@ -51,9 +51,9 @@ public class GameLoop extends BasicGame {
 	public void init(GameContainer _gc) throws SlickException {
 		physics.init();
 		renderer.init();
-		crea.init();
+		scene.init();
 		event.init();
-		listeItems =crea.getListe();
+		itemsList = scene.getItemsList();
 		
 	}
 
@@ -72,8 +72,8 @@ public class GameLoop extends BasicGame {
 			if (count == 2) {
 				//System.exit(0);
 			}
-			input.update(_gc.getInput(), listeItems.get(0));
-			physics.update(listeItems, delta);
+			input.update(_gc.getInput(), itemsList.get(0));
+			physics.update(itemsList, delta);
 			//event.update(listeItems, delta);	
 		
 			//System.out.println("-----------------");
@@ -92,8 +92,8 @@ public class GameLoop extends BasicGame {
 				if (count == 2) {
 					//System.exit(0);
 				}
-				input.update(_gc.getInput(), listeItems.get(0));
-				physics.update(listeItems, delta);
+				input.update(_gc.getInput(), itemsList.get(0));
+				physics.update(itemsList, delta);
 				//event.update(listeItems, delta);		
 		
 				//System.out.println("-----------------");
@@ -110,7 +110,7 @@ public class GameLoop extends BasicGame {
 
 	@Override
 	public void render(GameContainer _gc, Graphics _g) throws SlickException {
-		renderer.render(_g, listeItems, debug_mode_rectangle, debug_mode_com);
+		renderer.render(_g, itemsList, debug_mode_rectangle, debug_mode_com);
 	}
 	
 	
@@ -131,7 +131,7 @@ public class GameLoop extends BasicGame {
     		debug_mode_reset = true;
        	}
     	if (key == Input.KEY_ESCAPE) {
-    		listeItems.removeAll(listeItems);
+    		itemsList.removeAll(itemsList);
     		System.exit(0);
     	}
     	if ( key == Input.KEY_4) {

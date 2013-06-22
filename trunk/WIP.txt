@@ -1,6 +1,11 @@
 # Work In Progress
 
 [Lucas]
+TODO:
+- Nico physics review
+- animation engine
+- Scene loading
+
 DONE:
 	- setup base classes (Main...)
 	- plugin checkstyle
@@ -11,6 +16,7 @@ DONE:
 	- tests avec Junit
 	- configuration & cmd-line checkstyle & findbug
     - .jar config loading
+    - clean rules for @Param: no more hardcoded values
 
 IMPROVMENTS:
     - @Param :
@@ -25,4 +31,5 @@ IMPROVMENTS:
                 && consider potential @ConfigAliases annotations
             - if 'init' method defined, call it
 	- use log system comme log4j/slf4j ?
+
 

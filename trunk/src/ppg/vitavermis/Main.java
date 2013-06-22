@@ -16,9 +16,8 @@ public final class Main {
 	@Param static int setMinimumLogicUpdateInterval;
 	@Param static int setMaximumLogicUpdateInterval;
 	
-	
 	public Main() throws SlickException {
-		StaticFieldLoader.loadFields("ppg.vitavermis", "/data/config.properties");
+		StaticFieldLoader.loadFields("ppg.vitavermis", "/config.properties");
 		
 		// print system infos
 		System.out.println("Arch=" + System.getProperty("sun.arch.data.model") + "bits");	
@@ -27,7 +26,7 @@ public final class Main {
 
 		// Slick init
 		AppGameContainer app = new AppGameContainer(new GameLoop(gameState));
-		/*
+		
 		System.out.println("windowWidth=" + windowWidth);	
 		System.out.println("windowHeight=" + windowHeight);	
 		app.setDisplayMode(windowWidth, windowHeight, false);
@@ -39,9 +38,6 @@ public final class Main {
 		if (fpsBool==1) {
 			app.setTargetFrameRate(fps);
 		}
-		*/
-		app.setDisplayMode(800, 600, false);
-		app.setTargetFrameRate(60);
 		
 		//app.setShowFPS(false);
 		//app.setVSync(true);

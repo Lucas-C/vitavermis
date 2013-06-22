@@ -55,7 +55,7 @@ javac -cp $libs -d bin/ $(find src/ -name *.java)
 mkdir lib_extracted
 for file in $(find ../lib/ -name *.jar | grep -v mockito); do jar xf $file; done
 cd ..
-jar cmf MANIFEST.MF exec/VitaVermis.jar -C bin/ ppg/ -C lib_extracted/ . data/
+jar cmf MANIFEST.MF exec/VitaVermis.jar -C bin/ ppg/ -C lib_extracted/ . -C data/ .
 rm -rf lib_extracted
 #3-Run!
 cd exec

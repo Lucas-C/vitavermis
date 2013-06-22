@@ -4,10 +4,10 @@ import java.io.File;
 import java.io.IOException;
 import java.net.JarURLConnection;
 import java.net.URL;
+import java.util.Collection;
 import java.util.Enumeration;
-import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.MissingResourceException;
-import java.util.Set;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
@@ -15,19 +15,26 @@ import java.util.jar.JarFile;
 /**
  * @author lucas
  *
+ * Class containing ".*Test.*" are ignored
+ *
  * Code inspiration : http://code.google.com/p/ldapbeans/source/browse/trunk/ldapbeans/src/main/java/ldapbeans/util/scanner/PackageHelper.java
  */
 public final class ClassScanner {
 	
 	private ClassScanner() { }
 	
-	static Set<Class<?>> getPackageClasses(String pkgName) {
-		URL pkgResource = getPackageRessource(pkgName);
+	static Collection<Class<?>> getPackageClasses(String pkgName) {
+		Collection<String> classeNames = getPackageClasseNames(pkgName);
+		return createClassesFromFilenames(classeNames);
+	}
+	
+	static Collection<String> getPackageClasseNames(String pkgName) {
+		final URL pkgResource = getPackageRessource(pkgName);
    		System.out.println("[INFO] Package ressource found : " + pkgResource);
-   		String ressourceProtocol = pkgResource.getProtocol(); 
+   		final String ressourceProtocol = pkgResource.getProtocol();
         if ("file".equals(ressourceProtocol)) {
     		final File directory = new File(pkgResource.getFile());
-        	return getClassesInDirectory(directory, pkgName);
+        	return getClassFilenamesInDirectory(directory, pkgName);
         } else if ("jar".equals(ressourceProtocol)) {
         	JarFile jarfile = null;
         	try {
@@ -36,10 +43,10 @@ public final class ClassScanner {
         	} catch (IOException e) {
 				throw new ClassCastException("Cannot convert to JarFile :" + e);
         	}
-        	return getClassesInJar(jarfile, pkgName);
+        	return getClassFilenamesInJar(jarfile, pkgName);
         } else {
         	throw new UnsupportedOperationException("Unknown protocol : " + ressourceProtocol);
-        }
+        }		
 	}
 	
 	static URL getPackageRessource(String pkgName) {
@@ -47,7 +54,7 @@ public final class ClassScanner {
         if (cld == null) {
             throw new NullPointerException("Unable to access system ClassLoader");
         }
-        String pkgPath = pkgName.replace('.', '/');
+        final String pkgPath = pkgName.replace('.', '/');
         URL pkgResource = cld.getResource(pkgPath);
         if (pkgResource == null) {
         	throw new NullPointerException("No system ClassLoader resources matching " + pkgPath);
@@ -55,37 +62,42 @@ public final class ClassScanner {
         return pkgResource;
 	}
 
-	static Set<Class<?>> getClassesInDirectory(File directory, String pkgName) {
-		Set<Class<?>> classes = new HashSet<Class<?>>();
+	static Collection<String> getClassFilenamesInDirectory(File directory, String pkgName) {
+		Collection<String> classFilenames = new LinkedList<String>();
         for (File file : directory.listFiles()) {
+        	final String filename = file.getName();
         	if (file.isDirectory()) {
-        		classes.addAll(getClassesInDirectory(file, pkgName + '.' + file.getName()));
-        	} else {
-        		addClassToSet(pkgName + '.' + file.getName(), classes);
+        		classFilenames.addAll(getClassFilenamesInDirectory(file, pkgName + '.' + filename));
+        	} else if (filename.endsWith(".class")) {
+        		classFilenames.add(pkgName + '.' + filename);
         	}
         }
-        return classes;
+        return classFilenames;
 	}
 	
-	static Set<Class<?>> getClassesInJar(JarFile jarfile, String pkgName) {
-		Set<Class<?>> classes = new HashSet<Class<?>>();
+	static Collection<String> getClassFilenamesInJar(JarFile jarfile, String pkgName) {
+		Collection<String> classFilenames = new LinkedList<String>();
 		final Enumeration<JarEntry> entries = (Enumeration<JarEntry>) jarfile.entries();
 		while (entries.hasMoreElements()) {
 			String jarEntryName = entries.nextElement().getName().replace('/', '.');
-			if (jarEntryName.contains(pkgName)) {
-				addClassToSet(jarEntryName, classes);
+			if (jarEntryName.contains(pkgName) && jarEntryName.endsWith(".class")) {
+				classFilenames.add(jarEntryName);
+			}
+		}
+		return classFilenames;
+	}
+
+	static Collection<Class<?>> createClassesFromFilenames(Collection<String> classFilenames) {
+		Collection<Class<?>> classes = new LinkedList<Class<?>>();
+		for (String classFilename : classFilenames) {
+			if (!classFilename.matches(".*Test.*")) {
+				try {
+					classes.add(Class.forName(classFilename.replace(".class", "")));
+				} catch (ClassNotFoundException e) {
+					throw new MissingResourceException("Cannot create class :" + e, classFilename, "");
+				}
 			}
 		}
 		return classes;
-	}
-
-	static void addClassToSet(String classfilename, Set<Class<?>> classes) {
-		if (classfilename.endsWith(".class") && !classfilename.matches(".*Test.*")) {
-			try {
-				classes.add(Class.forName(classfilename.replace(".class", "")));
-			} catch (ClassNotFoundException e) {
-				throw new MissingResourceException("Cannot create class :" + e, classfilename, "");
-			}
-		}		
 	}	
 }
