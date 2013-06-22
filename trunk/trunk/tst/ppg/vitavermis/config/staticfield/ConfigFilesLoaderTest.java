@@ -15,7 +15,7 @@ public class ConfigFilesLoaderTest {
 			put("int", (int)1);
 	        put("double", (double)2.0);
 	    } };
-		final Map<String, Object> actualTable = ConfigFilesLoader.readParameters("/config.properties");
+		final Map<String, Object> actualTable = ConfigFilesLoader.readParameters("/test_config.properties");
 		assertEquals(expectedTable, actualTable);
 	}
 }

@@ -1,6 +1,7 @@
 package ppg.vitavermis.config.staticfield;
 
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -11,7 +12,8 @@ public class ClassScannerTest {
 	
 	@Test
 	public final void getPackageClassesTest() {
-		final Set<Class<?>> classes = ClassScanner.getPackageClasses("ppg.vitavermis.config.staticfield");
+		final Set<Class<?>> classes = new HashSet<Class<?>>(
+				ClassScanner.getPackageClasses("ppg.vitavermis.config.staticfield"));
 		final Class<?>[] expectedArray = {
 	    	ClassScanner.class,
 	    	ConfigFilesLoader.class,

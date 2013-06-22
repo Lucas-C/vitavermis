@@ -10,83 +10,75 @@ import ppg.vitavermis.items.*;
 import org.newdawn.slick.SlickException;
 
 
-
 /**
- * Fichier test pour chargement object
+ * Fichier test pour chargement d'objets
  * @author parpaing
  * @version 1.01
  *
  */
 
-public final class creation {
-	ArrayList<Item> liste = null;
-//	@Param static int windowWidth;
-//	@Param static int windowHeight;
-	public static int windowWidth = 800;
-	public static int windowHeight = 600;
+public final class Scene {
+	ArrayList<Item> itemsList;
+	@Param static int windowWidth;
+	@Param static int windowHeight;
 	
-	public creation(){
-	}
-	
-	public ArrayList<Item> getListe() {
-		return liste;
+	public ArrayList<Item> getItemsList() {
+		return itemsList;
 	}
 
 	public void init() throws SlickException {
-		
-		
-		liste = new ArrayList<Item>();
+		itemsList = new ArrayList<Item>();
 		// hero
 		MainCharacterItem hero = new MainCharacterItem(new Image("data/rond.png"));
 		hero.setPosition(new Vector2f(350,350));
-		liste.add(hero);
+		itemsList.add(hero);
 		// Mur droit
 		Background murD = new Background(new Image("data/rectangle.png") , new String("Mur droit") );
 		murD.setHeight(windowHeight);
 		murD.setWidth(10);
 		murD.setPosition(new Vector2f(windowWidth - 10, 0));
-		liste.add(murD);
+		itemsList.add(murD);
 		// Mur gauche
 		Background murG = new Background(new Image("data/rectangle.png") , new String("Mur gauche") );
 		murG.setHeight(windowHeight);
 		murG.setWidth(10);
 		murG.setPosition(new Vector2f(0, 0));
-		liste.add(murG);
+		itemsList.add(murG);
 		// sol
 		Background sol = new Background(new Image("data/rectangle.png") , new String("Sol") );
 		sol.setHeight(10);
 		sol.setWidth(windowWidth);
 		sol.setPosition(new Vector2f(0, windowHeight - 10));
-		liste.add(sol);
+		itemsList.add(sol);
 		PlateformeItem plateform1 = new PlateformeItem(new Image("data/rectangle.png") , new String("plateform1"));
 		plateform1.setHeight(10);
 		plateform1.setWidth(150);
 		plateform1.setPosition(new Vector2f(100,150));
 		plateform1.setCelerity(new Vector2f((float)0.5,0));
-		liste.add(plateform1);
+		itemsList.add(plateform1);
 		PlateformeItem plateform2 = new PlateformeItem(new Image("data/rectangle.png") , new String("plateform2"));
 		plateform2.setHeight(10);
 		plateform2.setWidth(150);
 		plateform2.setPosition(new Vector2f(200,250));
 		plateform2.setCelerity(new Vector2f((float)0.3,0));
-		liste.add(plateform2);
+		itemsList.add(plateform2);
 		PlateformeItem plateform3 = new PlateformeItem(new Image("data/rectangle.png") , new String("plateform3"));
 		plateform3.setHeight(10);
 		plateform3.setWidth(150);
 		plateform3.setPosition(new Vector2f(300,350));
 		plateform3.setCelerity(new Vector2f((float)0.4,0));
-		liste.add(plateform3);
+		itemsList.add(plateform3);
 		PlateformeItem plateform4 = new PlateformeItem(new Image("data/rectangle.png") , new String("plateform4"));
 		plateform4.setHeight(10);
 		plateform4.setWidth(150);
 		plateform4.setPosition(new Vector2f(50,450));
 		plateform4.setCelerity(new Vector2f((float)0.2,0));
-		liste.add(plateform4);
+		itemsList.add(plateform4);
 		Background toit = new Background(new Image("data/rectangle.png") , new String("toit"));
 		toit.setHeight(10);
 		toit.setWidth(windowWidth);
 		toit.setPosition(new Vector2f(0,0));
-		liste.add(toit);
+		itemsList.add(toit);
 		/*
 		liste = new ArrayList<ItemsPhy>();
 		
