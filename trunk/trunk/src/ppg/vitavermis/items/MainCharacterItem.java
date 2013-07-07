@@ -2,10 +2,11 @@ package ppg.vitavermis.items;
 
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.geom.Vector2f;
 
 import ppg.vitavermis.config.Param;
 
-public class MainCharacterItem extends MobileItem {
+public class MainCharacterItem extends MobilItem {
 
 	private boolean jumping;
 	
@@ -47,8 +48,14 @@ public class MainCharacterItem extends MobileItem {
 		this.jumping = jumping1;
 	}
 
-	public MainCharacterItem(@Param("name") String name, @Param("spriteName") String spriteName) throws SlickException {
+	private MainCharacterItem(
+			@Param("x") int x,
+			@Param("y") int y,
+			@Param("spriteName") String spriteName,
+			@Param("name") String name
+			) throws SlickException {
 		super(new Image(spriteName), name);
+		this.setPosition(new Vector2f(x, y));
 	}
 
 }

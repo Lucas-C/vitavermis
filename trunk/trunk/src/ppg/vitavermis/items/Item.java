@@ -16,7 +16,7 @@ public class Item {
 	/**
 	 * String for description for debug 
 	 */
-	public String com;
+	public String name;
 	/**
 	 * float vector giving the position of the item 
 	 */
@@ -47,10 +47,10 @@ public class Item {
 	 * <p>
 	 * 
 	 */
-	public Item(Image img, String str) {
+	public Item(Image img, String name) {
 		this.position 		= new Vector2f(0, 0);
 		this.image 			= img;
-		this.com			= str;
+		this.name			= name;
 		this.height 		= itemHeightBase;
 		this.width 			= itemWidthBase;
 	}
@@ -89,7 +89,7 @@ public class Item {
 	 * 
 	 */
 	public final String getCom() {
-		return com;
+		return name;
 	}
 
 	/**

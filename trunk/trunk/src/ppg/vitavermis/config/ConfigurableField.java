@@ -1,11 +1,19 @@
 package ppg.vitavermis.config;
 
+import static ppg.vitavermis.config.ConfigurableField.getPrimitiveType;
+import static ppg.vitavermis.config.ConfigurableField.getWrapperType;
+import static ppg.vitavermis.config.ConfigurableField.isPrimitiveType;
+import static ppg.vitavermis.config.ConfigurableField.isWrapperType;
+
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.NoSuchElementException;
+
+import javax.xml.bind.TypeConstraintException;
 
 public class ConfigurableField {
 	public final static Map<Class<?>, Class<?>> WRAPPER_TYPES = new HashMap<Class<?>, Class<?>>();
@@ -21,17 +29,26 @@ public class ConfigurableField {
 		WRAPPER_TYPES.put(void.class, Void.class);
 	}
 	
-	public static boolean isWrapperType(Class<?> clazz) {
+	public static boolean isPrimitiveType(Class<?> clazz) {
 	    return WRAPPER_TYPES.containsKey(clazz);
 	}	
 
-	public static boolean isPrimitiveType(Class<?> clazz) {
+	public static boolean isWrapperType(Class<?> clazz) {
 	    return WRAPPER_TYPES.containsValue(clazz);
 	}	
 
-	public static Class<?> convertWrapperType(Class<?> clazz) {
+	public static Class<?> getWrapperType(Class<?> clazz) {
 	    return WRAPPER_TYPES.get(clazz);
-	}	
+	}
+	
+	public static Class<?> getPrimitiveType(Class<?> clazz) {
+		for (Entry<Class<?>, Class<?>> entry : WRAPPER_TYPES.entrySet()) {
+			if (clazz.equals(entry.getValue())) {
+				return entry.getKey();
+			}
+		}
+		throw new IllegalArgumentException("No matching primitive type for " + clazz);
+	}
 
 	public static boolean isFieldTypeSupported(Class<?> fieldType) {
 		return fieldType == String.class || fieldType.isPrimitive(); // [1]
@@ -69,7 +86,38 @@ public class ConfigurableField {
 		}
 	}
 	
-	public static void setFieldValue(Object instance, Field field, Object value) {
+	public static void setFieldValueWithCast(Object instance, Field field, Object value) {
+		value = cast(value, field.getType());
+		setFieldValue(instance, field, value);
+	}
+	
+	public static Object cast(Object obj, Class<?> expectedType) {
+		Class<?> currentType = obj.getClass();
+		//System.out.println("obj=" + obj + "; expectedType=" + expectedType + "; currentType=" + currentType);
+		if (isPrimitiveType(expectedType)) { // We don't care as unboxing is automated
+			expectedType = getWrapperType(expectedType);
+		}
+		if (isWrapperType(expectedType) && String.class == currentType) {
+			String strObj = (String)obj;
+			if (Integer.class == expectedType) {
+				obj = Integer.parseInt(strObj);
+			} else if (Double.class == expectedType) {
+				obj = Double.parseDouble(strObj); 
+			} else if (Float.class == expectedType) {
+				obj = Float.parseFloat(strObj); 
+			} else {
+				throw new UnsupportedOperationException("String -> " + expectedType);
+			}
+		} else {
+			obj = expectedType.cast(obj);
+			if (!expectedType.isInstance(obj)) {
+				throw new TypeConstraintException("Cannot cast type " + currentType + " to " + expectedType);
+			}
+		}
+		return obj;
+	}
+	
+	static void setFieldValue(Object instance, Field field, Object value) {
 		final boolean readable = field.isAccessible();
 		if (!readable) {
 			field.setAccessible(true);
@@ -78,12 +126,6 @@ public class ConfigurableField {
 			field.set(instance, value);
 		} catch (IllegalAccessException iae) {
 			throw new IllegalArgumentException(iae);
-/*		} catch (Exception e) { // try a String-conversion
-			try {
-				field.set(instance, value.toString());
-			} catch (IllegalAccessException iae) {
-				throw new IllegalArgumentException(iae);				
-			}*/
 		} finally {
 			if (!readable) {
 				field.setAccessible(false);
@@ -128,7 +170,13 @@ public class ConfigurableField {
 		} catch (IllegalAccessException e) {
 			assert false : "Internal error - setAccessible did not work";
 		} catch (InvocationTargetException e) {
-			throw new IllegalArgumentException("Could not call method " + cls + "." + methodName + " : " + e.getTargetException());
+			try {
+				throw e.getTargetException();
+			} catch (RuntimeException eTarget) {
+				throw eTarget;
+			} catch (Throwable eTarget) {
+				throw new IllegalArgumentException("Could not call method " + cls + "." + methodName + " : " + eTarget);
+			}
 		} finally {
 			if (!accessible) {
 				m.setAccessible(false);

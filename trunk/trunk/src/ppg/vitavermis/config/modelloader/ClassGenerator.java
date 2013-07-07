@@ -7,14 +7,13 @@ import java.lang.reflect.Modifier;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.NoSuchElementException;
+import java.util.Properties;
 
 import javax.xml.bind.TypeConstraintException;
 
 import ppg.vitavermis.config.ConfigFilesLoader;
+import ppg.vitavermis.config.ConfigurableField;
 import ppg.vitavermis.config.Param;
-
-import static ppg.vitavermis.config.ConfigurableField.isPrimitiveType;
-import static ppg.vitavermis.config.ConfigurableField.isWrapperType;;
 
 /**
  * @author lucas
@@ -24,6 +23,7 @@ import static ppg.vitavermis.config.ConfigurableField.isWrapperType;;
  * 
  * Prerequisites:
  *  - class must have one (and only one) constructor with only @Param annotated parameters
+ *  		(multiple constructors could be allowed as a feature)
  *  - one parameter must be aliased with "name": this value will be replaced with the config file name
  *  - class must not be nested (but this feature could be added)
  *
@@ -41,31 +41,31 @@ public final class ClassGenerator {
 		checkIsGenerable(cls);
 		// 2- Read config files & load their values in a table
 		final String className = cls.getName().substring(cls.getName().lastIndexOf('.') + 1);
-		final Map<String, Map<String, Object>> fieldValues = ConfigFilesLoader.loadConfigFilesInDirectory(
+		final Map<String, Properties> paramProperties = ConfigFilesLoader.loadConfigFilesInDirectory(
 				modelsDirName + '/' + className, fileExt);
 		// 3- Generate classes
-		final Map<String, T> classes = generateClassesWithValues(cls, fieldValues);
+		final Map<String, T> classes = generateClassesWithValues(cls, paramProperties);
 		return classes;
 	}
 	
-	private static <T> Map<String, T> generateClassesWithValues(Class<T> cls, Map<String, Map<String, Object>> fieldValues) {
-		Map<String, T> classes = new HashMap<String, T>(fieldValues.size());
-		for (Map.Entry<String, Map<String, Object> > entry : fieldValues.entrySet()) {
-			final Map<String, Object> configFieldsTable = entry.getValue();
+	private static <T> Map<String, T> generateClassesWithValues(Class<T> cls, Map<String, Properties> paramProperties) {
+		Map<String, T> classes = new HashMap<String, T>(paramProperties.size());
+		for (Map.Entry<String, Properties > entry : paramProperties.entrySet()) {
+			final Properties properties = entry.getValue();
 			final String instanceName = entry.getKey();
-			if (configFieldsTable.containsKey("name")) {
+			if (properties.containsKey("name")) {
 				throw new NoSuchElementException("Instance file " + instanceName + " for class " + cls.getName()
 						+ " should not have a 'name' field.");
 			}
-			configFieldsTable.put("name", instanceName);
-			classes.put(instanceName, generateClassWithValues(cls, configFieldsTable));
+			properties.put("name", instanceName);
+			classes.put(instanceName, generateClassWithValues(cls, properties));
 		}
 		return classes;
 	}
 
-	private static <T> T generateClassWithValues(Class<T> cls, Map<String, Object> configFieldsTable) {
+	private static <T> T generateClassWithValues(Class<T> cls, Properties properties) {
 		Constructor<T> constructor = getValidConstructor(cls);
-		Object[] paramValues = getParamValues(constructor, configFieldsTable);
+		Object[] paramValues = getParamValues(constructor, properties);
 		final boolean readable = constructor.isAccessible();
 		if (!readable) {
 			constructor.setAccessible(true);
@@ -75,7 +75,13 @@ public final class ClassGenerator {
 		} catch (InstantiationException | IllegalAccessException e) {
 			throw new IllegalArgumentException("Class " + cls + " doesn't match the prerequisites : " + e);
 		} catch (InvocationTargetException e) {
-			throw new IllegalStateException("Exception raised while invoking " + cls + " constructor : " + e.getTargetException());
+			try {
+				throw e.getTargetException();
+			} catch (RuntimeException eTarget) {
+				throw eTarget;
+			} catch (Throwable eTarget) {
+				throw new IllegalArgumentException("Could not call constructor " + constructor + " : " + eTarget);
+			}
 		} finally {
 			if (!readable) {
 				constructor.setAccessible(false);
@@ -83,7 +89,7 @@ public final class ClassGenerator {
 		}
 	}
 	
-	private static Object[] getParamValues(Constructor<?> constructor, Map<String, Object> configFieldsTable) {
+	private static Object[] getParamValues(Constructor<?> constructor, Properties properties) {
 		final Class<?>[] paramsTypes = constructor.getParameterTypes();		
 		final Param[] argsParams = extractParamsFromAnnotations(constructor.getParameterAnnotations());
 		assert paramsTypes.length == argsParams.length : constructor;
@@ -91,25 +97,13 @@ public final class ClassGenerator {
 		for (int i = 0; i < argsParams.length; ++i) {
 			final String paramName = argsParams[i].value();
 			assert !paramName.isEmpty() : i + "th param of " + constructor + " is empty";
-			Object value = configFieldsTable.get(paramName);
+			Object value = properties.get(paramName);
 			if (value == null) {
 				throw new NoSuchElementException("Could not find a value for parameter " + paramName
 						+ " to generate class " + constructor);
 			}
 			Class<?> expectedType = paramsTypes[i];
-			if (!expectedType.isInstance(value)
-			&& ((!isWrapperType(value.getClass()) && !isPrimitiveType(value.getClass()))
-			|| (!isWrapperType(expectedType) && !isPrimitiveType(expectedType)))) {
-				if (expectedType == String.class) {
-					value = value.toString();
-				} else {	
-					value = expectedType.cast(value);
-				}
-				if (!expectedType.isInstance(value)) {
-					throw new TypeConstraintException("Cannot cast type " + value.getClass() + " of " + constructor
-							+ " parameter " + paramName + " to " + expectedType);
-				}
-			}
+			value = ConfigurableField.cast(value, expectedType);
 			paramValues[i] = value;
 		}
 		return paramValues;

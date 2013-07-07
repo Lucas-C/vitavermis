@@ -5,9 +5,11 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 import java.util.Set;
 
 import ppg.vitavermis.config.ClassScanner;
@@ -44,8 +46,8 @@ public final class StaticFieldLoader {
 	public static void loadFields(String pkgName, String configFileName) {
    		System.out.println("[INFO] START Static fields loading");
 		// 1 - Read config files & load their values in table
-		final Map<String, Object> configParamsTable = ConfigFilesLoader.loadProperties(configFileName);
-		if (configParamsTable.isEmpty()) {
+		final Properties properties = ConfigFilesLoader.getPropertiesFromFilename(configFileName);
+		if (properties.isEmpty()) {
 			System.out.println("[WARNING] No values found in configuration file named " + configFileName);
 		}
 		// 2 - Get all pkg classes
@@ -54,7 +56,7 @@ public final class StaticFieldLoader {
 			System.out.println("[WARNING] No classes found for package " + pkgName);
 		}
 		// 3 - Process each field
-		Set<String> unusedConfiguredParams = processAllFields(classes, configParamsTable);
+		Set<String> unusedConfiguredParams = processAllFields(classes, properties);
 		if (!unusedConfiguredParams.isEmpty()) {
 	   		System.out.println("[WARNING] There are unused configuration values: " + unusedConfiguredParams);
 		}
@@ -62,12 +64,12 @@ public final class StaticFieldLoader {
 	}
 	
 	// VisibleForTesting
-	static Set<String> processAllFields(Collection<Class<?>> classes, final Map<String, Object> configParamsTable) {
-		Set<String> unusedConfiguredParams = new HashSet<String>(configParamsTable.keySet());
+	static Set<String> processAllFields(Collection<Class<?>> classes, final Properties properties) {
+		Set<String> unusedConfiguredParams = properties.stringPropertyNames();
 		for (Class<?> iClass : classes) {
 			for (Field iField : iClass.getDeclaredFields()) {
 				if (iField.getAnnotation(Param.class) != null) {
-					final String configKey = processField(iField, iClass.getName(), configParamsTable);
+					final String configKey = processField(iField, iClass.getName(), properties);
 					unusedConfiguredParams.remove(configKey);
 				}
 			}
@@ -77,7 +79,7 @@ public final class StaticFieldLoader {
 		
 	// VisibleForTesting
 	static String processField(Field field, String className,
-			final Map<String, Object> configParamsTable) {
+			final Properties properties) {
 		// 1 - Check if @Param is correctly used
 		if (!Modifier.isStatic(field.getModifiers())) {
 			throw new IncompleteAnnotationException(Param.class, "Annoted field " + fieldWithParamToString(field, className) + " should be static");
@@ -96,14 +98,14 @@ public final class StaticFieldLoader {
 					+ " already initialized: " + ConfigurableField.getFieldValue(null, field));			
 		}
 		// 3 - Lookup field name then alias in config table (with and then without prefix naming)
-		final String key = lookUpFieldKey(field, className, configParamsTable);
+		final String key = lookUpFieldKey(field, className, properties);
 		// 4 - Assign the object with a potential error if types mismatch
-		Object obj = configParamsTable.get(key);
-			ConfigurableField.setFieldValue(null, field, obj);
+		Object obj = properties.get(key);
+		ConfigurableField.setFieldValueWithCast(null, field, obj);
 		return key;
 	}
 	
-	private static String lookUpFieldKey(Field field, String className, final Map<String, Object> configParamsTable) {
+	private static String lookUpFieldKey(Field field, String className, final Properties properties) {
 		final Param param = field.getAnnotation(Param.class);
 		assert param != null : "Field not annotated with @Param";
 		List<String> keyList = new ArrayList<String>(4);
@@ -115,7 +117,7 @@ public final class StaticFieldLoader {
 		keyList.add(field.getName());
 		keyList.add(className + "." + field.getName());
 		for (String key : keyList) {
-			if (configParamsTable.containsKey(key)) {
+			if (properties.containsKey(key)) {
 				return key;
 			}
 		}

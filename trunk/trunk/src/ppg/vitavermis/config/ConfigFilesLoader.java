@@ -6,7 +6,6 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.security.ProviderException;
-import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -27,28 +26,33 @@ public final class ConfigFilesLoader {
 
 	private ConfigFilesLoader() { }
 
-	public static Map<String, Object> loadProperties(String configFileName) {
-		final Properties props = getPropertiesFromFilename(configFileName);
-		return propertiesToMap(props);
-	}
-	
 	public static void checkConfigDirectoryExists(String dirName) {
 		getConfigDir(dirName);
 	}
 	
-	public static Map<String, Map<String, Object>> loadConfigFilesInDirectory(String dirName, String fileExt) {
+	public static Properties getPropertiesFromFilename(String configFileName) {
+		final URL configFileURL = getRessourceFileURL(configFileName);
+		Properties props = new Properties();
+		try {
+			props.load(configFileURL.openStream());
+		} catch (IOException e) {
+			throw new ProviderException("Cannot read property file " + configFileName, e);
+		}
+		return props;
+	}
+	
+	public static Map<String, Properties> loadConfigFilesInDirectory(String dirName, String fileExt) {
 		final File dir = getConfigDir(dirName);
-		Map<String, Map<String, Object>> fieldValues = new HashMap<String, Map<String, Object>>();
+		Map<String, Properties> fieldValues = new HashMap<String, Properties>();
 		for (final String fileName : dir.list()) {
 			if (fileName.endsWith(fileExt)) {
 				final String propertiesFile = dirName + '/' + fileName;
-				final Map<String, Object> configParamsTable = loadProperties(propertiesFile);
-				if (configParamsTable.isEmpty()) {
+				final Properties props = getPropertiesFromFilename(propertiesFile);
+				if (props.isEmpty()) {
 					throw new NoSuchElementException("Config table in " + propertiesFile + " is empty");
 				}
 				final String baseName = fileName.replaceFirst(fileExt + "$", "");
-				fieldValues.put(baseName, configParamsTable);
-				break;
+				fieldValues.put(baseName, props);
 			}
 		}
 		return fieldValues;
@@ -83,40 +87,6 @@ public final class ConfigFilesLoader {
 		return configResource;
 	}
 	
-	static Properties getPropertiesFromFilename(String configFileName) {
-		final URL configFileURL = getRessourceFileURL(configFileName);
-		Properties props = new Properties();
-		try {
-			props.load(configFileURL.openStream());
-		} catch (IOException e) {
-			throw new ProviderException("Cannot read property file " + configFileName, e);
-		}
-		return props;
-	}
-	
-	static Map<String, Object> propertiesToMap(Properties props) {
-		Map<String, Object> configTable = new HashMap<String, Object>();
-		@SuppressWarnings("unchecked")
-		Enumeration<String> keys = (Enumeration<String>) props.propertyNames();
-		while (keys.hasMoreElements()) {
-			String key = keys.nextElement();
-			String value = props.getProperty(key);
-			configTable.put(key, getTypedValue(value));
-		}
-		return configTable;
-	}
-
-	// Test precedence is important : better cast to 'int' as it can then be casted to 'double', but not the opposite
-	static Object getTypedValue(String value) {
-		try {
-			return Integer.parseInt(value);
-		} catch (NumberFormatException nfe) { ; }
-		try {
-			return Double.parseDouble(value);
-		} catch (NumberFormatException nfe) { ; }
-		return value;
-	}
-
 	static Set<String> listSubDirsContainingFileExt(String dirName, String fileExt) {
 		final File dir = getConfigDir(dirName);
 		Set<String> subDirsContainingFileExt = new HashSet<String>();
