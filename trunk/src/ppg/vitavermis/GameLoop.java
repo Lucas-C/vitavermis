@@ -8,7 +8,7 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 
-import ppg.vitavermis.config.staticfield.Param;
+import ppg.vitavermis.config.Param;
 import ppg.vitavermis.event.EventAnalyserMgr;
 import ppg.vitavermis.input.InputMgr;
 import ppg.vitavermis.items.Item;
@@ -19,6 +19,7 @@ import ppg.vitavermis.testCreation.Scene;
 
 public class GameLoop extends BasicGame {
 	@Param static String windowName;
+	@Param static String gameVersion;
 
 	final GameState		gameState;
 	final RenderMgr		renderer;
@@ -38,7 +39,7 @@ public class GameLoop extends BasicGame {
 	public int count = 0;
 	
 	GameLoop(GameState gameState) {
-		super(windowName);
+		super(windowName + " - " + gameVersion);
 		this.gameState	= gameState;
 		this.input		= new InputMgr();
 		this.physics	= new PhysicsMgr();

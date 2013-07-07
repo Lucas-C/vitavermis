@@ -5,7 +5,8 @@ import java.util.ArrayList;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.geom.Vector2f;
 
-import ppg.vitavermis.config.staticfield.Param;
+import ppg.vitavermis.config.Param;
+import ppg.vitavermis.config.modelloader.ClassGenerator;
 import ppg.vitavermis.items.*;
 import org.newdawn.slick.SlickException;
 
@@ -29,7 +30,7 @@ public final class Scene {
 	public void init() throws SlickException {
 		itemsList = new ArrayList<Item>();
 		// hero
-		MainCharacterItem hero = new MainCharacterItem(new Image("data/rond.png"));
+		MainCharacterItem hero = ClassGenerator.generateClasses(MainCharacterItem.class, "models", ".conf").get("bob");
 		hero.setPosition(new Vector2f(350,350));
 		itemsList.add(hero);
 		// Mur droit

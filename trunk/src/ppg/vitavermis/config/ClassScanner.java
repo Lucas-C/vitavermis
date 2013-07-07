@@ -1,4 +1,4 @@
-package ppg.vitavermis.config.staticfield;
+package ppg.vitavermis.config;
 
 import java.io.File;
 import java.io.IOException;
@@ -23,7 +23,7 @@ public final class ClassScanner {
 	
 	private ClassScanner() { }
 	
-	static Collection<Class<?>> getPackageClasses(String pkgName) {
+	public static Collection<Class<?>> getPackageClasses(String pkgName) {
 		Collection<String> classeNames = getPackageClasseNames(pkgName);
 		return createClassesFromFilenames(classeNames);
 	}

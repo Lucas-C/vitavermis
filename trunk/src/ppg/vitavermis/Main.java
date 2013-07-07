@@ -3,7 +3,7 @@ package ppg.vitavermis;
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.SlickException;
 
-import ppg.vitavermis.config.staticfield.Param;
+import ppg.vitavermis.config.Param;
 import ppg.vitavermis.config.staticfield.StaticFieldLoader;
 
 public final class Main {
@@ -17,7 +17,7 @@ public final class Main {
 	@Param static int setMaximumLogicUpdateInterval;
 	
 	public Main() throws SlickException {
-		StaticFieldLoader.loadFields("ppg.vitavermis", "/config.properties");
+		StaticFieldLoader.loadFields("ppg.vitavermis", "config.properties");
 		
 		// print system infos
 		System.out.println("Arch=" + System.getProperty("sun.arch.data.model") + "bits");	
