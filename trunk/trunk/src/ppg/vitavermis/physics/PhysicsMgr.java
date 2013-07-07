@@ -436,18 +436,18 @@ public class PhysicsMgr {
 							Math.abs(((PlateformeItem) ((MainCharacterItem) item).getContactItem()).getCelerity().x)) {
 						
 					} else {
-						System.out.println("1");
+						//System.out.println("1");
 						item.getCumulForce().x = item.getCumulForce().x / (item.getMassCategory() + 3);
 						item.getCelerity().x = item.getCelerity().x / (item.getMassCategory() + 3);
 					}
 				} else {
-					System.out.println("2");
+					//System.out.println("2");
 
 					item.getCumulForce().x = item.getCumulForce().x / (item.getMassCategory() + 3);
 					item.getCelerity().x = item.getCelerity().x / (item.getMassCategory() + 3);
 				}
 			} else {
-				System.out.println("3");
+				//System.out.println("3");
 				item.getCumulForce().x = item.getCumulForce().x / (item.getMassCategory() + 3);
 				item.getCelerity().x = item.getCelerity().x / (item.getMassCategory() + 3);
 			}

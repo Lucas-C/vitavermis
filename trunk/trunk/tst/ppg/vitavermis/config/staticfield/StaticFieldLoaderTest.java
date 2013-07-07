@@ -2,7 +2,6 @@ package ppg.vitavermis.config.staticfield;
 
 import java.lang.annotation.IncompleteAnnotationException;
 import java.lang.reflect.Field;
-import java.lang.reflect.Modifier;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -11,6 +10,8 @@ import java.util.Set;
 
 import org.junit.Before;
 import org.junit.Test;
+
+import ppg.vitavermis.config.Param;
 import static org.junit.Assert.*;
 
 import static ppg.vitavermis.config.staticfield.StaticFieldLoader.*;
@@ -19,8 +20,10 @@ public class StaticFieldLoaderTest {
 	
 	@Param static String field;
 	@Param static private String privateField;
-	@Param(alias = "alias") static String aliasedField;
+	@Param("field") static String aliasedField;
 	static String noParamField;
+	@Param static int intField;
+	@Param static double doubleField = 0;
 	
 	static private class NestedClassOfHomonyms {
 		@Param static String field;	
@@ -39,9 +42,10 @@ public class StaticFieldLoaderTest {
 		configParamsTable = new HashMap<String, Object>() { {
 			put("field", "FIELD");
 			put("privateField", "FIELD");
-	        put("alias", "ALIAS");
 	        put("aliasedField", "ALIAS-ERROR");
 	    	put("noParamField", "NEVER_SET_VALUE");
+	    	put("doubleField", 4.2);
+	    	put("intField", 42);
 		} };
 	}
 	
@@ -51,6 +55,8 @@ public class StaticFieldLoaderTest {
 		privateField = null;
 		aliasedField = null;
 		noParamField = null;
+		intField = 0;
+		doubleField = 0;
 		NestedClassOfHomonyms.field = null;
 		NestedClassOfErrors.initializedField = "HARDCODED_INITIALIZED_FIELD";
 		NestedClassOfErrors.noConfigField = null;
@@ -63,7 +69,7 @@ public class StaticFieldLoaderTest {
 		final Set<String> expected = new HashSet<String>(Arrays.asList("noParamField", "aliasedField"));
 		assertEquals(expected, unusedConfiguredParams);
 	}
-	
+
 	@Test
 	public final void processFieldTest() throws NoSuchFieldException {
 		Field okField = StaticFieldLoaderTest.class.getDeclaredField("field");
@@ -82,7 +88,7 @@ public class StaticFieldLoaderTest {
 	public final void processAliasedFieldTest() throws NoSuchFieldException {
 		Field okField = StaticFieldLoaderTest.class.getDeclaredField("aliasedField");
 		processField(okField, StaticFieldLoaderTest.class.getName(), configParamsTable);
-		assertEquals("ALIAS", aliasedField);
+		assertEquals("FIELD", aliasedField);
 	}
 	
 	@Test
@@ -115,85 +121,23 @@ public class StaticFieldLoaderTest {
 		Field errField = NestedClassOfErrors.class.getDeclaredField("noConfigField");
 		processField(errField, NestedClassOfErrors.class.getName(), configParamsTable);
 	}
-	
-	@Test
-	public final void isFieldTypeSupportedTest() {
-		assertTrue(isFieldTypeSupported(String.class));
-		assertTrue(isFieldTypeSupported(int.class));
-		assertTrue(isFieldTypeSupported(boolean.class));
-		assertFalse(isFieldTypeSupported(Character.class));
-	}
-
-	@SuppressWarnings("unused")
-	static private class NestedClassOfPrimitiveTypes {
-		static boolean b_default;
-		static boolean b_manual = false;
-		static int i_default;
-		static int i_manual = 0;
-		static double d_default;
-		static double d_manual = 0;
-		static char c_default;
-		static char c_manual = '\u0000';
-	}
-	
-	@Test
-	public final void isDefaultValueSetTest() throws NoSuchFieldException {
-		assertTrue(isStaticDefaultValueSet(StaticFieldLoaderTest.class.getDeclaredField("field")));
-		assertTrue(isStaticDefaultValueSet(NestedClassOfPrimitiveTypes.class.getDeclaredField("b_default")));
-		assertTrue(isStaticDefaultValueSet(NestedClassOfPrimitiveTypes.class.getDeclaredField("b_manual")));
-		assertTrue(isStaticDefaultValueSet(NestedClassOfPrimitiveTypes.class.getDeclaredField("i_default")));
-		assertTrue(isStaticDefaultValueSet(NestedClassOfPrimitiveTypes.class.getDeclaredField("i_manual")));
-		assertTrue(isStaticDefaultValueSet(NestedClassOfPrimitiveTypes.class.getDeclaredField("d_default")));
-		assertTrue(isStaticDefaultValueSet(NestedClassOfPrimitiveTypes.class.getDeclaredField("d_manual")));
-		assertTrue(isStaticDefaultValueSet(NestedClassOfPrimitiveTypes.class.getDeclaredField("c_default")));
-		assertTrue(isStaticDefaultValueSet(NestedClassOfPrimitiveTypes.class.getDeclaredField("c_manual")));
-	}
 
 	@Test
-	public final void isFieldFlagSetTest() throws NoSuchFieldException {
-		Field baseStaticField = StaticFieldLoaderTest.class.getDeclaredField("field");
-				
-		Field nonStatField = NestedClassOfErrors.class.getDeclaredField("dynamicField");
-		assertTrue(isFieldFlagSet(baseStaticField, Modifier.STATIC));
-		assertFalse(isFieldFlagSet(nonStatField, Modifier.STATIC));
-		
-		Field finalField = NestedClassOfErrors.class.getDeclaredField("FINAL_FIELD");
-		assertTrue(isFieldFlagSet(finalField, Modifier.FINAL));
-		assertFalse(isFieldFlagSet(baseStaticField, Modifier.FINAL));
-
-		Field privField = StaticFieldLoaderTest.class.getDeclaredField("privateField");
-		assertFalse(isFieldFlagSet(privField, Modifier.PUBLIC));
-		assertTrue(isFieldFlagSet(privField, Modifier.PRIVATE));
-		assertFalse(isFieldFlagSet(baseStaticField, Modifier.PUBLIC));
-		assertFalse(isFieldFlagSet(baseStaticField, Modifier.PRIVATE));
+	public final void typeCastTest() throws NoSuchFieldException {
+		Map<String, Object> wrongConfigParamsTable = new HashMap<String, Object>() { {
+			put("doubleField", 42);
+		} };
+		Field okField = StaticFieldLoaderTest.class.getDeclaredField("doubleField");
+		processField(okField, StaticFieldLoaderTest.class.getName(), wrongConfigParamsTable);
+		assertEquals(42, doubleField, 0.001);
 	}
 
-	@Test
-	public final void getStaticFieldValueTest() throws NoSuchFieldException {
-		Field okField = NestedClassOfErrors.class.getDeclaredField("initializedField");
-		assertNotNull(okField);
-		assertEquals("HARDCODED_INITIALIZED_FIELD", getStaticFieldValue(okField));
-	}
-
-	@Test(expected = NullPointerException.class)
-	public final void getStaticFieldValueFailTest() throws NoSuchFieldException {
-		Field errField = NestedClassOfErrors.class.getDeclaredField("dynamicField");
-		assertNotNull(errField);
-		getStaticFieldValue(errField);
-	}
-
-	@Test
-	public final void setStaticFieldValueTest() throws NoSuchFieldException {
-		Field okField = StaticFieldLoaderTest.class.getDeclaredField("field");
-		assertNotNull(okField);
-		setStaticFieldValue(okField, "OK");
-		assertEquals("OK", field);
-	}
-
-	@Test(expected = NullPointerException.class)
-	public final void setStaticFieldValueFailTest() throws NoSuchFieldException {
-		Field errField = NestedClassOfErrors.class.getDeclaredField("dynamicField");
-		assertNotNull(errField);
-		setStaticFieldValue(errField, "OK");
+	@Test(expected = IncompleteAnnotationException.class)
+	public final void typeCastFailTest() throws NoSuchFieldException {
+		Map<String, Object> wrongConfigParamsTable = new HashMap<String, Object>() { {
+			put("intField", 4.2);
+		} };
+		Field errField = StaticFieldLoaderTest.class.getDeclaredField("intField");
+		processField(errField, StaticFieldLoaderTest.class.getName(), wrongConfigParamsTable);
 	}
 }

@@ -3,6 +3,8 @@ package ppg.vitavermis.items;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 
+import ppg.vitavermis.config.Param;
+
 public class MainCharacterItem extends MobileItem {
 
 	private boolean jumping;
@@ -45,8 +47,8 @@ public class MainCharacterItem extends MobileItem {
 		this.jumping = jumping1;
 	}
 
-	public MainCharacterItem(Image img) throws SlickException {
-		super(img, new String("Perso_Principal"));
+	public MainCharacterItem(@Param("name") String name, @Param("spriteName") String spriteName) throws SlickException {
+		super(new Image(spriteName), name);
 	}
 
 }

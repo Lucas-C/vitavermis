@@ -21,15 +21,8 @@ DONE:
 IMPROVMENTS:
     - @Param :
         - lists
-        - default.conf file, + rules for which other to use
-    - Set<ClassT> generateModels(ClassT.class)
-        ---> read conf files in ClassT/ subdir
-        ---> for each one:
-            - instanciate a new
-            - assign avery field found in the config file :
-                + if exist a 'name' field : use the config file name
-                && consider potential @ConfigAliases annotations
-            - if 'init' method defined, call it
+        - default .conf file, + rules for which other to use
 	- use log system comme log4j/slf4j ?
+    - provide a cmd-line option to list all @Param configurables
 
 

@@ -1,11 +1,14 @@
-package ppg.vitavermis.config.staticfield;
+package ppg.vitavermis.config;
 
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
 import org.junit.Test;
+
+import ppg.vitavermis.config.ClassScanner;
+import ppg.vitavermis.config.ConfigFilesLoader;
+import ppg.vitavermis.config.staticfield.StaticFieldLoader;
 import static org.junit.Assert.*;
 
 public class ClassScannerTest {

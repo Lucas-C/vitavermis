@@ -10,6 +10,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import ppg.vitavermis.config.ClassScanner;
+import ppg.vitavermis.config.ConfigFilesLoader;
+import ppg.vitavermis.config.ConfigurableField;
+import ppg.vitavermis.config.Param;
+
 /**
  * @author lucas
  * 
@@ -37,16 +42,16 @@ public final class StaticFieldLoader {
 	private StaticFieldLoader() { }	
 
 	public static void loadFields(String pkgName, String configFileName) {
-   		System.out.println("[INFO] START Static fields loading in " + pkgName);
-		// 1 - Get target classes
+   		System.out.println("[INFO] START Static fields loading");
+		// 1 - Read config files & load their values in table
+		final Map<String, Object> configParamsTable = ConfigFilesLoader.loadProperties(configFileName);
+		if (configParamsTable.isEmpty()) {
+			System.out.println("[WARNING] No values found in configuration file named " + configFileName);
+		}
+		// 2 - Get all pkg classes
 		Collection<Class<?>> classes = ClassScanner.getPackageClasses(pkgName);
 		if (classes.isEmpty()) {
-			System.out.println("[WARNING] No classes found");
-		}
-		// 2 - Read config files & load their values in table
-		final Map<String, Object> configParamsTable = ConfigFilesLoader.readParameters(configFileName);
-		if (configParamsTable.isEmpty()) {
-			System.out.println("[WARNING] No configuration files found");
+			System.out.println("[WARNING] No classes found for package " + pkgName);
 		}
 		// 3 - Process each field
 		Set<String> unusedConfiguredParams = processAllFields(classes, configParamsTable);
@@ -73,111 +78,59 @@ public final class StaticFieldLoader {
 	// VisibleForTesting
 	static String processField(Field field, String className,
 			final Map<String, Object> configParamsTable) {
-		final Param param = field.getAnnotation(Param.class);
-		assert param != null : "Field not annotated with @Param";
-   		String displayName = className + '.' + field.getName();
-		if (!"".equals(param.alias())) {
-			displayName += "(ALIAS:" + param.alias() + ")";
+		// 1 - Check if @Param is correctly used
+		if (!Modifier.isStatic(field.getModifiers())) {
+			throw new IncompleteAnnotationException(Param.class, "Annoted field " + fieldWithParamToString(field, className) + " should be static");
 		}
-		// 1 - Check if @Param is correctly used 
-		if (!isFieldFlagSet(field, Modifier.STATIC)) {
-			throw new IncompleteAnnotationException(Param.class, "Annoted field " + displayName + " should be static");
-		}
-		if (isFieldFlagSet(field, Modifier.FINAL)) {
-			throw new IncompleteAnnotationException(Param.class, "Annoted field " + displayName + " should not be final");
+		if (Modifier.isFinal(field.getModifiers())) {
+			throw new IncompleteAnnotationException(Param.class, "Annoted field " + fieldWithParamToString(field, className) + " should not be final");
 		}
 		Class<?> fieldClass = field.getType();
-		if (!isFieldTypeSupported(fieldClass)) {
-			throw new IncompleteAnnotationException(Param.class, "Annoted field " + displayName + " type not supported: " + fieldClass);			
+		if (!ConfigurableField.isFieldTypeSupported(fieldClass)) {
+			throw new IncompleteAnnotationException(Param.class, "Annoted field " + fieldWithParamToString(field, className)
+					+ " type not supported: " + fieldClass);			
 		}
 		// 2 - Check that the field is not already initialized
-		if (!isStaticDefaultValueSet(field)) {
-			throw new IncompleteAnnotationException(Param.class, "Annoted field " + displayName + " already initialized: " + getStaticFieldValue(field));			
+		if (!ConfigurableField.isDefaultValue(null, field)) {
+			throw new IncompleteAnnotationException(Param.class, "Annoted field " + fieldWithParamToString(field, className)
+					+ " already initialized: " + ConfigurableField.getFieldValue(null, field));			
 		}
 		// 3 - Lookup field name then alias in config table (with and then without prefix naming)
-		List<String> keyList = new ArrayList<String>();
-		if (!"".equals(param.alias())) {
-			keyList.add(param.alias());
-			keyList.add(className + "." + param.alias());
+		final String key = lookUpFieldKey(field, className, configParamsTable);
+		// 4 - Assign the object with a potential error if types mismatch
+		Object obj = configParamsTable.get(key);
+			ConfigurableField.setFieldValue(null, field, obj);
+		return key;
+	}
+	
+	private static String lookUpFieldKey(Field field, String className, final Map<String, Object> configParamsTable) {
+		final Param param = field.getAnnotation(Param.class);
+		assert param != null : "Field not annotated with @Param";
+		List<String> keyList = new ArrayList<String>(4);
+		final String alias = param.value();
+		if (!"".equals(alias)) {
+			keyList.add(alias);
+			keyList.add(className + "." + alias);
 		}
 		keyList.add(field.getName());
 		keyList.add(className + "." + field.getName());
 		for (String key : keyList) {
 			if (configParamsTable.containsKey(key)) {
-				setStaticFieldValue(field, configParamsTable.get(key));
 				return key;
 			}
 		}
 		// 4 - If still nothing found, throw an error
-		throw new IncompleteAnnotationException(Param.class, "No configuration parameter found for uninitialized annoted field " + displayName);
+		throw new IncompleteAnnotationException(Param.class, "No configuration parameter found for uninitialized annoted field " + fieldWithParamToString(field, className));
 	}
 	
-	// VisibleForTesting
-	static boolean isFieldTypeSupported(Class<?> fieldType) {
-		return fieldType == String.class || fieldType.isPrimitive(); // [1]
-	}
-
-	// VisibleForTesting
-	static boolean isStaticDefaultValueSet(Field field) {
-		Class<?> fieldClass = field.getType();
-		Object val = getStaticFieldValue(field);
-		if (boolean.class == fieldClass) {
-			return (boolean)val == false;
-		} else if (char.class == fieldClass) {
-			return (char)val == '\u0000';
-		} else if (fieldClass.isPrimitive()) {
-			return ((Number) val).doubleValue() == 0;
-		} else {
-			return val == null; // [1]
+	private static String fieldWithParamToString(Field field, String className) {
+		final Param param = field.getAnnotation(Param.class);
+		assert param != null : "Field not annotated with @Param";
+		String displayName = className + '.' + field.getName();
+		final String alias = param.value();
+		if (!"".equals(alias)) {
+			displayName += "(ALIAS:" + alias + ")";
 		}
-	}
-	
-	// VisibleForTesting
-	static boolean isFieldFlagSet(Field field, int flag) {
-		try {
-			Field modifiersField = Field.class.getDeclaredField("modifiers");
-		    modifiersField.setAccessible(true);
-			final boolean flagSet = (modifiersField.getInt(field) & flag) > 0;
-		    modifiersField.setAccessible(false);
-		    return flagSet;
-		} catch (IllegalAccessException | NoSuchFieldException e) {
-			throw new IllegalArgumentException(e);
-		}
-	}
-
-	// VisibleForTesting
-	static Object getStaticFieldValue(Field field) {
-		final boolean readable = field.isAccessible();
-		Object retVal = null;
-		if (!readable) {
-			field.setAccessible(true);
-		}
-		try {
-			retVal = field.get(null);
-			//System.out.println("field:" + field.getName() + " = " + o);	
-		} catch (IllegalAccessException e) {
-			throw new IllegalArgumentException(e);
-		}		
-		if (!readable) {
-			field.setAccessible(false);
-		}
-		return retVal;
-	}
-	
-	// VisibleForTesting
-	static void setStaticFieldValue(Field field, Object o) {
-		final boolean readable = field.isAccessible();
-		if (!readable) {
-			field.setAccessible(true);
-		}
-		try {
-			field.set(null, o);
-			//System.out.println("field:" + field.getName() + " = " + o);	
-		} catch (IllegalAccessException e) {
-			throw new IllegalArgumentException(e);
-		}		
-		if (!readable) {
-			field.setAccessible(false);
-		}
+		return displayName;
 	}
 }
