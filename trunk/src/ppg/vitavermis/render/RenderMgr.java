@@ -30,7 +30,7 @@ public class RenderMgr {
 				_g.drawRect(rectangle.x, rectangle.y, rectangle.width, rectangle.height);
 			}
 			if (debug_mode_2 == true) {
-				_g.drawString(item.com, item.getPosition().x + 10, item.getPosition().y + 10);
+				_g.drawString(item.name, item.getPosition().x + 10, item.getPosition().y + 10);
 			}
 			
 		}

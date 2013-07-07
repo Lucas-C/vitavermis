@@ -1,85 +1,50 @@
 package ppg.vitavermis.testCreation;
 
 import java.util.ArrayList;
+import java.util.Map;
 
-import org.newdawn.slick.Image;
-import org.newdawn.slick.geom.Vector2f;
-
+import ppg.vitavermis.config.ConfigurableField;
 import ppg.vitavermis.config.Param;
 import ppg.vitavermis.config.modelloader.ClassGenerator;
 import ppg.vitavermis.items.*;
 import org.newdawn.slick.SlickException;
 
-
 /**
  * Fichier test pour chargement d'objets
  * @author parpaing
- * @version 1.01
- *
  */
-
 public final class Scene {
-	ArrayList<Item> itemsList;
 	@Param static int windowWidth;
 	@Param static int windowHeight;
-	
+	@Param static int scene;
+
+	ArrayList<Item> itemsList;
+
 	public ArrayList<Item> getItemsList() {
 		return itemsList;
 	}
 
 	public void init() throws SlickException {
-		itemsList = new ArrayList<Item>();
+		ConfigurableField.invokeMethod(Scene.class, this, "init_" + scene);
+	}
+		
+	void init_0 () throws SlickException {
+		this.itemsList = new ArrayList<Item>();
+		
 		// hero
 		MainCharacterItem hero = ClassGenerator.generateClasses(MainCharacterItem.class, "models", ".conf").get("bob");
-		hero.setPosition(new Vector2f(350,350));
-		itemsList.add(hero);
-		// Mur droit
-		Background murD = new Background(new Image("data/rectangle.png") , new String("Mur droit") );
-		murD.setHeight(windowHeight);
-		murD.setWidth(10);
-		murD.setPosition(new Vector2f(windowWidth - 10, 0));
-		itemsList.add(murD);
-		// Mur gauche
-		Background murG = new Background(new Image("data/rectangle.png") , new String("Mur gauche") );
-		murG.setHeight(windowHeight);
-		murG.setWidth(10);
-		murG.setPosition(new Vector2f(0, 0));
-		itemsList.add(murG);
-		// sol
-		Background sol = new Background(new Image("data/rectangle.png") , new String("Sol") );
-		sol.setHeight(10);
-		sol.setWidth(windowWidth);
-		sol.setPosition(new Vector2f(0, windowHeight - 10));
-		itemsList.add(sol);
-		PlateformeItem plateform1 = new PlateformeItem(new Image("data/rectangle.png") , new String("plateform1"));
-		plateform1.setHeight(10);
-		plateform1.setWidth(150);
-		plateform1.setPosition(new Vector2f(100,150));
-		plateform1.setCelerity(new Vector2f((float)0.5,0));
-		itemsList.add(plateform1);
-		PlateformeItem plateform2 = new PlateformeItem(new Image("data/rectangle.png") , new String("plateform2"));
-		plateform2.setHeight(10);
-		plateform2.setWidth(150);
-		plateform2.setPosition(new Vector2f(200,250));
-		plateform2.setCelerity(new Vector2f((float)0.3,0));
-		itemsList.add(plateform2);
-		PlateformeItem plateform3 = new PlateformeItem(new Image("data/rectangle.png") , new String("plateform3"));
-		plateform3.setHeight(10);
-		plateform3.setWidth(150);
-		plateform3.setPosition(new Vector2f(300,350));
-		plateform3.setCelerity(new Vector2f((float)0.4,0));
-		itemsList.add(plateform3);
-		PlateformeItem plateform4 = new PlateformeItem(new Image("data/rectangle.png") , new String("plateform4"));
-		plateform4.setHeight(10);
-		plateform4.setWidth(150);
-		plateform4.setPosition(new Vector2f(50,450));
-		plateform4.setCelerity(new Vector2f((float)0.2,0));
-		itemsList.add(plateform4);
-		Background toit = new Background(new Image("data/rectangle.png") , new String("toit"));
-		toit.setHeight(10);
-		toit.setWidth(windowWidth);
-		toit.setPosition(new Vector2f(0,0));
-		itemsList.add(toit);
+		this.itemsList.add(hero);
+
+		Map<String, BackgroundItem> BackgroundItems = ClassGenerator.generateClasses(BackgroundItem.class, "models", ".conf");
+		for (final BackgroundItem background : BackgroundItems.values()) {
+			this.itemsList.add(background);
+		}
+
+		Map<String, PlatformItem> PlatformItems = ClassGenerator.generateClasses(PlatformItem.class, "models", ".conf");
+		for (final PlatformItem platform : PlatformItems.values()) {
+			this.itemsList.add(platform);
+		}
+
 		/*
 		liste = new ArrayList<ItemsPhy>();
 		

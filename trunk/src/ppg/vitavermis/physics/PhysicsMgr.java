@@ -4,11 +4,11 @@ import java.awt.Rectangle;
 import java.util.ArrayList;
 
 import org.newdawn.slick.geom.Vector2f;
-import ppg.vitavermis.items.Background;
+import ppg.vitavermis.items.BackgroundItem;
 import ppg.vitavermis.items.Item;
 import ppg.vitavermis.items.MainCharacterItem;
-import ppg.vitavermis.items.MobileItem;
-import ppg.vitavermis.items.PlateformeItem;
+import ppg.vitavermis.items.MobilItem;
+import ppg.vitavermis.items.PlatformItem;
 
 /***
  * 
@@ -39,7 +39,7 @@ public class PhysicsMgr {
 		applyallForce(liste, hero);
 		for (Item item : liste) {
 //			System.out.println("update loop " + item.com);
-			if (item instanceof MobileItem) {
+			if (item instanceof MobilItem) {
 				// liberation de tout les contact de MainCharacter
 				if (item instanceof MainCharacterItem) {
 //					System.out.println(((MobileItem) item).getCelerity());
@@ -48,18 +48,18 @@ public class PhysicsMgr {
 					((MainCharacterItem) item).setContactItem(null);
 				}
 //				System.out.println("changement de position boocle " + item.com);
-				if (item instanceof PlateformeItem) {
-					destinationMobileItem.x = item.getPosition().x + ((MobileItem) item).getCelerity().x * delta;
-					destinationMobileItem.y = item.getPosition().y + ((MobileItem) item).getCelerity().y * delta;
+				if (item instanceof PlatformItem) {
+					destinationMobileItem.x = item.getPosition().x + ((MobilItem) item).getCelerity().x * delta;
+					destinationMobileItem.y = item.getPosition().y + ((MobilItem) item).getCelerity().y * delta;
 //					System.out.println("-+-+-+-+-+-+++-----+++--++-");
 //					System.out.println(((MobileItem) item).getCelerity());
-					intertsection2((MobileItem) item, liste, destinationMobileItem);
+					intertsection2((MobilItem) item, liste, destinationMobileItem);
 				} else {
-					((MobileItem) item).getCelerity().x +=  ((MobileItem) item).getCumulForce().x * delta;
-					((MobileItem) item).getCelerity().y +=  ((MobileItem) item).getCumulForce().y * delta;
-					destinationMobileItem.x = item.getPosition().x + ((MobileItem) item).getCelerity().x * delta;
-					destinationMobileItem.y = item.getPosition().y + ((MobileItem) item).getCelerity().y * delta;
-					intertsection2((MobileItem) item, liste, destinationMobileItem);
+					((MobilItem) item).getCelerity().x +=  ((MobilItem) item).getCumulForce().x * delta;
+					((MobilItem) item).getCelerity().y +=  ((MobilItem) item).getCumulForce().y * delta;
+					destinationMobileItem.x = item.getPosition().x + ((MobilItem) item).getCelerity().x * delta;
+					destinationMobileItem.y = item.getPosition().y + ((MobilItem) item).getCelerity().y * delta;
+					intertsection2((MobilItem) item, liste, destinationMobileItem);
 				}
 			}
 		}
@@ -106,9 +106,9 @@ public class PhysicsMgr {
 	 */
 	public final void applyallForce(ArrayList<Item> liste, Item item) {
 		for (Item item1 : liste) {
-			if (item1 instanceof MobileItem) {
-				applyGravity((MobileItem) item1);
-				decreaseForce((MobileItem) item1);
+			if (item1 instanceof MobilItem) {
+				applyGravity((MobilItem) item1);
+				decreaseForce((MobilItem) item1);
 			}
 		}
 		
@@ -121,14 +121,14 @@ public class PhysicsMgr {
 	 * @param force
 	 */
 	public static void applyForce(Item item, Vector2f force) {
-		if (!(item instanceof MobileItem)) {
+		if (!(item instanceof MobilItem)) {
 			//System.out.println("Objet non deplacable");
 		} else {
 			//System.out.println("Objet deplacable");
-			((MobileItem) item).getCumulForce().x += force.x;
-			((MobileItem) item).getCumulForce().y += force.y;
+			((MobilItem) item).getCumulForce().x += force.x;
+			((MobilItem) item).getCumulForce().y += force.y;
 			//movement_horizontal(((MobileItem) item).getCumulForce(), ((MobileItem) item).getMassCategory());
-			movement_vertical(((MobileItem) item).getCumulForce(), ((MobileItem) item).getMassCategory());
+			movement_vertical(((MobilItem) item).getCumulForce(), ((MobilItem) item).getMassCategory());
 		}
 	}
 	
@@ -139,9 +139,9 @@ public class PhysicsMgr {
 	 * @see ForceDefinition#gravity
 	 */
 	// refvoir
-	public final void applyGravity(MobileItem item) {		
-		if (item instanceof PlateformeItem) {
-			if (((PlateformeItem) item).isGravity()) {
+	public final void applyGravity(MobilItem item) {		
+		if (item instanceof PlatformItem) {
+			if (((PlatformItem) item).isGravity()) {
 				item.getCumulForce().y += ForceDefinition.gravity;
 			}
 		} else {
@@ -160,7 +160,7 @@ public class PhysicsMgr {
 
 	// supposition 
 	// par definition si un element est dans le rectangle l'objet mobile le touche (ce qui est faux mais peut �tre consid�rer comme vrai � petite �chelle)
-	public final void intertsection2(MobileItem itemMobile, ArrayList<Item> liste, Vector2f destination) {
+	public final void intertsection2(MobilItem itemMobile, ArrayList<Item> liste, Vector2f destination) {
 		
 		// position, celerity, cumulforce temporaire de notre mobile item
 		Vector2f newPosition = new Vector2f(destination.x, destination.y);
@@ -193,11 +193,11 @@ public class PhysicsMgr {
 					((MainCharacterItem) itemMobile).setContactItem(item);
 				}
 
-				if (item instanceof Background) {
+				if (item instanceof BackgroundItem) {
 					// fonction de traitement 
 					replacePositionIntersection(itemMobile, item, destination, newPosition, newCelerity, newCumulforce);
 				} else {
-					if (item instanceof PlateformeItem) {
+					if (item instanceof PlatformItem) {
 						// fonction de traitement sp� Plateform
 						replacePositionIntersection(itemMobile, item, destination, newPosition, newCelerity, newCumulforce);
 					} else {
@@ -237,25 +237,25 @@ public class PhysicsMgr {
 	 * @param destination
 	 * @return if the mobile utem position up change between initiale position and destination
 	 */
-	public final boolean upChange(MobileItem itemMobile, Item item, Vector2f destination) {
+	public final boolean upChange(MobilItem itemMobile, Item item, Vector2f destination) {
 		boolean upBegin = masterUp(itemMobile.getPosition().y, item.getPosition());
 		boolean upEnd = masterUp(destination.y + itemMobile.getHeight() , item.getPosition());
 		return (upBegin != upEnd && itemMobile.getPosition().y != destination.y);
 	}
 
-	public final boolean downChange(MobileItem itemMobile, Item item, Vector2f destination) {
+	public final boolean downChange(MobilItem itemMobile, Item item, Vector2f destination) {
 		boolean downBegin = masterDown(itemMobile.getPosition().y, item.getPosition());
 		boolean downEnd = masterDown(destination.y - item.getHeight(), item.getPosition());
 		return (downBegin != downEnd && itemMobile.getPosition().y != destination.y);
 	}
 		
-	public final boolean leftChange(MobileItem itemMobile, Item item, Vector2f destination) {
+	public final boolean leftChange(MobilItem itemMobile, Item item, Vector2f destination) {
 		boolean leftBegin = masterLeft(itemMobile.getPosition().x, item.getPosition());
 		boolean leftEnd = masterLeft(destination.x + itemMobile.getWidth(), item.getPosition());
 		return (leftBegin != leftEnd && itemMobile.getPosition().x != destination.x);
 	}
 
-	public final boolean rigthChange(MobileItem itemMobile, Item item, Vector2f destination) {
+	public final boolean rigthChange(MobilItem itemMobile, Item item, Vector2f destination) {
 		boolean rigthBegin = masterRight(itemMobile.getPosition().x, item.getPosition());
 		boolean rigthEnd = masterRight(destination.x - item.getWidth(), item.getPosition());
 //		System.out.println(item.getPosition() + " " + itemMobile.getPosition());
@@ -272,7 +272,7 @@ public class PhysicsMgr {
 	 * @param new_celerity
 	 * @param new_cumulforce
 	 */
-	public final void replacePositionIntersection(MobileItem itemMobile, Item item, Vector2f destination, 
+	public final void replacePositionIntersection(MobilItem itemMobile, Item item, Vector2f destination, 
 			Vector2f newPosition, Vector2f newCelerity, Vector2f newCumulforce) {
 		
 		// astuce prendre l'�lement avec sa taille ne plus pour pouvoir tester corecctement le changement de position
@@ -308,10 +308,10 @@ public class PhysicsMgr {
 					}
 					newCumulforce.y = Math.min(0, itemMobile.getCumulForce().y);
 					newCelerity.y = Math.min(0, itemMobile.getCelerity().y);
-					if (item instanceof PlateformeItem) {
+					if (item instanceof PlatformItem) {
 						// gestion plateform qui transmette leur mouvement
-						if (Math.abs(newCelerity.x) < Math.abs(((PlateformeItem) item).getCelerity().x)) {
-							newCelerity.x += ((PlateformeItem) item).getCelerity().x;
+						if (Math.abs(newCelerity.x) < Math.abs(((PlatformItem) item).getCelerity().x)) {
+							newCelerity.x += ((PlatformItem) item).getCelerity().x;
 						}
 					}
 				} 
@@ -336,7 +336,7 @@ public class PhysicsMgr {
 						newPosition.x = item.getPosition().x - itemMobile.getWidth();
 					}
 					// traitemeent des plateform qui change de direction  quand elle rencontre un mur
-					if (itemMobile instanceof PlateformeItem) {
+					if (itemMobile instanceof PlatformItem) {
 						newCelerity.x = -1 * itemMobile.getCelerity().x;
 					} else {
 						newCelerity.x = Math.min(0, itemMobile.getCelerity().x);
@@ -350,7 +350,7 @@ public class PhysicsMgr {
 					if (newPosition.x < item.getPosition().x + item.getWidth()) {
 						newPosition.x = item.getPosition().x + item.getWidth();
 					}
-					if (itemMobile instanceof PlateformeItem) {
+					if (itemMobile instanceof PlatformItem) {
 						newCelerity.x = -1 * itemMobile.getCelerity().x;
 					} else {
 						newCelerity.x = Math.max(0, itemMobile.getCelerity().x);
@@ -424,16 +424,16 @@ public class PhysicsMgr {
 	 * a resistance force against the celerity.x
 	 * @param item mobile item that undergoes a force's decrease
 	 */
-	public final void decreaseForce(MobileItem item) {
+	public final void decreaseForce(MobilItem item) {
 		/*if (!(item instanceof PlateformeItem)) {
 			item.getCumulForce().x = item.getCumulForce().x / (item.getMassCategory() + 3);
 			item.getCelerity().x = item.getCelerity().x / (item.getMassCategory() + 3);
 		}*/
 		if (item instanceof MainCharacterItem) {
 			if (((MainCharacterItem) item).isContact()) {
-				if (((MainCharacterItem) item).getContactItem() instanceof PlateformeItem) {
+				if (((MainCharacterItem) item).getContactItem() instanceof PlatformItem) {
 					if ( Math.abs(((MainCharacterItem) item).getCelerity().x) <= 
-							Math.abs(((PlateformeItem) ((MainCharacterItem) item).getContactItem()).getCelerity().x)) {
+							Math.abs(((PlatformItem) ((MainCharacterItem) item).getContactItem()).getCelerity().x)) {
 						
 					} else {
 						//System.out.println("1");

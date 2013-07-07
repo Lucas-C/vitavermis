@@ -4,7 +4,7 @@
 TODO:
 - Nico physics review
 - animation engine
-- Scene loading
+- Scene/level loading
 
 DONE:
 	- setup base classes (Main...)
@@ -17,6 +17,7 @@ DONE:
 	- configuration & cmd-line checkstyle & findbug
     - .jar config loading
     - clean rules for @Param: no more hardcoded values
+    - ClassGenerator.generateClasses
 
 IMPROVMENTS:
     - @Param :

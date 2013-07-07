@@ -1,7 +1,5 @@
 package ppg.vitavermis.config;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Properties;
 
 import org.junit.Test;
@@ -13,13 +11,11 @@ public class ConfigFilesLoaderTest {
 		
 	@Test
 	public final void correctlyCastededConfigValuesTest() {
-		final Map<String, Object> expectedTable = new HashMap<String, Object>() { {
-			put("string", "string");
-			put("int", (int)1);
-	        put("double", (double)2.0);
-	    } };
-   		final Properties configProps = ConfigFilesLoader.getPropertiesFromFilename("test_config.properties");
-		final Map<String, Object> actualTable = ConfigFilesLoader.propertiesToMap(configProps);
-		assertEquals(expectedTable, actualTable);
+		final Properties expected = new Properties();
+		expected.put("string", "string");
+		expected.put("int", (int)1);
+		expected.put("double", (double)2.0);
+   		final Properties properties = ConfigFilesLoader.getPropertiesFromFilename("test_config.properties");
+		assertEquals(expected, properties);
 	}
 }

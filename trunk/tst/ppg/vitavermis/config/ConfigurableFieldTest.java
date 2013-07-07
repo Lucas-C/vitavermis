@@ -1,15 +1,6 @@
 package ppg.vitavermis.config;
 
-import java.lang.annotation.IncompleteAnnotationException;
 import java.lang.reflect.Field;
-import java.lang.reflect.Modifier;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
-
-import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -83,5 +74,11 @@ public class ConfigurableFieldTest {
 		Field errField = ConfigurableFieldTest.class.getDeclaredField("dynamicField");
 		assertNotNull(errField);
 		setFieldValue(null, errField, "OK");
+	}
+
+	@Test
+	public final void string2intCastTest() {
+		int ten = (int)cast("10", int.class);
+		assertEquals(10, ten);
 	}
 }
