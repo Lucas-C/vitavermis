@@ -38,8 +38,8 @@ public class MobilItem extends Item {
 	 * <p>
 	 * 
 	 */
-	public MobilItem(Image img, String str) {
-		super(img, str);
+	public MobilItem(Image img, Vector2f dimensions, String str) {
+		super(img, dimensions, str);
 		this.bouncingCategory 	= 0;
 		this.massCategory 		= 0;
 		this.celerity			= new Vector2f(0, 0);

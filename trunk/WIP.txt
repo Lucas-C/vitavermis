@@ -4,7 +4,10 @@
 TODO:
 - Nico physics review
 - animation engine
-- Scene/level loading
+- level/map loading
+- on-screen shortcuts help
+- Vector classes (2d, 3d for float, int...)
+- enforce final in every class except ppg.vitavermis.state
 
 DONE:
 	- setup base classes (Main...)
@@ -26,4 +29,8 @@ IMPROVMENTS:
 	- use log system comme log4j/slf4j ?
     - provide a cmd-line option to list all @Param configurables
 
+NOTES AGAINST SLICK:
+    force using init() methods -> against immutability
+    no Renderable.draw(x, y, width, height) // Fixable by a patch
+    use integers for width/height
 

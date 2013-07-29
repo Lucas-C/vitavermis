@@ -4,6 +4,8 @@ import java.awt.Rectangle;
 import java.util.ArrayList;
 
 import org.newdawn.slick.geom.Vector2f;
+
+import ppg.vitavermis.GameState;
 import ppg.vitavermis.items.BackgroundItem;
 import ppg.vitavermis.items.Item;
 import ppg.vitavermis.items.MainCharacterItem;
@@ -21,7 +23,7 @@ public class PhysicsMgr {
 	 * Initialisation de toute les constantes de force (chargement � paritr d'un fichier de config
 	 * 
 	 */
-	public void init()  {
+	public void init(GameState gameState)  {
 
 	}
 
@@ -170,8 +172,9 @@ public class PhysicsMgr {
 		// rectangle de trajectoire du mobile item
 		int x = Math.min((int) itemMobile.getPosition().x, (int) destination.x);
 		int y = Math.min((int) itemMobile.getPosition().y , (int) destination.y);
-		int height = Math.max((int) itemMobile.getPosition().y - y, (int) destination.y + (int) itemMobile.getHeight() - y);
-		int width = Math.max((int) itemMobile.getPosition().x - x, (int) destination.x + (int) itemMobile.getWidth() - x);
+		final Vector2f dimensions = itemMobile.getDimensions();
+		int height = Math.max((int) itemMobile.getPosition().y - y, (int) destination.y + (int) dimensions.y - y);
+		int width = Math.max((int) itemMobile.getPosition().x - x, (int) destination.x + (int) dimensions.x - x);
 		Rectangle rect = new Rectangle(x, y, width, height);
 		// recuperation de tout les elements appartenant aux rectangles
 		for (Item item : liste) {
@@ -239,25 +242,25 @@ public class PhysicsMgr {
 	 */
 	public final boolean upChange(MobilItem itemMobile, Item item, Vector2f destination) {
 		boolean upBegin = masterUp(itemMobile.getPosition().y, item.getPosition());
-		boolean upEnd = masterUp(destination.y + itemMobile.getHeight() , item.getPosition());
+		boolean upEnd = masterUp(destination.y + itemMobile.getDimensions().x , item.getPosition());
 		return (upBegin != upEnd && itemMobile.getPosition().y != destination.y);
 	}
 
 	public final boolean downChange(MobilItem itemMobile, Item item, Vector2f destination) {
 		boolean downBegin = masterDown(itemMobile.getPosition().y, item.getPosition());
-		boolean downEnd = masterDown(destination.y - item.getHeight(), item.getPosition());
+		boolean downEnd = masterDown(destination.y - itemMobile.getDimensions().y, item.getPosition());
 		return (downBegin != downEnd && itemMobile.getPosition().y != destination.y);
 	}
 		
 	public final boolean leftChange(MobilItem itemMobile, Item item, Vector2f destination) {
 		boolean leftBegin = masterLeft(itemMobile.getPosition().x, item.getPosition());
-		boolean leftEnd = masterLeft(destination.x + itemMobile.getWidth(), item.getPosition());
+		boolean leftEnd = masterLeft(destination.x + itemMobile.getDimensions().x, item.getPosition());
 		return (leftBegin != leftEnd && itemMobile.getPosition().x != destination.x);
 	}
 
 	public final boolean rigthChange(MobilItem itemMobile, Item item, Vector2f destination) {
 		boolean rigthBegin = masterRight(itemMobile.getPosition().x, item.getPosition());
-		boolean rigthEnd = masterRight(destination.x - item.getWidth(), item.getPosition());
+		boolean rigthEnd = masterRight(destination.x - itemMobile.getDimensions().y, item.getPosition());
 //		System.out.println(item.getPosition() + " " + itemMobile.getPosition());
 		return (rigthBegin != rigthEnd && itemMobile.getPosition().x != destination.x);
 	}
@@ -303,8 +306,9 @@ public class PhysicsMgr {
 					// item_mobile is up to the item
 //					System.out.println("up");
 					// test par rapport au diff�rente intersection
-					if (newPosition.y > item.getPosition().y - itemMobile.getHeight()) {
-						newPosition.y = item.getPosition().y - itemMobile.getHeight() + 1; // + 1 pour garder le contact et ne pas faire trembl� l'objet
+					final float height = itemMobile.getDimensions().y;
+					if (newPosition.y > item.getPosition().y - height) {
+						newPosition.y = item.getPosition().y - height + 1; // + 1 pour garder le contact et ne pas faire trembl� l'objet
 					}
 					newCumulforce.y = Math.min(0, itemMobile.getCumulForce().y);
 					newCelerity.y = Math.min(0, itemMobile.getCelerity().y);
@@ -321,8 +325,9 @@ public class PhysicsMgr {
 //					System.out.println("down");
 //					System.out.println(item.getPosition().y + " -+- " + itemMobile.getHeight());
 					// test par rapport au diff�rente intersection
-					if (newPosition.y < item.getPosition().y + item.getHeight()) {
-						newPosition.y = item.getPosition().y + item.getHeight();
+					final float height = itemMobile.getDimensions().y;
+					if (newPosition.y < item.getPosition().y + height) {
+						newPosition.y = item.getPosition().y + height;
 					}
 					newCumulforce.y = Math.max(0, itemMobile.getCumulForce().y);
 					newCelerity.y = Math.max(0, itemMobile.getCelerity().y);
@@ -332,8 +337,9 @@ public class PhysicsMgr {
 				if (leftChange) {
 //					System.out.println("left");
 					// test par rapport au diff�rente intersection
-					if (newPosition.x > item.getPosition().x - itemMobile.getWidth()) {
-						newPosition.x = item.getPosition().x - itemMobile.getWidth();
+					final float width = itemMobile.getDimensions().x;
+					if (newPosition.x > item.getPosition().x - width) {
+						newPosition.x = item.getPosition().x - width;
 					}
 					// traitemeent des plateform qui change de direction  quand elle rencontre un mur
 					if (itemMobile instanceof PlatformItem) {
@@ -347,8 +353,9 @@ public class PhysicsMgr {
 			case 4: 
 				if (rigthChange) {
 //					System.out.println("Right");
-					if (newPosition.x < item.getPosition().x + item.getWidth()) {
-						newPosition.x = item.getPosition().x + item.getWidth();
+					final float width = itemMobile.getDimensions().x;
+					if (newPosition.x < item.getPosition().x + width) {
+						newPosition.x = item.getPosition().x + width;
 					}
 					if (itemMobile instanceof PlatformItem) {
 						newCelerity.x = -1 * itemMobile.getCelerity().x;
@@ -379,20 +386,21 @@ public class PhysicsMgr {
 	 * @return an int to describe the position of the master item to the item
 	 */
 	public final static int itemPosition(Item master, Item item) {
-		float distX = Math.abs(master.getPosition().x - item.getPosition().x);
-		float distY = Math.abs(item.getPosition().y - master.getPosition().y);
+		final Vector2f masterDimensions = master.getDimensions();
+		final float distX = Math.abs(master.getPosition().x - item.getPosition().x);
+		final float distY = Math.abs(item.getPosition().y - master.getPosition().y);
 		//test if at the left
 		if (master.getPosition().x < item.getPosition().x) {
 			//test if up to item
 			if (master.getPosition().y < item.getPosition().y) {
-				if (distX - master.getWidth() < distY - master.getHeight()) {
+				if (distX - masterDimensions.x < distY - masterDimensions.y) {
 					return 3;
 				} else {
 					return 1;
 				}
 			} else {
 				// master is down to item
-				if (Math.abs(distX - item.getWidth()) < Math.abs(distY - item.getHeight())) {
+				if (Math.abs(distX - masterDimensions.x) < Math.abs(distY - masterDimensions.y)) {
 					return 3;
 				} else {
 					return 2;
@@ -403,14 +411,14 @@ public class PhysicsMgr {
 			// master if at the rigth of item
 			//test if up to item
 			if (master.getPosition().y < item.getPosition().y) {
-				if (distX - master.getWidth() < distY - master.getHeight()) {
+				if (distX - masterDimensions.x < distY - masterDimensions.y) {
 					return 4;
 				} else {
 					return 1;
 				}
 			} else {
 			// master is down to item
-				if (Math.abs(distX - item.getWidth()) < Math.abs(distY - item.getHeight())) {
+				if (Math.abs(distX - masterDimensions.x) < Math.abs(distY - masterDimensions.y)) {
 					return 4;
 				} else {
 					return 2;

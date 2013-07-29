@@ -1,10 +1,5 @@
 package ppg.vitavermis.config;
 
-import static ppg.vitavermis.config.ConfigurableField.getPrimitiveType;
-import static ppg.vitavermis.config.ConfigurableField.getWrapperType;
-import static ppg.vitavermis.config.ConfigurableField.isPrimitiveType;
-import static ppg.vitavermis.config.ConfigurableField.isWrapperType;
-
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -105,6 +100,8 @@ public class ConfigurableField {
 				obj = Double.parseDouble(strObj); 
 			} else if (Float.class == expectedType) {
 				obj = Float.parseFloat(strObj); 
+			} else if (Boolean.class == expectedType) {
+				obj = Boolean.parseBoolean(strObj); 
 			} else {
 				throw new UnsupportedOperationException("String -> " + expectedType);
 			}
@@ -154,19 +151,14 @@ public class ConfigurableField {
 	}
 
 	
-	public static <T> void invokeMethod(Class<T> cls, T instance, String methodName) {
-		Method m = null;
-		try {
-			m = getMethod(cls, methodName);
-		} catch (NoSuchElementException e) {
-			return;
-		}
+	public static <T> Object invokeMethod(Class<T> cls, T instance, String methodName) {
+		Method m = getMethod(cls, methodName);
 		final boolean accessible = m.isAccessible();
 		if (!accessible) {
 			m.setAccessible(true);
 		}
 		try {
-			m.invoke(instance);
+			return m.invoke(instance);
 		} catch (IllegalAccessException e) {
 			assert false : "Internal error - setAccessible did not work";
 		} catch (InvocationTargetException e) {
@@ -182,5 +174,6 @@ public class ConfigurableField {
 				m.setAccessible(false);
 			}
 		}
+		return null;
 	}
 }

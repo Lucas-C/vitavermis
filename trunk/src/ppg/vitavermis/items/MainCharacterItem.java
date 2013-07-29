@@ -8,12 +8,9 @@ import ppg.vitavermis.config.Param;
 
 public class MainCharacterItem extends MobilItem {
 
-	private boolean jumping;
-	
+	private boolean jumping;	
 	private Item contactItem;
-	
 	private boolean contact;
-	
 	private float jumpPow;
 	
 	public final float getJumpPow() {
@@ -51,10 +48,12 @@ public class MainCharacterItem extends MobilItem {
 	private MainCharacterItem(
 			@Param("x") int x,
 			@Param("y") int y,
+			@Param("width") int width,
+			@Param("height") int height,
 			@Param("spriteName") String spriteName,
 			@Param("name") String name
 			) throws SlickException {
-		super(new Image(spriteName), name);
+		super(new Image(spriteName), new Vector2f(width,height), name);
 		this.setPosition(new Vector2f(x, y));
 	}
 

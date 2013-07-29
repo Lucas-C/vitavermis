@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import org.newdawn.slick.geom.Vector2f;
 
+import ppg.vitavermis.GameState;
 import ppg.vitavermis.items.Item;
 import ppg.vitavermis.physics.ForceDefinition;
 import ppg.vitavermis.physics.PhysicsMgr;
@@ -22,7 +23,7 @@ public class EventAnalyserMgr {
 	 */
 	public int side = 0;    
 	
-	public void init() {
+	public void init(GameState gameState) {
 		
 	}
 	
