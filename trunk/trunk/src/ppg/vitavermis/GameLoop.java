@@ -21,41 +21,37 @@ public class GameLoop extends BasicGame {
 	@Param static String windowName;
 	@Param static String gameVersion;
 
-	final GameState		gameState;
+	GameState			gameState;
 	final RenderMgr		renderer;
 	final PhysicsMgr	physics;
 	final InputMgr		input;
-	
-	final Scene		scene;				// phase de test
 	final EventAnalyserMgr event;
-	ArrayList<Item> itemsList = null;
+	
+	public static boolean debug_mode_up_down = false;
 	private boolean debug_mode_rectangle = false;
 	private boolean debug_mode_com = false;
 	private boolean debug_mode_reset = false;
-	public static boolean debug_mode_up_down = false;
 	private boolean delta_mode = false;
 	private boolean incrementation_delta = false;
 	
 	public int count = 0;
 	
-	GameLoop(GameState gameState) {
+	GameLoop() {
 		super(windowName + " - " + gameVersion);
-		this.gameState	= gameState;
+		this.gameState	= null;
 		this.input		= new InputMgr();
 		this.physics	= new PhysicsMgr();
 		this.renderer	= new RenderMgr();
-		this.scene 		= new Scene();
 		this.event      = new EventAnalyserMgr();
 	}
 
 	@Override
 	public void init(GameContainer _gc) throws SlickException {
-		physics.init();
-		renderer.init();
-		scene.init();
-		event.init();
-		itemsList = scene.getItemsList();
-		
+		Scene scene = Scene.createInitialScene();
+		this.gameState = scene.getInitialGameState();
+		physics.init(gameState);
+		renderer.init(gameState, _gc.getGraphics());
+		event.init(gameState);
 	}
 
 	@Override
@@ -73,6 +69,7 @@ public class GameLoop extends BasicGame {
 			if (count == 2) {
 				//System.exit(0);
 			}
+			ArrayList<Item> itemsList = this.gameState.itemsList;
 			input.update(_gc.getInput(), itemsList.get(0));
 			physics.update(itemsList, delta);
 			//event.update(listeItems, delta);	
@@ -93,6 +90,7 @@ public class GameLoop extends BasicGame {
 				if (count == 2) {
 					//System.exit(0);
 				}
+				ArrayList<Item> itemsList = this.gameState.itemsList;
 				input.update(_gc.getInput(), itemsList.get(0));
 				physics.update(itemsList, delta);
 				//event.update(listeItems, delta);		
@@ -111,7 +109,7 @@ public class GameLoop extends BasicGame {
 
 	@Override
 	public void render(GameContainer _gc, Graphics _g) throws SlickException {
-		renderer.render(_g, itemsList, debug_mode_rectangle, debug_mode_com);
+		renderer.render(_g, this.gameState, debug_mode_rectangle, debug_mode_com);
 	}
 	
 	
@@ -132,6 +130,7 @@ public class GameLoop extends BasicGame {
     		debug_mode_reset = true;
        	}
     	if (key == Input.KEY_ESCAPE) {
+			ArrayList<Item> itemsList = this.gameState.itemsList;
     		itemsList.removeAll(itemsList);
     		System.exit(0);
     	}

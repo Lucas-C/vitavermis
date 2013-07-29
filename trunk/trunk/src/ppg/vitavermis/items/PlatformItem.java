@@ -46,16 +46,14 @@ public class PlatformItem extends MobilItem {
 	private PlatformItem(
 		@Param("pos_x") int pos_x,
 		@Param("pos_y") int pos_y,
+		@Param("width") int width,
+		@Param("height") int height,
 		@Param("cel_x") float cel_x,
 		@Param("cel_y") float cel_y,
-		@Param("height") int height,
-		@Param("width") int width,
 		@Param("spriteName") String spriteName,
 		@Param("name") String name
 		) throws SlickException {
-		super(new Image(spriteName), name);
-		this.setHeight(height);
-		this.setWidth(width);
+		super(new Image(spriteName), new Vector2f(width,height), name);
 		this.setPosition(new Vector2f(pos_x, pos_y));
 		this.setCelerity(new Vector2f(cel_x, cel_y));
 		this.gravity = false;
