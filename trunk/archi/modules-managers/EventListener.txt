@@ -1,0 +1,3 @@
+"Ecoute" les évênements "joueur" (clavier, souris, pad) & les stocke dans un buffer
+* popNewEvents() : retourne les nouveaux évênements "joueur" et les retire de son buffer interne
+* getInputContext() : retourne l'état courant (boutons pressées) des inputs (clavier, souris...)

@@ -1,0 +1,2 @@
+Logique du héro.
+Input paremeters : HeroState, list<Event>, InputContext
