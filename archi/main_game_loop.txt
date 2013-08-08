@@ -1,0 +1,24 @@
+while true:
+    deltaT = newT - oldT
+    render_mgr.update(deltaT, gamestate.sprites)
+    
+    phys_deltaT += deltaT
+    if phys_deltaT > PHYS_PERIOD:
+        phys_update(phys_deltaT)
+        phys_deltaT -= PHYS_PERIOD
+
+
+def phys_update(phys_deltaT):
+    (new_events_list, input_context) = event_listener.getNewEventsListAndContext()
+    
+    (hero_events, menu_events) = event_dispatcher.route(new_events_list, input_context, binding_config)
+
+    if menu_events or gamestate.menustate.isgamepaused():
+        menu_mgr.update(menu_events, gamestate.menustate)
+        return
+    
+    hero_mgr.update(gamestate.herostate, hero_events)
+    ai_mgr.update(phys_deltaT, gamestate.smart_entities)
+    
+    entity_mgr.update(phys_deltaT, gamestate.entities)
+    phys_mgr.update(phys_deltaT, gamestate.items)

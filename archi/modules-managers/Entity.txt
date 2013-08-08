@@ -1,0 +1,5 @@
+Classe abstraite
+- registerMessage(EntityMessage msg) :
+    stocke le message dans la pile de l'EntityMgr
+- consumeMessage(EntityMessage msg): // abstract, UNIQUEMENT appelé par le EntityMgr
+    comportement spécifique à la classe fille, selon le message

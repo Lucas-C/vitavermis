@@ -1,0 +1,4 @@
+L'état courant de tout élément visuel
+- Localisation ref
+- isVisible
+...
