@@ -3,11 +3,13 @@
 [Lucas]
 TODO:
 - Nico physics review
-- animation engine
+- animation engine : fix "duration"
+- Vector classes (2d, 3d for float, int...) + Localisation
 - level/map loading
 - on-screen shortcuts help
-- Vector classes (2d, 3d for float, int...)
-- enforce final in every class except ppg.vitavermis.state
+- enforce final in every class except ppg.vitavermis.state :
+    @Const("ppg") annotation
+    "ppg" define an ImmutableContract : typeScope (limit checks to only types in ppg.etc e.g.), ignored pkgs, exception raised...
 
 DONE:
 	- setup base classes (Main...)
@@ -26,7 +28,8 @@ IMPROVMENTS:
     - @Param :
         - lists
         - default .conf file, + rules for which other to use
-	- use log system comme log4j/slf4j ?
+	- use log system like log4j/slf4j:
+        + define a minimum period for logging -> logline will contain a count of "silenced" too frequent messages
     - provide a cmd-line option to list all @Param configurables
 
 NOTES AGAINST SLICK:
