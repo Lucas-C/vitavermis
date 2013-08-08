@@ -1,0 +1,6 @@
+Liste d'états à durée déterminée caractérisant l'entitée, associée à leur durée de vie restante.
+!!ATTENTION!! Ne pas mélanger ces états avec l'ItemState (entitée au sol / ou non, entité en mouvement / ou non...)
+
+Example:
+    "blessé" (le personnage est temporairement invulnérable) - 300ms
+    "sprint" - 1200ms

@@ -1,24 +1,28 @@
 while true:
-    deltaT = newT - oldT
-    render_mgr.update(deltaT, gamestate.sprites)
+    time = getTime()
+    render_mgr.update(time, gamestate.sprites)
     
-    phys_deltaT += deltaT
-    if phys_deltaT > PHYS_PERIOD:
-        phys_update(phys_deltaT)
-        phys_deltaT -= PHYS_PERIOD
+    if time > gamestate.lastEventUpdate + EVENTS_PHYSICS_UPDATE_PERIOD:
+        phys_deltaT = gamestate.lastEventUpdate - time
+        gamestate.lastEventUpdate = time
+        
+        (new_events_list, input_context) = event_listener.getNewEventsListAndContext()
+                
+        (hero_actions, menu_actions) = event_dispatcher.route(new_events_list, input_context, binding_config)
+        
+        if menu_actions or gamestate.menustate.isgamepaused():
+            menu_mgr.update(gamestate.menustate, menu_actions)
+            if gamestate.menustate.isgamepaused():
+                return
+        
+        gamestate.lastPhysicsUpdate += phys_deltaT
+        physics_update(phys_deltaT, hero_actions)
 
 
-def phys_update(phys_deltaT):
-    (new_events_list, input_context) = event_listener.getNewEventsListAndContext()
-    
-    (hero_events, menu_events) = event_dispatcher.route(new_events_list, input_context, binding_config)
-
-    if menu_events or gamestate.menustate.isgamepaused():
-        menu_mgr.update(menu_events, gamestate.menustate)
-        return
-    
-    hero_mgr.update(gamestate.herostate, hero_events)
+def physics_update(phys_deltaT, gamestate, hero_actions):
+    hero_mgr.update(gamestate.herostate, hero_actions)
     ai_mgr.update(phys_deltaT, gamestate.smart_entities)
     
     entity_mgr.update(phys_deltaT, gamestate.entities)
     phys_mgr.update(phys_deltaT, gamestate.items)
+

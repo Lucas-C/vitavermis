@@ -1,4 +1,33 @@
-...WIP...
+SITUATION INITIALE: le hero est sur une plateforme statique, une ennemi juste à sa droite
+EVENEMENT: le joueur appuie sur "CTRL", le bouton pour lancer une attaque "KICK"
+SITUATION FINALE:
+    animations: le héro frappe + l'ennemi est blessé
+    physique: l'ennemi recule
+    gameplay: l'ennemi reçoit des dégâts + le héro augmente ses stats
+    
 
+* l'EventListener reçoit un nouvel InputEvent("CTRL") -> stocké dans un buffer ordonné
+
+* EventDispatcher update(new_events_list, input_context, binding_config) : convertit l'évênements en InputAction("KickButtonPressed") et le classe comme "évênement relatif au héro"
+
+* HeroMgr update(gamestate.herostate, hero_actions) : transforme l'EventAction en EntityMessage("KICK", direction:droite) et envoie celui-ci au Hero
+
+* EntityMgr update(phys_deltaT, gamestate.entities) :
+
+    ** Hero update : hérite de KickingEntity, sa réaction à un message "Kick" est définie dans cette classe :
+    1- lancement de l'animation d'attaque (par un message envoyé au sprite du héro ?)
+    2- test de collision à droite du héro
+        -> réussi : envoie d'un EntityMessage "HIT" à l'ennemi
+    
+    ** Ennemi update:
+    1- Logique de perte de dégâts
+    2- Animation lancée
+    3- Recul physique déclenché
+
+
+// NOTE: si les dégâts étaient suffisant pour tuer l'ennemi, l'animation de mort n'est pas déclenchée de suite:
+- d'abord l'ennemi est dans un état "blessé" pour une période fixe, et est poussé sur le côté
+- puis il meurt et l'animation correspondante est lancée
+=> cf. EntityState
 
 // Suite du scenario : ...And Bad Guy Fall Into Spikes
