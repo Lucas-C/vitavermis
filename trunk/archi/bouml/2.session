@@ -1,0 +1,12 @@
+window_sizes 1440 843 337 1097 649 120
+diagrams
+  active  sequencediagram_ref 134786 // GameLoop
+    1097 649 60 1 0 38
+end
+show_stereotypes
+selected class_ref 168450 // MenuManager
+open
+  class_ref 148354 // Entity
+  class_ref 161794 // Message
+end
+end

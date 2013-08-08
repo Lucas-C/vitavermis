@@ -1,0 +1,859 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Bouml (http://bouml.free.fr/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="807"
+   height="529"
+   version="1.1"
+   id="svg2"
+   inkscape:version="0.48.4 r9939"
+   sodipodi:docname="gameloop_sequence.svg">
+  <metadata
+     id="metadata256">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs254" />
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1440"
+     inkscape:window-height="843"
+     id="namedview252"
+     showgrid="false"
+     inkscape:zoom="3.5689981"
+     inkscape:cx="180.23373"
+     inkscape:cy="373.70295"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="g186" />
+  <g
+     id="g4">
+    <polygon
+       fill="#ffffff"
+       stroke="black"
+       stroke-opacity="1"
+       points="291,371 310,371 310,377 304,383 291,383 291,371"
+       id="polygon6" />
+    <rect
+       fill="none"
+       stroke="black"
+       stroke-width="1"
+       stroke-opacity="1"
+       x="291"
+       y="371"
+       width="483"
+       height="126"
+       id="rect8" />
+    <text
+       font-family="Sans"
+       font-size="6"
+       fill="#000000"
+       xml:space="preserve"
+       text-anchor="middle"
+       x="298"
+       y="380"
+       id="text10">alt</text>
+    <line
+       stroke="black"
+       stroke-opacity="1"
+       x1="291"
+       y1="383"
+       x2="304"
+       y2="383"
+       id="line12" />
+    <line
+       stroke="black"
+       stroke-opacity="1"
+       x1="304"
+       y1="383"
+       x2="310"
+       y2="377"
+       id="line14" />
+    <line
+       stroke="black"
+       stroke-opacity="1"
+       x1="310"
+       y1="377"
+       x2="310"
+       y2="371"
+       id="line16" />
+  </g>
+  <g
+     id="g18">
+    <line
+       stroke="black"
+       stroke-dasharray="18,6"
+       stroke-opacity="1"
+       x1="618"
+       y1="63"
+       x2="618"
+       y2="529"
+       id="line20" />
+  </g>
+  <g
+     id="g22">
+    <line
+       stroke="black"
+       stroke-dasharray="18,6"
+       stroke-opacity="1"
+       x1="146"
+       y1="69"
+       x2="146"
+       y2="529"
+       id="line24" />
+  </g>
+  <g
+     id="g26">
+    <line
+       stroke="black"
+       stroke-dasharray="20,4"
+       stroke-opacity="1"
+       x1="291"
+       y1="434"
+       x2="774"
+       y2="434"
+       id="line28" />
+  </g>
+  <g
+     id="g30">
+    <rect
+       fill="#808080"
+       stroke="none"
+       stroke-opacity="1"
+       x="792"
+       y="43"
+       width="2"
+       height="11"
+       id="rect32" />
+    <rect
+       fill="#808080"
+       stroke="none"
+       stroke-opacity="1"
+       x="705"
+       y="52"
+       width="89"
+       height="2"
+       id="rect34" />
+    <rect
+       fill="#ffffc0"
+       stroke="black"
+       stroke-width="1"
+       stroke-opacity="1"
+       x="702"
+       y="40"
+       width="90"
+       height="12"
+       id="rect36" />
+    <text
+       font-family="Sans"
+       font-size="6"
+       fill="#000000"
+       xml:space="preserve"
+       text-decoration="underline"
+       text-anchor="middle"
+       x="747"
+       y="49"
+       id="text38">heroMgr:HeroManager</text>
+  </g>
+  <g
+     id="g40">
+    <rect
+       fill="#808080"
+       stroke="none"
+       stroke-opacity="1"
+       x="665"
+       y="42"
+       width="2"
+       height="11"
+       id="rect42" />
+    <rect
+       fill="#808080"
+       stroke="none"
+       stroke-opacity="1"
+       x="571"
+       y="51"
+       width="96"
+       height="2"
+       id="rect44" />
+    <rect
+       fill="#ffffc0"
+       stroke="black"
+       stroke-width="1"
+       stroke-opacity="1"
+       x="568"
+       y="39"
+       width="97"
+       height="12"
+       id="rect46" />
+    <text
+       font-family="Sans"
+       font-size="6"
+       fill="#000000"
+       xml:space="preserve"
+       text-decoration="underline"
+       text-anchor="middle"
+       x="617"
+       y="48"
+       id="text48">menuMgr:MenuManager</text>
+  </g>
+  <g
+     id="g50">
+    <rect
+       fill="#808080"
+       stroke="none"
+       stroke-opacity="1"
+       x="527"
+       y="42"
+       width="2"
+       height="11"
+       id="rect52" />
+    <rect
+       fill="#808080"
+       stroke="none"
+       stroke-opacity="1"
+       x="406"
+       y="51"
+       width="123"
+       height="2"
+       id="rect54" />
+    <rect
+       fill="#ffffc0"
+       stroke="black"
+       stroke-width="1"
+       stroke-opacity="1"
+       x="403"
+       y="39"
+       width="124"
+       height="12"
+       id="rect56" />
+    <text
+       font-family="Sans"
+       font-size="6"
+       fill="#000000"
+       xml:space="preserve"
+       text-decoration="underline"
+       text-anchor="middle"
+       x="465"
+       y="48"
+       id="text58">evtDispatcher:EventDispatcher</text>
+  </g>
+  <g
+     id="g60">
+    <rect
+       fill="#808080"
+       stroke="none"
+       stroke-opacity="1"
+       x="350"
+       y="45"
+       width="2"
+       height="11"
+       id="rect62" />
+    <rect
+       fill="#808080"
+       stroke="none"
+       stroke-opacity="1"
+       x="289"
+       y="54"
+       width="63"
+       height="2"
+       id="rect64" />
+    <rect
+       fill="#ffffc0"
+       stroke="black"
+       stroke-width="1"
+       stroke-opacity="1"
+       x="286"
+       y="42"
+       width="64"
+       height="12"
+       id="rect66" />
+    <text
+       font-family="Sans"
+       font-size="6"
+       fill="#000000"
+       xml:space="preserve"
+       text-decoration="underline"
+       text-anchor="middle"
+       x="318"
+       y="51"
+       id="text68">loop:GameLoop</text>
+  </g>
+  <g
+     id="g70">
+    <rect
+       fill="#808080"
+       stroke="none"
+       stroke-opacity="1"
+       x="206"
+       y="48"
+       width="2"
+       height="11"
+       id="rect72" />
+    <rect
+       fill="#808080"
+       stroke="none"
+       stroke-opacity="1"
+       x="86"
+       y="57"
+       width="122"
+       height="2"
+       id="rect74" />
+    <rect
+       fill="#ffffc0"
+       stroke="black"
+       stroke-width="1"
+       stroke-opacity="1"
+       x="83"
+       y="45"
+       width="123"
+       height="12"
+       id="rect76" />
+    <text
+       font-family="Sans"
+       font-size="6"
+       fill="#000000"
+       xml:space="preserve"
+       text-decoration="underline"
+       text-anchor="middle"
+       x="145"
+       y="54"
+       id="text78">evtListener:InputEventListener</text>
+  </g>
+  <g
+     id="g80">
+    <line
+       stroke="black"
+       stroke-dasharray="18,6"
+       stroke-opacity="1"
+       x1="748"
+       y1="64"
+       x2="748"
+       y2="529"
+       id="line82" />
+  </g>
+  <g
+     id="g84"
+     style="fill:#ffffff;fill-opacity:1">
+    <rect
+       fill="none"
+       stroke="black"
+       stroke-width="1"
+       stroke-opacity="1"
+       x="615"
+       y="387"
+       width="6"
+       height="31"
+       id="rect86"
+       style="fill:#ffffff;fill-opacity:1" />
+  </g>
+  <g
+     id="g88">
+    <line
+       stroke="black"
+       stroke-dasharray="18,6"
+       stroke-opacity="1"
+       x1="319"
+       y1="66"
+       x2="319"
+       y2="529"
+       id="line90" />
+  </g>
+  <g
+     id="g108">
+    <line
+       stroke="black"
+       stroke-dasharray="18,6"
+       stroke-opacity="1"
+       x1="466"
+       y1="63"
+       x2="466"
+       y2="529"
+       id="line110" />
+  </g>
+  <g
+     id="g116">
+    <line
+       stroke="black"
+       stroke-opacity="1"
+       stroke-dasharray="4,4"
+       x1="323"
+       y1="347"
+       x2="463"
+       y2="347"
+       id="line118" />
+    <path
+       fill="none"
+       stroke="black"
+       stroke-opacity="1"
+       d="M 327 343 L 323 347 L 327 351"
+       id="path120" />
+  </g>
+  <g
+     id="g122">
+    <line
+       stroke="black"
+       stroke-opacity="1"
+       x1="323"
+       y1="279"
+       x2="463"
+       y2="279"
+       id="line124" />
+    <polygon
+       fill="#000000"
+       stroke="none"
+       points="463,279 459,275 459,283"
+       id="polygon126" />
+  </g>
+  <g
+     id="g128"
+     style="fill:#ffffff;fill-opacity:1">
+    <rect
+       fill="none"
+       stroke="black"
+       stroke-width="1"
+       stroke-opacity="1"
+       x="745"
+       y="458"
+       width="6"
+       height="25"
+       id="rect130"
+       style="fill:#ffffff;fill-opacity:1" />
+  </g>
+  <g
+     id="g138">
+    <line
+       stroke="black"
+       stroke-opacity="1"
+       stroke-dasharray="4,4"
+       x1="150"
+       y1="182"
+       x2="316"
+       y2="182"
+       id="line140" />
+    <path
+       fill="none"
+       stroke="black"
+       stroke-opacity="1"
+       d="M 312 178 L 316 182 L 312 186"
+       id="path142" />
+  </g>
+  <g
+     id="g144">
+    <line
+       stroke="black"
+       stroke-opacity="1"
+       x1="323"
+       y1="204"
+       x2="463"
+       y2="204"
+       id="line146" />
+    <polygon
+       fill="#000000"
+       stroke="none"
+       points="463,204 459,200 459,208"
+       id="polygon148" />
+  </g>
+  <g
+     id="g150">
+    <line
+       stroke="black"
+       stroke-opacity="1"
+       stroke-dasharray="4,4"
+       x1="323"
+       y1="222"
+       x2="463"
+       y2="222"
+       id="line152" />
+    <path
+       fill="none"
+       stroke="black"
+       stroke-opacity="1"
+       d="M 327 218 L 323 222 L 327 226"
+       id="path154" />
+  </g>
+  <g
+     id="g156">
+    <line
+       stroke="black"
+       stroke-opacity="1"
+       x1="323"
+       y1="329"
+       x2="463"
+       y2="329"
+       id="line158" />
+    <polygon
+       fill="#000000"
+       stroke="none"
+       points="463,329 459,325 459,333"
+       id="polygon160" />
+  </g>
+  <g
+     id="g162">
+    <line
+       stroke="black"
+       stroke-opacity="1"
+       stroke-dasharray="4,4"
+       x1="323"
+       y1="477"
+       x2="745"
+       y2="477"
+       id="line164" />
+    <path
+       fill="none"
+       stroke="black"
+       stroke-opacity="1"
+       d="M 327 473 L 323 477 L 327 481"
+       id="path166" />
+  </g>
+  <g
+     id="g168">
+    <line
+       stroke="black"
+       stroke-opacity="1"
+       stroke-dasharray="4,4"
+       x1="323"
+       y1="297"
+       x2="463"
+       y2="297"
+       id="line170" />
+    <path
+       fill="none"
+       stroke="black"
+       stroke-opacity="1"
+       d="M 327 293 L 323 297 L 327 301"
+       id="path172" />
+  </g>
+  <g
+     id="g174">
+    <line
+       stroke="black"
+       stroke-opacity="1"
+       x1="323"
+       y1="463"
+       x2="745"
+       y2="463"
+       id="line176" />
+    <polygon
+       fill="#000000"
+       stroke="none"
+       points="745,463 741,459 741,467"
+       id="polygon178" />
+  </g>
+  <g
+     id="g180">
+    <line
+       stroke="black"
+       stroke-opacity="1"
+       stroke-dasharray="4,4"
+       x1="150"
+       y1="131"
+       x2="316"
+       y2="131"
+       id="line182" />
+    <path
+       fill="none"
+       stroke="black"
+       stroke-opacity="1"
+       d="M 312 127 L 316 131 L 312 135"
+       id="path184" />
+  </g>
+  <g
+     id="g186">
+    <line
+       stroke="black"
+       stroke-opacity="1"
+       x1="150"
+       y1="164"
+       x2="316"
+       y2="164"
+       id="line188" />
+    <polygon
+       points="154,160 154,168 150,164 "
+       id="polygon190"
+       transform="translate(-0.4,0)"
+       style="fill:#000000;stroke:none" />
+  </g>
+  <g
+     id="g192"
+     style="fill:#ffffff;fill-opacity:1">
+    <rect
+       fill="none"
+       stroke="black"
+       stroke-width="1"
+       stroke-opacity="1"
+       x="316"
+       y="102"
+       width="6"
+       height="415"
+       id="rect194"
+       style="fill:#ffffff;fill-opacity:1" />
+  </g>
+  <g
+     id="g196">
+    <line
+       stroke="black"
+       stroke-opacity="1"
+       x1="323"
+       y1="396"
+       x2="615"
+       y2="396"
+       id="line198" />
+    <polygon
+       fill="#000000"
+       stroke="none"
+       points="615,396 611,392 611,400"
+       id="polygon200" />
+  </g>
+  <g
+     id="g202">
+    <line
+       stroke="black"
+       stroke-opacity="1"
+       stroke-dasharray="4,4"
+       x1="323"
+       y1="413"
+       x2="615"
+       y2="413"
+       id="line204" />
+    <path
+       fill="none"
+       stroke="black"
+       stroke-opacity="1"
+       d="M 327 409 L 323 413 L 327 417"
+       id="path206" />
+  </g>
+  <g
+     id="g208">
+    <text
+       font-family="Sans"
+       font-size="6"
+       fill="#000000"
+       xml:space="preserve"
+       x="365"
+       y="325"
+       id="text210">getHeroActions()</text>
+  </g>
+  <g
+     id="g212">
+    <text
+       font-family="Sans"
+       font-size="6"
+       fill="#000000"
+       xml:space="preserve"
+       x="375"
+       y="343"
+       id="text214">heroActions</text>
+  </g>
+  <g
+     id="g216">
+    <text
+       font-family="Sans"
+       font-size="6"
+       fill="#000000"
+       xml:space="preserve"
+       x="208"
+       y="159"
+       id="text218">getContext()</text>
+  </g>
+  <g
+     id="g220">
+    <text
+       font-family="Sans"
+       font-size="6"
+       fill="#000000"
+       xml:space="preserve"
+       x="217"
+       y="178"
+       id="text222">context</text>
+  </g>
+  <g
+     id="g224">
+    <text
+       font-family="Sans"
+       font-size="6"
+       fill="#000000"
+       xml:space="preserve"
+       x="477"
+       y="391"
+       id="text226">update(menuActions, menuState)</text>
+  </g>
+  <g
+     id="g228">
+    <text
+       font-family="Sans"
+       font-size="6"
+       fill="#000000"
+       xml:space="preserve"
+       x="339"
+       y="199"
+       id="text230">dispatch(newEvents, context)</text>
+  </g>
+  <g
+     id="g232">
+    <text
+       font-family="Sans"
+       font-size="6"
+       fill="#000000"
+       xml:space="preserve"
+       x="484"
+       y="457"
+       id="text234">update(heroActions, heroState)</text>
+  </g>
+  <g
+     id="g236">
+    <text
+       font-family="Sans"
+       font-size="6"
+       fill="#000000"
+       xml:space="preserve"
+       x="364"
+       y="274"
+       id="text238">getMenuActions()</text>
+  </g>
+  <g
+     id="g240">
+    <text
+       font-family="Sans"
+       font-size="6"
+       fill="#000000"
+       xml:space="preserve"
+       x="373"
+       y="293"
+       id="text242">menuActions</text>
+  </g>
+  <g
+     id="g244">
+    <text
+       font-family="Sans"
+       font-size="6"
+       fill="#000000"
+       xml:space="preserve"
+       x="204"
+       y="109"
+       id="text246">getNewEvents()</text>
+  </g>
+  <g
+     id="g248">
+    <text
+       font-family="Sans"
+       font-size="6"
+       fill="#000000"
+       xml:space="preserve"
+       x="213"
+       y="128"
+       id="text250">newEvents</text>
+  </g>
+  <g
+     id="g92"
+     style="fill:#ffffff;fill-opacity:1">
+    <rect
+       fill="none"
+       stroke="black"
+       stroke-width="1"
+       stroke-opacity="1"
+       x="143"
+       y="155"
+       width="6"
+       height="32"
+       id="rect94"
+       style="fill:#ffffff;fill-opacity:1" />
+  </g>
+  <g
+     id="g112"
+     style="fill:#ffffff;fill-opacity:1">
+    <rect
+       fill="none"
+       stroke="black"
+       stroke-width="1"
+       stroke-opacity="1"
+       x="143"
+       y="106"
+       width="6"
+       height="35"
+       id="rect114"
+       style="fill:#ffffff;fill-opacity:1" />
+  </g>
+  <g
+     id="g96"
+     style="fill:#ffffff;fill-opacity:1">
+    <rect
+       fill="none"
+       stroke="black"
+       stroke-width="1"
+       stroke-opacity="1"
+       x="463"
+       y="199"
+       width="6"
+       height="28"
+       id="rect98"
+       style="fill:#ffffff;fill-opacity:1" />
+  </g>
+  <g
+     id="g104"
+     style="fill:#ffffff;fill-opacity:1">
+    <rect
+       fill="none"
+       stroke="black"
+       stroke-width="1"
+       stroke-opacity="1"
+       x="463"
+       y="273"
+       width="6"
+       height="29"
+       id="rect106"
+       style="fill:#ffffff;fill-opacity:1" />
+  </g>
+  <g
+     id="g100"
+     style="fill:#ffffff;fill-opacity:1">
+    <rect
+       fill="none"
+       stroke="black"
+       stroke-width="1"
+       stroke-opacity="1"
+       x="463"
+       y="323"
+       width="6"
+       height="29"
+       id="rect102"
+       style="fill:#ffffff;fill-opacity:1" />
+  </g>
+  <g
+     transform="translate(-0.222,-49.363348)"
+     id="g186-4">
+    <line
+       style="stroke:#000000;stroke-width:1;stroke-opacity:1"
+       x1="150"
+       y1="164"
+       x2="316"
+       y2="164"
+       id="line188-6" />
+    <polygon
+       style="fill:#000000;stroke:none"
+       points="154,168 150,164 154,160 "
+       id="polygon190-5"
+       transform="translate(-0.3,0)" />
+  </g>
+</svg>
