@@ -1,5 +1,0 @@
-L'état courant de tout élément physique
-- Localisation ref
-- forces exercées dessus
-- vitesse
-- isFalling

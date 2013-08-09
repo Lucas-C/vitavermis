@@ -1,4 +1,5 @@
 L'état courant de tout élément visuel
+- SpriteModel ref
 - Localisation ref
 - isVisible
 ...

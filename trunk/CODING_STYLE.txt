@@ -1,0 +1,7 @@
+* Référence : tools/vitavermis_checkstyle.xml
+* Eclipse pour tout le monde
+* pas de nombre magique -> mettre tous les paramètres en fichier de conf
+* javadoc pas systématiquement requise (pas de paraphrase du code)
+* code reviews
+* mode DEBUG activable / déactivable
+

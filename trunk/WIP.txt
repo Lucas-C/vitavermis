@@ -6,6 +6,9 @@ TODO:
 - animation engine : fix "duration"
 - Vector classes (2d, 3d for float, int...) + Localisation
 - level/map loading
+- graphic helpers : AABB boxes, celerity vectors
+- use log system like log4j/slf4j:
+    + define a minimum period for logging -> logline will contain a count of "silenced" too frequent messages
 - on-screen shortcuts help
 - enforce final in every class except ppg.vitavermis.state :
     @Const("ppg") annotation
@@ -28,8 +31,6 @@ IMPROVMENTS:
     - @Param :
         - lists
         - default .conf file, + rules for which other to use
-	- use log system like log4j/slf4j:
-        + define a minimum period for logging -> logline will contain a count of "silenced" too frequent messages
     - provide a cmd-line option to list all @Param configurables
 
 NOTES AGAINST SLICK:

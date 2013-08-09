@@ -1,0 +1,42 @@
+L'état courant de tout élément physique
+- ModelItem ref
+- Localisation ref
+- celerity
+- acceleration / sumForces (temporaire ?)
+
++ Informations de contexte -  état géolocalisé
+- isOnTheGround
+- il y a un mur juste à sa droite (définition de "juste" à préciser)
++ ? accroché à un ennemi, touche le plafond ?
+
+// From the pad
+class ItemState {
+    Vect2d cumulForce;
+    Vect2d cumulTorque;
+    
+    void applyForce(Vect2d force, Vect2d applicationPt) {
+        //update cumulForce
+        //update cumulTorque
+    }
+    
+    Vect2d computeSpeed() {
+        // compute speed
+        cumulTorque = 0;
+        cumulForce = 0;
+        return speed
+    }
+}
+
+// Durant la même frame physique :
+// Le héro marche sur un bumper (gros ressort)
+hero.applyForce(Vect2d(0, 100)):
+...
+// Le héro subit la gravité
+hero.applyForce(Vect2d(0, -10)):
+...
+// Le héro est déplacé vers la droite par le joueur qui appuie sur la touche droite
+hero.applyForce(Vect2d(30, 0)):
+
+// Calcul des nouvelles positions de tous les PhysicElem
+Vect2d newSpeed = hero.computeSpeed();
+Vect2d newPos = Pos + deltaT * newSpeed;

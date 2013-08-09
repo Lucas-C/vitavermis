@@ -1,1 +1,0 @@
-* rafraichit TOUS les items actuellement dans la "zone physiquement active" (une zone légèrement plus large que l'écran)
