@@ -1,0 +1,6 @@
+Le modèle d'un ItemState, contient les informations partagées entre plusieurs Items
+- massCategory // différente categorie
+- bouncingCategory
+- (AABB) collisionBox // boîte englobante
+- (Booleen) undergoGravity
+

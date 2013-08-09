@@ -1,0 +1,10 @@
+Exemple de "scénario" pour un rebond contre un mur :
+- le personnage saute en direction du mur
+- le joueur appuie sur la touche SAUT
+- le joueur relâche la touche SAUT
+- le personnage atteind le mur
+- le personnage arrive en contact avec le mur -> l'info est remontée au EventAnalyserMgr
+- le personnage commence à tomber
+- le joueur appuie sur la touche SAUT :
+    -> COMME le perso est dans l'état <CHUTE> ET qu'il est contre un mur -> il rebondit
+    (alternative) -> COMME le perso a commencé sa <CHUTE> il y a moins de X ms ET qu'il est contre un mur -> il rebondit

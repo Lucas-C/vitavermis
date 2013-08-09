@@ -1,0 +1,17 @@
+Description d'une attaque :
+- type de dégâts : en une fois, perso transmet dégâts en continu...
+- valeur des dégâts :
+- cooldown avant prochaine attaque : durée
+- combos possibles ? lesquels ?
+- mouvement possible durant attaque ? / déplacement forcé du perso
+- durée de l'attaque
+- durée de l'animation (peut être > que celle de l'attaque)
+- quelle animation ? quels sons ?
+- effet de zone -> taille de la zone ?
+
++ projectiles ?
+Description d'un projectile :
+- vitesse
+- type de dégâts
+- valeur dégâts
+- masque de collision ? -> quels objets peut-il percuter

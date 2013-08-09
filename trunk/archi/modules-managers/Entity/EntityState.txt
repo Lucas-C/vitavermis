@@ -2,5 +2,8 @@ Liste d'états à durée déterminée caractérisant l'entitée, associée à le
 !!ATTENTION!! Ne pas mélanger ces états avec l'ItemState (entitée au sol / ou non, entité en mouvement / ou non...)
 
 Example:
+    //** état de vulnérabilité : invulnérable, normal, 'mort subite'...
     "blessé" (le personnage est temporairement invulnérable) - 300ms
+    //** "action en cours" : taper, sauter, actionner un bouton...
     "sprint" - 1200ms
+

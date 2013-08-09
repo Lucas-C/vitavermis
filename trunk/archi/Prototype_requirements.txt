@@ -1,0 +1,25 @@
+1- Fonctionnalités du proto
+** sol plat + plateformes rectangulaires
+** perso rectangulaire
+    ** déplacement
+        ** de gauche à droite
+        ** sauter 
+            ** déclenche animation sur perso
+            ** force initiale verticale vers le haut
+            ** contrôle aérien
+            ** pas double saut
+    ** barre de vie : 3
+** un ennemi
+    ** barre de vie : 5
+    ** déplacement
+        ** de gauche à droite
+        ** en cas de collision, change de direction
+    ** dégâts de contact : 1
+** une attaque
+    ** déclenche une animation sur perso
+    ** lancer un projectile
+        ** animation en boucle sur projectile
+        ** mouvement horizontal
+        ** vitesse continue
+        ** explose : fait des dégâts et disparaît
+        ** dégâts : 1

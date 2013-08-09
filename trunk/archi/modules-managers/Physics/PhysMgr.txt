@@ -1,0 +1,51 @@
+* rafraichit TOUS les items actuellement dans la "zone physiquement active" (une zone légèrement plus large que l'écran)
+
+(ce qui suit a été récupéré du pad)
+
+# !! Séparation physique / visuel : ne PAS employer la taille de l'écran ou le terme 'pixel'
+
+OPEN QUESTIONS:
+Catalogue des élements :
+- comme déterminer quel object se trouve à l'emplacement (x,y) ? Ou bien sur une trajectoire donnée ?
+- différence objets statiques / dynamiques ?
+Collisions pdt un mouvement :
+- quel type de résolution : tout-ou-rien ou calcul du point d'intersection ?
+- prendre en compte épaisseur des objets
+- comment modéliser un projectile se déplaçant à vitesse constante (subit une force constante ?)
+
+Se documenter sur comment les autres jeux gèrent les collisions
+http://worms2d.info/User:Etho/Physics_Engine
+http://code.google.com/p/hedgewars/source/browse/
+
+x = x + v*t
+v = v + a*t
+a = a + somme des forces appliquées sur l'objet / CatégorieDeMasse.FacteurDeRéduction
+Transfert de force :
+cumulForcesA = cumulForcesA + forceCommuniquéeParBàA
+où forceCommuniquéeParBàA = CatégorieDeMasse.FacteurDeTransmissionDeForce * (différentes solutions à tester : accelB OU vitesseB OU vitesseB "au carré en norme")
+
+
+### Collisions :
+(recherche spatiale : http://en.wikipedia.org/wiki/Spatial_index#Spatial_index)
+Exemple : Box2d
+    - http://www.iforce2d.net/b2dtut/collision-anatomy
+    - http://www.iforce2d.net/b2dtut/collision-callbacks
+    - http://www.iforce2d.net/b2dtut/forces
+http://info.sonicretro.org/SPG:Getting_Hit
+http://higherorderfun.com/blog/2012/05/20/the-guide-to-implementing-2d-platformers/
+Autres sujets de réflexion :
+- ? collision filtering (aka : "les ennemis peuvent passer les uns à travers les autres")
+- triger zones (aka : "bumpers ? boutons...")
+
+/// Intersections
+public void update(ArrayList<ItemsPhy> listItemDyns, int delta) {
+    applyGravity(listItemDyns);
+    exchangesForces(listItemDyns, manifoldContacts);
+    computeAcceleration(listItemDyns);
+    computeCelerity(listItemDyns);
+    computeAndUpdatesContacts(manifoldContacts, listItemStatics);
+    computePositionMaximumWithCollisions(listItemDyns, manifoldContacts);
+ }
+ 
+ PosA                  ObjStatic                   PosB (= PosA + celerity * deltaT)
+  xA - - - - - -> - - - - -y[ooo] - - - - -> - - - - xB
