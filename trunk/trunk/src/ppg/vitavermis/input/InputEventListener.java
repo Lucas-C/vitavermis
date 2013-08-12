@@ -1,25 +1,80 @@
 package ppg.vitavermis.input;
 
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Queue;
+
 import org.newdawn.slick.Input;
+import org.newdawn.slick.KeyListener;
 import org.newdawn.slick.geom.Vector2f;
 
 import ppg.vitavermis.GameLoop;
 import ppg.vitavermis.items.Item;
 import ppg.vitavermis.physics.ForceDefinition;
 import ppg.vitavermis.physics.PhysicsMgr;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 /**
  * 
  * @author parpaing
  *
  */
-public class InputMgr {
+public class InputEventListener {
 	
 	public static boolean jump = false;
 	private int countTemp;
 	
-	public InputMgr() {
+	private final Queue<InputEvent> newEvents = new LinkedList<InputEvent>();
+	
+	private final InputContext context = new InputContext();
+	
+	public InputEventListener() {
 		countTemp = 0;
+	}
+	
+	public List<InputEvent> getNewEvents() {
+		throw new NotImplementedException();
+	}
+	
+	public InputContext getContext() {
+		return this.context;
+	}
+	
+	public void init(final Input input) {
+		KeyListener kl = new KeyListener() {
+
+			@Override
+			public void inputStarted() {}
+			
+			@Override
+			public void inputEnded() {}
+
+			@Override
+			public boolean isAcceptingInput() {
+				return true;
+			}
+
+			@Override
+			public void setInput(Input arg0) {}
+
+			@Override
+			public void keyPressed(int code, char c) {
+				InputEventListener.this.context.add(code);
+				
+				System.out.println("A key was pressed! (" + code + ")");
+				System.out.println("Context : " + InputEventListener.this.context);
+			}
+
+			@Override
+			public void keyReleased(int code, char c) {
+				InputEventListener.this.context.remove(code);
+				
+				System.out.println("A key was released! (" + code + ")");
+				System.out.println("Context : " + InputEventListener.this.context);
+			}
+		};
+
+		input.addKeyListener(kl);
 	}
 	
 	public final void update(Input input, Item item) {

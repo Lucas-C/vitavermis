@@ -9,8 +9,8 @@ import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 
 import ppg.vitavermis.config.Param;
-import ppg.vitavermis.event.EventAnalyserMgr;
-import ppg.vitavermis.input.InputMgr;
+import ppg.vitavermis.input.InputEventDispatcher;
+import ppg.vitavermis.input.InputEventListener;
 import ppg.vitavermis.items.Item;
 import ppg.vitavermis.physics.PhysicsMgr;
 import ppg.vitavermis.render.RenderMgr;
@@ -21,11 +21,11 @@ public class GameLoop extends BasicGame {
 	@Param static String windowName;
 	@Param static String gameVersion;
 
-	GameState			gameState;
-	final RenderMgr		renderer;
-	final PhysicsMgr	physics;
-	final InputMgr		input;
-	final EventAnalyserMgr event;
+	GameState gameState;
+	final RenderMgr renderer;
+	final PhysicsMgr physics;
+	final InputEventListener evtListener;
+	final InputEventDispatcher evtDispatcher;
 	
 	public static boolean debug_mode_up_down = false;
 	private boolean debug_mode_rectangle = false;
@@ -38,11 +38,11 @@ public class GameLoop extends BasicGame {
 	
 	GameLoop() {
 		super(windowName + " - " + gameVersion);
-		this.gameState	= null;
-		this.input		= new InputMgr();
-		this.physics	= new PhysicsMgr();
-		this.renderer	= new RenderMgr();
-		this.event      = new EventAnalyserMgr();
+		this.gameState = null;
+		this.evtListener = new InputEventListener();
+		this.physics = new PhysicsMgr();
+		this.renderer = new RenderMgr();
+		this.evtDispatcher = new InputEventDispatcher();
 	}
 
 	@Override
@@ -51,7 +51,7 @@ public class GameLoop extends BasicGame {
 		this.gameState = scene.getInitialGameState();
 		physics.init(gameState);
 		renderer.init(gameState, _gc.getGraphics());
-		event.init(gameState);
+		evtListener.init(_gc.getInput());
 	}
 
 	@Override
@@ -70,7 +70,7 @@ public class GameLoop extends BasicGame {
 				//System.exit(0);
 			}
 			ArrayList<Item> itemsList = this.gameState.itemsList;
-			input.update(_gc.getInput(), itemsList.get(0));
+			evtListener.update(_gc.getInput(), itemsList.get(0));
 			physics.update(itemsList, delta);
 			//event.update(listeItems, delta);	
 		
@@ -91,7 +91,7 @@ public class GameLoop extends BasicGame {
 					//System.exit(0);
 				}
 				ArrayList<Item> itemsList = this.gameState.itemsList;
-				input.update(_gc.getInput(), itemsList.get(0));
+				evtListener.update(_gc.getInput(), itemsList.get(0));
 				physics.update(itemsList, delta);
 				//event.update(listeItems, delta);		
 		
