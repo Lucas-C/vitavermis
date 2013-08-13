@@ -1,11 +1,17 @@
 package ppg.vitavermis;
 
+import java.lang.annotation.Annotation;
+import java.util.HashMap;
 import java.util.Map;
 
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.SlickException;
 
 import ppg.vitavermis.config.Param;
+import ppg.vitavermis.config.annotationcrawler.AnnotationCrawler;
+import ppg.vitavermis.config.annotationcrawler.AnnotationHandler;
+import ppg.vitavermis.config.constchecker.Const;
+import ppg.vitavermis.config.constchecker.ConstChecker;
 import ppg.vitavermis.config.staticfield.StaticFieldLoader;
 
 public final class Game {
@@ -22,8 +28,8 @@ public final class Game {
 	public Game(String[] args) throws SlickException {
 		printDebugInfo();
 		
-		StaticFieldLoader.loadFields("ppg.vitavermis", "config.properties");
-
+		processAllCustomAnnotations();
+		
 		// Slick init
 		AppGameContainer app = new AppGameContainer(new GameLoop());
 		
@@ -44,6 +50,13 @@ public final class Game {
 
 		// Slick start
 		app.start();	
+	}
+	
+	private static void processAllCustomAnnotations() {
+		Map<Class<? extends Annotation>, AnnotationHandler> annotationsToHandle = new HashMap<Class<? extends Annotation>, AnnotationHandler>();
+		annotationsToHandle.put(Param.class, new StaticFieldLoader("config.properties"));
+		annotationsToHandle.put(Const.class, new ConstChecker());
+		AnnotationCrawler.processPackage("ppg.vitavermis", annotationsToHandle);
 	}
 	
 	private static void printDebugInfo() {

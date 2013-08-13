@@ -2,6 +2,7 @@
 
 [Lucas]
 TODO:
+- diagramme pour lister infos relatives au Hero et leur repartition en classes
 - Nico physics review
 - animation engine : fix "duration"
 - Vector classes (2d, 3d for float, int...) + Localisation

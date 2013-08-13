@@ -1,9 +1,12 @@
 package ppg.vitavermis.config.staticfield;
 
+import java.lang.annotation.Annotation;
 import java.lang.annotation.IncompleteAnnotationException;
 import java.lang.reflect.Field;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Properties;
 import java.util.Set;
 
@@ -11,6 +14,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 import ppg.vitavermis.config.Param;
+import ppg.vitavermis.config.annotationcrawler.AnnotationCrawler;
+import ppg.vitavermis.config.annotationcrawler.AnnotationHandler;
 import static org.junit.Assert.*;
 
 import static ppg.vitavermis.config.staticfield.StaticFieldLoader.*;
@@ -62,10 +67,16 @@ public class StaticFieldLoaderTest {
 	
 	@Test
 	public final void processAllFieldsTest() {
-		Set<String> unusedConfiguredParams = processAllFields(new HashSet<Class<?>>(
-				Arrays.asList(StaticFieldLoaderTest.class, NestedClassOfHomonyms.class)), properties);
-		final Set<String> expected = new HashSet<String>(Arrays.asList("noParamField", "aliasedField"));
-		assertEquals(expected, unusedConfiguredParams);
+		final Set<Class<?>> targetClasses = new HashSet<Class<?>>(
+				Arrays.asList(StaticFieldLoaderTest.class, NestedClassOfHomonyms.class));
+		StaticFieldLoader staticFieldLoader = new StaticFieldLoader(this.properties);
+		Map<Class<? extends Annotation>, AnnotationHandler> annotationsToHandle = new HashMap<Class<? extends Annotation>, AnnotationHandler>();
+		annotationsToHandle.put(Param.class, staticFieldLoader);
+
+		AnnotationCrawler.processAllAnnotations(targetClasses, annotationsToHandle);
+		
+		Set<String> expected = new HashSet<String>(Arrays.asList("noParamField", "aliasedField"));
+		assertEquals(expected, staticFieldLoader.getUnusedConfiguredParams());
 	}
 
 	@Test

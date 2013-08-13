@@ -15,6 +15,8 @@ import java.util.jar.JarFile;
 /**
  * @author lucas
  *
+ * LIMITATION: Does no list nested classes (static or not) 
+ *
  * Class containing ".*Test.*" are ignored
  *
  * Code inspiration : http://code.google.com/p/ldapbeans/source/browse/trunk/ldapbeans/src/main/java/ldapbeans/util/scanner/PackageHelper.java
