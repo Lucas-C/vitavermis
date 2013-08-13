@@ -4,18 +4,14 @@ import java.lang.annotation.IncompleteAnnotationException;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Properties;
 import java.util.Set;
 
-import ppg.vitavermis.config.ClassScanner;
 import ppg.vitavermis.config.ConfigFilesLoader;
 import ppg.vitavermis.config.ConfigurableField;
 import ppg.vitavermis.config.Param;
+import ppg.vitavermis.config.annotationcrawler.AnnotationHandler;
 
 /**
  * @author lucas
@@ -38,48 +34,56 @@ import ppg.vitavermis.config.Param;
  * Original idea : http://piotrnowicki.com/2012/06/inject-java-properties-in-java-ee-using-cdi/
  * Modifying a private attribute : http://stackoverflow.com/questions/3301635/change-private-static-final-field-using-java-reflection
  * 
+ * @TODO: to make it possible to reload the configuration file, this module
+ * need to internally cache the assigned @Param values in order to detect
+ * changes and only re-assigned modified vaues to @Param annotated static fields. 
  */
-public final class StaticFieldLoader {
+public final class StaticFieldLoader extends AnnotationHandler {
 
-	private StaticFieldLoader() { }	
-
-	public static void loadFields(String pkgName, String configFileName) {
-   		System.out.println("[INFO] START Static fields loading");
-		// 1 - Read config files & load their values in table
-		final Properties properties = ConfigFilesLoader.getPropertiesFromFilename(configFileName);
-		if (properties.isEmpty()) {
+	private final Properties properties;
+	private Set<String> unusedConfiguredParams;
+	
+	// For testing
+	Set<String> getUnusedConfiguredParams() {
+		return unusedConfiguredParams;
+	}
+	
+	public StaticFieldLoader(String configFileName) {
+		this(ConfigFilesLoader.getPropertiesFromFilename(configFileName));
+		if (this.properties.isEmpty()) {
 			System.out.println("[WARNING] No values found in configuration file named " + configFileName);
 		}
-		// 2 - Get all pkg classes
-		Collection<Class<?>> classes = ClassScanner.getPackageClasses(pkgName);
-		if (classes.isEmpty()) {
-			System.out.println("[WARNING] No classes found for package " + pkgName);
-		}
-		// 3 - Process each field
-		Set<String> unusedConfiguredParams = processAllFields(classes, properties);
-		if (!unusedConfiguredParams.isEmpty()) {
+	}
+
+	public StaticFieldLoader(Properties properties) {
+   		System.out.println("[INFO] INIT Static fields loading");
+		this.properties = properties;
+		this.unusedConfiguredParams = this.properties.stringPropertyNames();		
+	}
+	
+	@Override
+	public void preProcessingCheck() {
+   		System.out.println("[INFO] START Static fields loading");
+	}
+
+	@Override
+	public void postProcessingCheck() {
+		if (!this.unusedConfiguredParams.isEmpty()) {
 	   		System.out.println("[WARNING] There are unused configuration values: " + unusedConfiguredParams);
 		}
    		System.out.println("[INFO] END Static fields loading");
 	}
-	
-	// VisibleForTesting
-	static Set<String> processAllFields(Collection<Class<?>> classes, final Properties properties) {
-		Set<String> unusedConfiguredParams = properties.stringPropertyNames();
-		for (Class<?> iClass : classes) {
-			for (Field iField : iClass.getDeclaredFields()) {
-				if (iField.getAnnotation(Param.class) != null) {
-					final String configKey = processField(iField, iClass.getName(), properties);
-					unusedConfiguredParams.remove(configKey);
-				}
-			}
-		}
-		return unusedConfiguredParams;
-	}
 		
+	@Override
+	public void processField(Field field, Class<?> parentClass) {
+		final String fieldKey = processField(field, parentClass.getName(), this.properties);
+		this.unusedConfiguredParams.remove(fieldKey);
+	}
+	
 	// VisibleForTesting
 	static String processField(Field field, String className,
 			final Properties properties) {
+		assert field.getAnnotation(Param.class) != null;
 		// 1 - Check if @Param is correctly used
 		if (!Modifier.isStatic(field.getModifiers())) {
 			throw new IncompleteAnnotationException(Param.class, "Annoted field " + fieldWithParamToString(field, className) + " should be static");
@@ -87,10 +91,10 @@ public final class StaticFieldLoader {
 		if (Modifier.isFinal(field.getModifiers())) {
 			throw new IncompleteAnnotationException(Param.class, "Annoted field " + fieldWithParamToString(field, className) + " should not be final");
 		}
-		Class<?> fieldClass = field.getType();
-		if (!ConfigurableField.isFieldTypeSupported(fieldClass)) {
+		Class<?> fieldType = field.getType();
+		if (!ConfigurableField.isFieldTypeSupported(fieldType)) {
 			throw new IncompleteAnnotationException(Param.class, "Annoted field " + fieldWithParamToString(field, className)
-					+ " type not supported: " + fieldClass);			
+					+ " type not supported: " + fieldType);			
 		}
 		// 2 - Check that the field is not already initialized
 		if (!ConfigurableField.isDefaultValue(null, field)) {
@@ -98,11 +102,11 @@ public final class StaticFieldLoader {
 					+ " already initialized: " + ConfigurableField.getFieldValue(null, field));			
 		}
 		// 3 - Lookup field name then alias in config table (with and then without prefix naming)
-		final String key = lookUpFieldKey(field, className, properties);
+		final String fieldKey = lookUpFieldKey(field, className, properties);
 		// 4 - Assign the object with a potential error if types mismatch
-		Object obj = properties.get(key);
+		Object obj = properties.get(fieldKey);
 		ConfigurableField.setFieldValueWithCast(null, field, obj);
-		return key;
+		return fieldKey;
 	}
 	
 	private static String lookUpFieldKey(Field field, String className, final Properties properties) {
