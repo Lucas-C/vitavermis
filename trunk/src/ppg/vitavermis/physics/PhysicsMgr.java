@@ -8,9 +8,9 @@ import org.newdawn.slick.geom.Vector2f;
 import ppg.vitavermis.GameState;
 import ppg.vitavermis.items.BackgroundItem;
 import ppg.vitavermis.items.Item;
-import ppg.vitavermis.items.MainCharacterItem;
 import ppg.vitavermis.items.MobilItem;
 import ppg.vitavermis.items.PlatformItem;
+import ppg.vitavermis.maincharacter.MainCharacter;
 
 /***
  * 
@@ -43,11 +43,11 @@ public class PhysicsMgr {
 //			System.out.println("update loop " + item.com);
 			if (item instanceof MobilItem) {
 				// liberation de tout les contact de MainCharacter
-				if (item instanceof MainCharacterItem) {
+				if (item instanceof MainCharacter) {
 //					System.out.println(((MobileItem) item).getCelerity());
 //					System.out.println(((MobileItem) item).getCumulForce());
-					((MainCharacterItem) item).setContact(false);
-					((MainCharacterItem) item).setContactItem(null);
+					((MainCharacter) item).setContact(false);
+					((MainCharacter) item).setContactItem(null);
 				}
 //				System.out.println("changement de position boocle " + item.com);
 				if (item instanceof PlatformItem) {
@@ -70,9 +70,9 @@ public class PhysicsMgr {
 	public static void jump(Item item) {
 		Item contactItem = null;
 			
-		if (item instanceof MainCharacterItem) {
-			if (((MainCharacterItem) item).isContact()) {
-				contactItem = ((MainCharacterItem) item).getContactItem();
+		if (item instanceof MainCharacter) {
+			if (((MainCharacter) item).isContact()) {
+				contactItem = ((MainCharacter) item).getContactItem();
 				if (contactItem != null) {
 					switch (itemPosition(item, contactItem)) {
 					case 1:
@@ -191,9 +191,9 @@ public class PhysicsMgr {
 			*/
 			if (rect.intersects(item.rectangle()) && (itemMobile != item)) {
 //				System.out.println("-- 1");
-				if (itemMobile instanceof MainCharacterItem) {
-					((MainCharacterItem) itemMobile).setContact(true);
-					((MainCharacterItem) itemMobile).setContactItem(item);
+				if (itemMobile instanceof MainCharacter) {
+					((MainCharacter) itemMobile).setContact(true);
+					((MainCharacter) itemMobile).setContactItem(item);
 				}
 
 				if (item instanceof BackgroundItem) {
@@ -437,11 +437,11 @@ public class PhysicsMgr {
 			item.getCumulForce().x = item.getCumulForce().x / (item.getMassCategory() + 3);
 			item.getCelerity().x = item.getCelerity().x / (item.getMassCategory() + 3);
 		}*/
-		if (item instanceof MainCharacterItem) {
-			if (((MainCharacterItem) item).isContact()) {
-				if (((MainCharacterItem) item).getContactItem() instanceof PlatformItem) {
-					if ( Math.abs(((MainCharacterItem) item).getCelerity().x) <= 
-							Math.abs(((PlatformItem) ((MainCharacterItem) item).getContactItem()).getCelerity().x)) {
+		if (item instanceof MainCharacter) {
+			if (((MainCharacter) item).isContact()) {
+				if (((MainCharacter) item).getContactItem() instanceof PlatformItem) {
+					if ( Math.abs(((MainCharacter) item).getCelerity().x) <= 
+							Math.abs(((PlatformItem) ((MainCharacter) item).getContactItem()).getCelerity().x)) {
 						
 					} else {
 						//System.out.println("1");

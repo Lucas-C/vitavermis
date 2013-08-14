@@ -7,6 +7,7 @@ import ppg.vitavermis.GameState;
 import ppg.vitavermis.config.Param;
 import ppg.vitavermis.config.modelloader.ClassGenerator;
 import ppg.vitavermis.items.*;
+import ppg.vitavermis.maincharacter.MainCharacter;
 
 import org.newdawn.slick.Color;
 import org.newdawn.slick.SlickException;
@@ -23,7 +24,7 @@ public final class PhysicsTest1 extends Scene {
 		ArrayList<Item> itemsList = new ArrayList<Item>();
 		
 		// hero
-		MainCharacterItem hero = ClassGenerator.generateClasses(MainCharacterItem.class, "models", ".conf").get("bob");
+		MainCharacter hero = ClassGenerator.generateClasses(MainCharacter.class, "models", ".conf").get("bob");
 		itemsList.add(hero);
 
 		Map<String, BackgroundItem> BackgroundItems = ClassGenerator.generateClasses(BackgroundItem.class, "models", ".conf");
