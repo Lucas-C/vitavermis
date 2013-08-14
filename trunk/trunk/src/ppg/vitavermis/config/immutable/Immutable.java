@@ -1,4 +1,4 @@
-package ppg.vitavermis.config.constchecker;
+package ppg.vitavermis.config.immutable;
 
 import static java.lang.annotation.RetentionPolicy.*;
 import static java.lang.annotation.ElementType.*;
@@ -9,7 +9,7 @@ import java.lang.annotation.Target;
 /**
  * @author lucas
  * 
- * This annotation ensure that the annotated field is final and only contains final fields, recursively.
+ * This annotation ensure that the annotated field class recursively only contains final fields.
  * 
  * This check is done, manually, by invoking the ConstChecker Annotation Handler.
  *
@@ -17,5 +17,5 @@ import java.lang.annotation.Target;
  */
 @Retention(RUNTIME)
 @Target({ FIELD, PARAMETER })
-public @interface Const {
+public @interface Immutable {
 }
