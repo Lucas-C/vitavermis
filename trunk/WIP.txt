@@ -11,9 +11,6 @@ TODO:
 - use log system like log4j/slf4j:
     + define a minimum period for logging -> logline will contain a count of "silenced" too frequent messages
 - on-screen shortcuts help
-- enforce final in every class except ppg.vitavermis.state :
-    @Const("ppg") annotation
-    "ppg" define an ImmutableContract : typeScope (limit checks to only types in ppg.etc e.g.), ignored pkgs, exception raised...
 
 DONE:
 	- setup base classes (Main...)
@@ -27,6 +24,7 @@ DONE:
     - .jar config loading
     - clean rules for @Param: no more hardcoded values
     - ClassGenerator.generateClasses
+    - enforce final in every child class with @Immutable
 
 IMPROVMENTS:
     - @Param :
