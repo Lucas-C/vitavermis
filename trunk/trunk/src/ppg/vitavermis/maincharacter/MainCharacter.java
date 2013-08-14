@@ -1,12 +1,16 @@
-package ppg.vitavermis.items;
+package ppg.vitavermis.maincharacter;
 
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Vector2f;
 
 import ppg.vitavermis.config.Param;
+import ppg.vitavermis.entity.Entity;
+import ppg.vitavermis.entity.kicker.Kicker;
+import ppg.vitavermis.items.Item;
+import ppg.vitavermis.items.MobilItem;
 
-public class MainCharacterItem extends MobilItem {
+public class MainCharacter extends MobilItem implements Entity, Kicker {
 
 	private boolean jumping;	
 	private Item contactItem;
@@ -45,7 +49,7 @@ public class MainCharacterItem extends MobilItem {
 		this.jumping = jumping1;
 	}
 
-	private MainCharacterItem(
+	private MainCharacter(
 			@Param("x") int x,
 			@Param("y") int y,
 			@Param("width") int width,

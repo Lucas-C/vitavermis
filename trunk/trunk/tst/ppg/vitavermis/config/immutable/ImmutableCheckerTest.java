@@ -22,24 +22,21 @@ public class ImmutableCheckerTest {
 		@Immutable String mutableDataStr;
 		@Immutable int mutableDataInt;
 	}
-	
 	@Test
 	public final void primitiveMutableDataTest() {
-		runAnnotatedCheck(AnnotatedMutableData.class);
+		runImmutableCheck(AnnotatedMutableData.class);
 	}
 	
 	static class ImmutableData {
-		final String immutableDataStr = "IMMutableData";
+		final String immutableDataStr = "INVARIABLE";
 		final int immutableDataInt = 42;
 	}
-	
 	static class AnnotatedCompositeWithImmutableData {
-		@Immutable ImmutableData immutableDataObj = new ImmutableData();
+		@Immutable ImmutableData immutableDataObj;
 	}
-	
 	@Test
 	public final void compositeImmutableDataTest() {
-		runAnnotatedCheck(AnnotatedCompositeWithImmutableData.class);
+		runImmutableCheck(AnnotatedCompositeWithImmutableData.class);
 	}
 	
 	static class MutableData {
@@ -47,35 +44,44 @@ public class ImmutableCheckerTest {
 		int mutableDataInt;
 		public MutableData() { this.mutableDataStr = "VARIABLE"; this.mutableDataInt = -7; }
 	}
-
 	static class AnnotatedCompositeWithMutableData {
-		@Immutable final MutableData mutableDataObj = new MutableData();
+		@Immutable MutableData mutableDataObj = new MutableData();
 	}
-
 	@Test(expected=TypeConstraintException.class)
 	public final void compositeMutableDataTest() {
-		runAnnotatedCheck(AnnotatedCompositeWithMutableData.class);
+		runImmutableCheck(AnnotatedCompositeWithMutableData.class);
 	}
 	
+	static class AnnotatedCompositeWithMutableDataOutsideScope {
+		@Immutable Mutable mutableObj = new Mutable();
+	}
 	@Test
 	public final void compositeMutableOutsideScopeTest() {
-		runAnnotatedCheck(Mutable.class);
+		runImmutableCheck(AnnotatedCompositeWithMutableDataOutsideScope.class);
 	}
 	
+	static class SelfRefImmutable {
+		@Immutable final SelfRefImmutable sibling = new SelfRefImmutable();
+	}
+	@Test
+	public final void selfReferentialImmutableTest() {
+		runImmutableCheck(SelfRefImmutable.class);
+	}
+
 	@Test
 	public final void noFieldsTest() {
-		runAnnotatedCheck(this.getClass());	
+		runImmutableCheck(this.getClass());	
 	}
 	
 	@Test
 	public final void nonAnnotatedTest() {
-		runAnnotatedCheck(MutableData.class);		
+		runImmutableCheck(MutableData.class);		
 	}
 
-	private void runAnnotatedCheck(Class<?> cls) {
+	private void runImmutableCheck(Class<?> cls) {
 		final Set<Class<?>> targetClasses = new HashSet<Class<?>>(Arrays.asList(cls));
 		Map<Class<? extends Annotation>, AnnotationHandler> annotationsToHandle = new HashMap<Class<? extends Annotation>, AnnotationHandler>();
-		annotationsToHandle.put(Immutable.class, new ImmutableChecker());
+		annotationsToHandle.put(Immutable.class, new ImmutableChecker(new HashSet<Class<?>>(Arrays.asList(String.class, Mutable.class))));
 
 		AnnotationCrawler.processAllAnnotations(targetClasses, annotationsToHandle);		
 	}

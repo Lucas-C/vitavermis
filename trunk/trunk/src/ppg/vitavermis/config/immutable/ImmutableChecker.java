@@ -63,6 +63,7 @@ public final class ImmutableChecker extends AnnotationHandler {
 		if (this.knownImmutableClasses.contains(cls)) {
 			return;
 		}
+		this.knownImmutableClasses.add(cls); // Added 1st to avoid self recursion
 		for (Field iField : childFields) {
 			if (!Modifier.isFinal(iField.getModifiers())) {
 				throw new TypeConstraintException("Non final field " + iField + " in " + cls);
@@ -73,7 +74,6 @@ public final class ImmutableChecker extends AnnotationHandler {
 				throw new TypeConstraintException("From " + iField + " in " + cls, e);				
 			}
 		}
-		this.knownImmutableClasses.add(cls);
 	}
 	
 	private static boolean stringStartsWithPrefixInList(String str, String[] prefixes) {
