@@ -2,6 +2,9 @@ package ppg.vitavermis.testCreation;
 
 import ppg.vitavermis.GameState;
 import ppg.vitavermis.config.Param;
+import ppg.vitavermis.physics.PhysicsMgr;
+import ppg.vitavermis.render.RenderMgr;
+
 import org.newdawn.slick.SlickException;
 
 public abstract class Scene {
@@ -17,5 +20,5 @@ public abstract class Scene {
 		}
 	}
 	
-	public abstract GameState getInitialGameState() throws SlickException;
+	public abstract GameState getInitialGameState(PhysicsMgr physics, RenderMgr renderer) throws SlickException;
 }

@@ -1,5 +1,8 @@
 # This file is intended to list all the project dependencies
+# The .classpath file can also be helpful to list additional libs
 
 Slick (build=274, see slick.jar/version)
 -> jogg & jorbis (son)
 -> LWJGL
+
+JBox2D

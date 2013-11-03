@@ -1,9 +1,7 @@
 package ppg.vitavermis;
 
 import java.lang.annotation.Annotation;
-import java.util.Arrays;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
 
 import org.newdawn.slick.AppGameContainer;

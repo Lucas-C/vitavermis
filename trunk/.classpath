@@ -12,5 +12,6 @@
 	<classpathentry kind="lib" path="lib/annotations.jar"/>
 	<classpathentry kind="lib" path="lib/jsr305.jar"/>
 	<classpathentry kind="lib" path="lib/mockito-all-1.9.5.jar"/>
+	<classpathentry kind="lib" path="lib/jbox2d-library-2.2.1.1.jar" sourcepath="/home/lucas/.m2/repository/org/jbox2d/jbox2d-library/2.2.1.1/jbox2d-library-2.2.1.1-sources.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

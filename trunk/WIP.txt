@@ -2,8 +2,11 @@
 
 [Lucas]
 TODO:
+- 'Entity' classes cleanup
+- sprites rendering cleanup
+- MainCharacter with input control
+- Zoom control
 - diagramme pour lister infos relatives au Hero et leur repartition en classes
-- Nico physics review
 - animation engine : fix "duration"
 - Vector classes (2d, 3d for float, int...) + Localisation
 - level/map loading
@@ -13,14 +16,14 @@ TODO:
 - on-screen shortcuts help
 
 DONE:
-	- setup base classes (Main...)
-	- plugin checkstyle
-	- plugin findbugs
-	- plugin YEdit 
-	- début de code/réflexion sur les fichiers de conf
-	- @Param intégré
-	- tests avec Junit
-	- configuration & cmd-line checkstyle & findbug
+    - setup base classes (Main...)
+    - plugin checkstyle
+    - plugin findbugs
+    - plugin YEdit
+    - début de code/réflexion sur les fichiers de conf
+    - @Param intégré
+    - tests avec Junit
+    - configuration & cmd-line checkstyle & findbug
     - .jar config loading
     - clean rules for @Param: no more hardcoded values
     - ClassGenerator.generateClasses
@@ -34,6 +37,6 @@ IMPROVMENTS:
 
 NOTES AGAINST SLICK:
     force using init() methods -> against immutability
-    no Renderable.draw(x, y, width, height) // Fixable by a patch
+    no Renderable.draw(x, y, width, height) // Fixed on Slick repo : patch approved
     use integers for width/height
 

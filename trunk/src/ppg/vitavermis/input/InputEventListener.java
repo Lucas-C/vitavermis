@@ -77,7 +77,7 @@ public class InputEventListener {
 		input.addKeyListener(kl);
 	}
 	
-	public final void update(Input input, Item item) {
+	public final void update(Input input) {
 		boolean moveLeft = input.isKeyDown(Input.KEY_LEFT); 
 		boolean moveRight = input.isKeyDown(Input.KEY_RIGHT);
 		boolean moveup = input.isKeyDown(Input.KEY_UP);
@@ -89,17 +89,17 @@ public class InputEventListener {
 		
 		
 		if (countTemp > 0) {
-			PhysicsMgr.jump(item);
+//			PhysicsMgr.jump(item);
 			countTemp--;
 		}
 		if (jump) {
 			countTemp = 10;			
 		}
 		if (moveLeft) {
-			PhysicsMgr.applyForce(item, new Vector2f(-ForceDefinition.x_max, 0));
+//			PhysicsMgr.applyForce(item, new Vector2f(-ForceDefinition.x_max, 0));
 		}
 		if (moveRight) {
-			PhysicsMgr.applyForce(item, new Vector2f(ForceDefinition.x_max, 0));
+//			PhysicsMgr.applyForce(item, new Vector2f(ForceDefinition.x_max, 0));
 		}
 		/*
 		if (jump) {
@@ -111,10 +111,10 @@ public class InputEventListener {
 		*/
 		if (GameLoop.debug_mode_up_down) {
 			if (movedown) {
-				PhysicsMgr.applyForce(item, new Vector2f(0, (float) (ForceDefinition.y_max)));
+//				PhysicsMgr.applyForce(item, new Vector2f(0, (float) (ForceDefinition.y_max)));
 			}
 			if (moveup) {
-				PhysicsMgr.applyForce(item, new Vector2f(0, -(float) (ForceDefinition.y_max)));
+//				PhysicsMgr.applyForce(item, new Vector2f(0, -(float) (ForceDefinition.y_max)));
 			}
 		}
 		
