@@ -3,10 +3,6 @@ package ppg.vitavermis.items;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.geom.Vector2f;
 
-/**
- * @author parpaing
- *
- */
 public class MobilItem extends Item {
 
 	/**

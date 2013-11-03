@@ -9,12 +9,10 @@ import ppg.vitavermis.items.Item;
 
 public class GameState {
 
-	public final ArrayList<Item> itemsList;
 	public final Color backgroundColor;
 	private final long startTime;
 
-	public GameState(ArrayList<Item> itemsList, Color backgroundColor) {
-		this.itemsList = itemsList;
+	public GameState(Color backgroundColor) {
 		this.backgroundColor = backgroundColor;
 		this.startTime = getTime();
 	}

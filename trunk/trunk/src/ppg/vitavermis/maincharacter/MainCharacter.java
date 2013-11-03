@@ -10,7 +10,7 @@ import ppg.vitavermis.entity.kicker.Kicker;
 import ppg.vitavermis.items.Item;
 import ppg.vitavermis.items.MobilItem;
 
-public class MainCharacter extends MobilItem implements Entity, Kicker {
+public class MainCharacter implements Entity, Kicker {
 
 	private boolean jumping;	
 	private Item contactItem;
@@ -50,15 +50,11 @@ public class MainCharacter extends MobilItem implements Entity, Kicker {
 	}
 
 	private MainCharacter(
-			@Param("x") int x,
-			@Param("y") int y,
 			@Param("width") int width,
 			@Param("height") int height,
 			@Param("spriteName") String spriteName,
 			@Param("name") String name
 			) throws SlickException {
-		super(new Image(spriteName), new Vector2f(width,height), name);
-		this.setPosition(new Vector2f(x, y));
 	}
 
 }

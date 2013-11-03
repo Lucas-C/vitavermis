@@ -48,63 +48,16 @@ public class GameLoop extends BasicGame {
 	@Override
 	public void init(GameContainer _gc) throws SlickException {
 		Scene scene = Scene.createInitialScene();
-		this.gameState = scene.getInitialGameState();
-		physics.init(gameState);
+		this.gameState = scene.getInitialGameState(physics, renderer);
+		physics.init();//gameState);
 		renderer.init(gameState, _gc.getGraphics());
 		evtListener.init(_gc.getInput());
 	}
 
 	@Override
-	public void update(GameContainer _gc, int delta) throws SlickException {
-		/* test pour le debug et avoir une même vitesse 
-		if (delta <3 ){
-		*/
-		//System.out.println(delta);
-		delta = 10;
-		if ( delta_mode != true ) {
-			if ( delta > 10 ){
-				delta = 10;
-			}
-			count ++;
-			if (count == 2) {
-				//System.exit(0);
-			}
-			ArrayList<Item> itemsList = this.gameState.itemsList;
-			evtListener.update(_gc.getInput(), itemsList.get(0));
-			physics.update(itemsList, delta);
-			//event.update(listeItems, delta);	
-		
-			//System.out.println("-----------------");
-			//System.out.println(delta);
-			
-			if (debug_mode_reset == true) {
-				debug_mode_reset = false;
-				init(_gc);
-			}
-		} else {
-			delta = 0 ;
-			if ( incrementation_delta ) {
-				delta = 10;
-				incrementation_delta = false;
-				count ++;
-				if (count == 2) {
-					//System.exit(0);
-				}
-				ArrayList<Item> itemsList = this.gameState.itemsList;
-				evtListener.update(_gc.getInput(), itemsList.get(0));
-				physics.update(itemsList, delta);
-				//event.update(listeItems, delta);		
-		
-				//System.out.println("-----------------");
-				System.out.println(delta);
-			
-				if (debug_mode_reset == true) {
-					debug_mode_reset = false;
-					init(_gc);
-				}
-			}
-		}
-		
+	public void update(GameContainer _gc, int delta_ms) throws SlickException {
+		evtListener.update(_gc.getInput());
+		physics.update(delta_ms);
 	}
 
 	@Override
@@ -113,7 +66,6 @@ public class GameLoop extends BasicGame {
 	}
 	
 	
-	/* deplacer dans les input) */
 	@Override
     public void keyPressed(int key, char c)
     {
@@ -130,8 +82,7 @@ public class GameLoop extends BasicGame {
     		debug_mode_reset = true;
        	}
     	if (key == Input.KEY_ESCAPE) {
-			ArrayList<Item> itemsList = this.gameState.itemsList;
-    		itemsList.removeAll(itemsList);
+    		//itemsList.removeAll(itemsList);
     		System.exit(0);
     	}
     	if ( key == Input.KEY_4) {

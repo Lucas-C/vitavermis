@@ -4,6 +4,7 @@ import java.awt.Rectangle;
 import org.newdawn.slick.Renderable;
 import org.newdawn.slick.geom.Vector2f;
 
+// TODO: Remove this class and only use ItemState/ItemModel 
 public class Item {
 
 	final private String name;
@@ -22,7 +23,7 @@ public class Item {
 	 * method to obtain the rectangle around the item
 	 * @ return the item's rectangle
 	 */
-	public final Rectangle rectangle() {
+	public final Rectangle getBoundingBox() {
 		Rectangle rect = new Rectangle((int) position.x, (int) position.y, (int) this.dimensions.x , (int) this.dimensions.y);
 	    return rect;
 	}
@@ -56,15 +57,5 @@ public class Item {
 	 */
 	public final Vector2f getPosition() {
 		return position;
-	}
-
-	// pas utilisé
-	/**
-	 * setter for position
-	 * @param position a new item's position
-	 * 
-	 */
-	public final void setPosition(Vector2f position1) {
-		this.position = position1;
 	}
 }
