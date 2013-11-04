@@ -7,13 +7,10 @@ import org.newdawn.slick.geom.Vector2f;
 import ppg.vitavermis.config.Param;
 import ppg.vitavermis.entity.Entity;
 import ppg.vitavermis.entity.kicker.Kicker;
-import ppg.vitavermis.items.Item;
-import ppg.vitavermis.items.MobilItem;
 
 public class MainCharacter implements Entity, Kicker {
 
 	private boolean jumping;	
-	private Item contactItem;
 	private boolean contact;
 	private float jumpPow;
 	
@@ -27,14 +24,6 @@ public class MainCharacter implements Entity, Kicker {
 
 	public final boolean isJumping() {
 		return jumping;
-	}
-
-	public final Item getContactItem() {
-		return contactItem;
-	}
-
-	public final void setContactItem(Item contactItem1) {
-		this.contactItem = contactItem1;
 	}
 
 	public final boolean isContact() {

@@ -12,12 +12,9 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Vector2f;
 
 import ppg.vitavermis.GameState;
-import ppg.vitavermis.items.Item;
-import ppg.vitavermis.physics.ItemModel;
-import ppg.vitavermis.physics.ItemState;
 
 public class RenderMgr {
-	private final static float SCALE = 50f;
+	private final static float SCALE = 32f;
 	
 	private List<Sprite> spriteList;
 	
