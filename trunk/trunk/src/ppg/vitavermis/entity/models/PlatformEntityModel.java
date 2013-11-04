@@ -1,15 +1,26 @@
-package ppg.vitavermis.entity;
+package ppg.vitavermis.entity.models;
 
 import org.newdawn.slick.SlickException;
 
 import ppg.vitavermis.config.Param;
+import ppg.vitavermis.entity.EntityModel;
 import ppg.vitavermis.physics.ItemModel;
 import ppg.vitavermis.render.SpriteModel;
 
-public class PlatformEntityModel {
+public class PlatformEntityModel implements EntityModel {
 
 	public ItemModel modelPhy;
 	public SpriteModel modelVis;
+	
+	@Override
+	public ItemModel getModelPhy() {
+		return this.modelPhy;
+	}
+	
+	@Override
+	public SpriteModel getModelVis() {
+		return this.modelVis;
+	}
 	
 	private PlatformEntityModel(
 		@Param("width") int width,

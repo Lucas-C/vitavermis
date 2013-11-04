@@ -6,19 +6,10 @@ import java.util.Queue;
 
 import org.newdawn.slick.Input;
 import org.newdawn.slick.KeyListener;
-import org.newdawn.slick.geom.Vector2f;
 
 import ppg.vitavermis.GameLoop;
-import ppg.vitavermis.items.Item;
-import ppg.vitavermis.physics.ForceDefinition;
-import ppg.vitavermis.physics.PhysicsMgr;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
-/**
- * 
- * @author parpaing
- *
- */
 public class InputEventListener {
 	
 	public static boolean jump = false;

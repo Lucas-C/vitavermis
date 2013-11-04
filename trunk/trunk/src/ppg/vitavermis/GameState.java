@@ -1,11 +1,7 @@
 package ppg.vitavermis;
 
-import java.util.ArrayList;
-
 import org.lwjgl.Sys;
 import org.newdawn.slick.Color;
-
-import ppg.vitavermis.items.Item;
 
 public class GameState {
 

@@ -1,7 +1,5 @@
 package ppg.vitavermis;
 
-import java.util.ArrayList;
-
 import org.newdawn.slick.BasicGame;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
@@ -11,7 +9,6 @@ import org.newdawn.slick.SlickException;
 import ppg.vitavermis.config.Param;
 import ppg.vitavermis.input.InputEventDispatcher;
 import ppg.vitavermis.input.InputEventListener;
-import ppg.vitavermis.items.Item;
 import ppg.vitavermis.physics.PhysicsMgr;
 import ppg.vitavermis.render.RenderMgr;
 import ppg.vitavermis.testCreation.Scene;
