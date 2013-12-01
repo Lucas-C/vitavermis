@@ -10,7 +10,6 @@ TODO:
 - animation engine : fix "duration"
 - Vector classes (2d, 3d for float, int...) + Localisation
 - level/map loading
-- graphic helpers : AABB boxes, celerity vectors
 - use log system like log4j/slf4j:
     + define a minimum period for logging -> logline will contain a count of "silenced" too frequent messages
 - on-screen shortcuts help
@@ -28,6 +27,7 @@ DONE:
     - clean rules for @Param: no more hardcoded values
     - ClassGenerator.generateClasses
     - enforce final in every child class with @Immutable
+    - graphic helpers : implemented Box2D DebugDraw
 
 IMPROVMENTS:
     - @Param :

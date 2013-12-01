@@ -29,8 +29,8 @@ public class SpriteModel {
 	public SpriteModel(
 		@Param("name") String name,
 		@Param("spriteName") String spriteName,
-		@Param("width") int width,
-		@Param("height") int height
+		@Param("width") float width,
+		@Param("height") float height
 	) throws SlickException {	
 		this.name = name;
 		this.dimensions = new Vector2f(width, height); 

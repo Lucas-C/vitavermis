@@ -14,9 +14,14 @@ import org.newdawn.slick.geom.Vector2f;
 import ppg.vitavermis.GameState;
 
 public class RenderMgr {
-	private final static float SCALE = 32f;
+	final static float SCALE = 32f;
 	
 	private List<Sprite> spriteList;
+	
+	private DebugDrawPPG debugDraw;
+	public DebugDrawPPG getDebugDraw() {
+		return debugDraw;
+	}
 	
 	public RenderMgr() {
 		this.spriteList = new ArrayList<Sprite>();
@@ -24,6 +29,7 @@ public class RenderMgr {
 	
 	public void init(GameState gameState, Graphics graphics) {
 		graphics.setBackground(gameState.backgroundColor);
+		debugDraw = new DebugDrawPPG(this);
 	}
 	
 	public final Sprite createSprite(String spriteName, SpriteModel model, PositionProvider posRef) {
@@ -32,13 +38,18 @@ public class RenderMgr {
 		return sprite;
 	}
 	
-	public void render(Graphics _g, GameState gameState, boolean debug_mode, boolean debug_mode_2) throws SlickException {
+	public void render(Graphics graphics, GameState gameState) throws SlickException {
+		renderSpriteList(graphics, gameState);
+		debugDraw.renderDebugShapes(graphics, gameState.getTimeSinceStart());
+	}
+
+	private void renderSpriteList(Graphics graphics, GameState gameState) throws SlickException {
 		for (Sprite sprite : spriteList) {
 			final Vec2 pos = sprite.posRef.getPos().mul(SCALE);
 			final Vector2f dimensions = sprite.model.dimensions.copy().scale(SCALE);
 			final Renderable renderable = sprite.model.renderable;
 			// Ugly hack because Renderable doesn't have a draw(x, y, width, height) 
-			// Fixed by submitting a patch to Slick : we need to update our SLick version to fix this
+			// Fixed by submitting a patch to Slick : we need to update our Slick version to fix this
 			if (renderable instanceof Animation) {
 				((Animation)renderable).draw(pos.x, pos.y, dimensions.x, dimensions.y);
 			} else if (renderable instanceof Image) {
@@ -46,15 +57,6 @@ public class RenderMgr {
 			} else {
 				throw new IllegalArgumentException("Invalid renderable : " + renderable);
 			}
-			
-			/*if (debug_mode == true) {
-				Rectangle rectangle = item.getBoundingBox();
-				_g.drawRect(rectangle.x, rectangle.y, rectangle.width, rectangle.height);
-			}
-			if (debug_mode_2 == true) {
-				_g.drawString(item.getName(), pos.x + 10, pos.y + 10);
-			}*/
-			_g.drawString("TIME: " + gameState.getTimeSinceStart() / 1000f, 0, 50);
 		}
 	}
 }

@@ -23,8 +23,8 @@ public class PlatformEntityModel implements EntityModel {
 	}
 	
 	private PlatformEntityModel(
-		@Param("width") int width,
-		@Param("height") int height,
+		@Param("width") float width,
+		@Param("height") float height,
 		@Param("spriteName") String spriteName,
 		@Param("name") String name
 	) throws SlickException {

@@ -1,5 +1,6 @@
 package ppg.vitavermis;
 
+import org.jbox2d.callbacks.DebugDraw;
 import org.newdawn.slick.BasicGame;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
@@ -46,20 +47,25 @@ public class GameLoop extends BasicGame {
 	public void init(GameContainer _gc) throws SlickException {
 		Scene scene = Scene.createInitialScene();
 		this.gameState = scene.getInitialGameState(physics, renderer);
-		physics.init();//gameState);
 		renderer.init(gameState, _gc.getGraphics());
+		physics.init(renderer.getDebugDraw());
+		if (gameState.physicsDebugLevel > 0) {
+			renderer.getDebugDraw().setFlags(DebugDraw.e_shapeBit|DebugDraw.e_aabbBit|DebugDraw.e_jointBit);
+		}
 		evtListener.init(_gc.getInput());
 	}
 
 	@Override
 	public void update(GameContainer _gc, int delta_ms) throws SlickException {
+		//System.out.println("Physics update");
 		evtListener.update(_gc.getInput());
 		physics.update(delta_ms);
 	}
 
 	@Override
 	public void render(GameContainer _gc, Graphics _g) throws SlickException {
-		renderer.render(_g, this.gameState, debug_mode_rectangle, debug_mode_com);
+		//System.out.println("Renderer update");
+		renderer.render(_g, this.gameState);
 	}
 	
 	
