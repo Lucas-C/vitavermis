@@ -6,6 +6,7 @@ import org.newdawn.slick.Color;
 public class GameState {
 
 	public final Color backgroundColor;
+	public int physicsDebugLevel = 1;
 	private final long startTime;
 
 	public GameState(Color backgroundColor) {

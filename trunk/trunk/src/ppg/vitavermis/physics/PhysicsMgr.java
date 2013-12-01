@@ -1,5 +1,8 @@
 package ppg.vitavermis.physics;
 
+import java.util.Arrays;
+
+import org.jbox2d.callbacks.DebugDraw;
 import org.jbox2d.common.Vec2;
 import org.jbox2d.dynamics.Body;
 import org.jbox2d.dynamics.World;
@@ -25,34 +28,43 @@ public class PhysicsMgr {
 	private final static int BOX2D_VELOCITY_ITERATIONS = 6;
 	private final static int BOX2D_POSITION_ITERATIONS = 2;
 	
-	private World world;
+	private World box2dWorld;
 	private float time_since_last_update_ms = 0;
 	
 	
 	public PhysicsMgr() {
 		Vec2 gravity = new Vec2(0.0f, 10.0f);
-		this.world = new World(gravity);
-		//this.box2dWorld.setDebugDraw(DebugDraw debugDraw);
-		// SEE DebugDrawJ2D for an example of implementation using Java2D
+		this.box2dWorld = new World(gravity);
 	}
 	
-	public void init()  {
+	public void init(DebugDraw debugDraw)  {
+		this.box2dWorld.setDebugDraw(debugDraw);
+		// SEE DebugDrawJ2D for an example of implementation using Java2D
 	}
 
-	public final void update(int delta_ms) {
+	public void update(int delta_ms) {
 		this.time_since_last_update_ms += delta_ms;
 		while (this.time_since_last_update_ms > BOX2D_TIME_STEP_MS) {
 			this.time_since_last_update_ms -= BOX2D_TIME_STEP_MS;
-			this.world.step(BOX2D_TIME_STEP_SECONDS, BOX2D_VELOCITY_ITERATIONS, BOX2D_POSITION_ITERATIONS);
-			//this.box2dWorld.drawDebugData();
+			this.box2dWorld.step(BOX2D_TIME_STEP_SECONDS, BOX2D_VELOCITY_ITERATIONS, BOX2D_POSITION_ITERATIONS);
+			//printBodies(this.box2dWorld);
+			this.box2dWorld.drawDebugData();
 		}
+	}
+	
+	private static void printBodies(World w) {
+		Body body = w.getBodyList();
+		do {
+			System.out.println("Body 1st fixture:" + body.getFixtureList().m_shape);			
+			body = body.getNext();
+		} while (body != null);
 	}
 	
 	// TODO: deleting a body can be more tricky, due to sync issues :
 	// best solution seems to 'flag' them somehow and batch process removals during the update()
 	public final ItemState createItem(String itemName, ItemModel model, Vec2 position) {
 		model.bodyDef.position.set(position);
-		Body body = this.world.createBody(model.bodyDef);
+		Body body = this.box2dWorld.createBody(model.bodyDef);
         body.createFixture(model.fixtureDef);
         return new ItemState(itemName, model, body);
 	}

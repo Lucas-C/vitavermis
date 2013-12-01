@@ -1,5 +1,7 @@
 package ppg.vitavermis.physics;
 
+import java.util.Arrays;
+
 import org.jbox2d.collision.shapes.CircleShape;
 import org.jbox2d.collision.shapes.PolygonShape;
 import org.jbox2d.collision.shapes.Shape;
@@ -57,6 +59,7 @@ public class ItemModel {
 	    private Shape shape = null;
 	    
 	    public Builder asCircle(float radius) {
+			assert radius > 0;
 	    	CircleShape circle = new CircleShape();
 	    	circle.m_radius = radius;
 	    	this.shape = circle;
@@ -64,6 +67,7 @@ public class ItemModel {
 	    }
 
 		public Builder asBox(float halfwidth, float halfheight) {
+			assert halfwidth > 0 && halfheight > 0;
 			PolygonShape polygon = new PolygonShape();
 			polygon.setAsBox(halfwidth, halfheight);
 	    	this.shape = polygon;

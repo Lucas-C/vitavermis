@@ -23,7 +23,7 @@ public class BallEntityModel implements EntityModel {
 	}
 
 	private BallEntityModel(
-		@Param("radius") int radius,
+		@Param("radius") float radius,
 		@Param("restitution") float restitution,
 		@Param("spriteName") String spriteName,
 		@Param("name") String name
