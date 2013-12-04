@@ -151,7 +151,7 @@ public final class ClassGenerator {
 			}
 		}
 		if (constructor == null) {
-			throw new TypeConstraintException("Class " + cls + "cannot be auto-generated : "
+			throw new TypeConstraintException("Class " + cls + " cannot be auto-generated : "
 					+ "it has no construtor with only @Param-annotated parameters");
 		}
 		return constructor;

@@ -9,6 +9,7 @@ import ppg.vitavermis.entity.EntityModel;
 import ppg.vitavermis.entity.EntityVisPhy;
 import ppg.vitavermis.entity.models.BallEntityModel;
 import ppg.vitavermis.entity.models.PlatformEntityModel;
+import ppg.vitavermis.maincharacter.MainCharacter;
 import ppg.vitavermis.physics.ItemState;
 import ppg.vitavermis.physics.PhysicsMgr;
 import ppg.vitavermis.render.RenderMgr;
@@ -22,12 +23,22 @@ public final class PhysicsTest1 extends Scene {
 	@Override
 	public GameState getInitialGameState(PhysicsMgr physics, RenderMgr renderer) throws SlickException {
 		// TODO: Convert to JSON file
-		Map<String, Vec2> level = new HashMap<String, Vec2>();
-		level.put("Block", new Vec2(10, 10));
-		level.put("Bouncer", new Vec2(10, 0));
-		
-		//MainCharacter hero = ClassGenerator.generateClasses(MainCharacter.class, "models", ".conf").get("bob");
-		
+		Map<Vec2, String> level = new HashMap<Vec2, String>();
+		level.put(new Vec2(0, 0), "Block");
+		level.put(new Vec2(5, 10), "Block");
+		level.put(new Vec2(6, 10), "Block");
+		level.put(new Vec2(7, 10), "Block");
+		level.put(new Vec2(8, 10), "Block");
+		level.put(new Vec2(9, 10), "Block");
+		level.put(new Vec2(10, 10), "Block");
+		level.put(new Vec2(11, 10), "Block");
+		level.put(new Vec2(12, 10), "Block");
+		level.put(new Vec2(13, 10), "Block");
+		level.put(new Vec2(14, 10), "Block");
+		level.put(new Vec2(15, 10), "Block");
+		level.put(new Vec2(16, 10), "Block");
+		level.put(new Vec2(10, 0), "Bouncer");
+				
 		Map<String, PlatformEntityModel> platforms = ClassGenerator.generateClasses(PlatformEntityModel.class, "models", ".conf");
 		Map<String, BallEntityModel> balls = ClassGenerator.generateClasses(BallEntityModel.class, "models", ".conf");
 
@@ -36,17 +47,24 @@ public final class PhysicsTest1 extends Scene {
 		models.putAll(balls);
 
 		// TODO: move that elsewhere - Only valid for EntityVisPhy
-		for (Map.Entry<String, Vec2 > entityPos : level.entrySet()) {
-			final String modelName = entityPos.getKey();
-			final Vec2 position = entityPos.getValue();
+		MainCharacter hero = null;
+		for (Map.Entry<Vec2, String> entityPos : level.entrySet()) {
+			final Vec2 position = entityPos.getKey();
+			final String modelName = entityPos.getValue();
 			System.out.println("modelName=" + modelName);	
 			final EntityModel model = models.get(modelName);
 			System.out.println("model=" + model);	
 			final ItemState itemPhy = physics.createItem(modelName + "_Item", model.getModelPhy(), position);
 			final Sprite sprite = renderer.createSprite(modelName + "_Sprite", model.getModelVis(), itemPhy);
-			new EntityVisPhy(model, itemPhy, sprite);
+			if (modelName.equals("Bouncer")) {
+				hero = new MainCharacter(model, itemPhy, sprite);				
+			} else {
+				new EntityVisPhy(model, itemPhy, sprite);
+			}
 		}
 
-		return new GameState(Color.black);
+		//MainCharacter hero = ClassGenerator.generateClasses(MainCharacter.class, "models", ".conf").get("bob");
+		assert hero != null;
+		return new GameState(hero);
 	}	
 }

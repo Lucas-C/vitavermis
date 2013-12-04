@@ -1,37 +1,49 @@
 package ppg.vitavermis.input;
 
+import java.util.ArrayDeque;
 import java.util.LinkedList;
-import java.util.List;
 import java.util.Queue;
 
 import org.newdawn.slick.Input;
 import org.newdawn.slick.KeyListener;
 
-import ppg.vitavermis.GameLoop;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
-
 public class InputEventListener {
 	
-	public static boolean jump = false;
-	private int countTemp;
-	
-	private final Queue<InputEvent> newEvents = new LinkedList<InputEvent>();
-	
-	private final InputContext context = new InputContext();
+	private final Queue<InputEvent> newEvents;
+	private Input inputContext;
 	
 	public InputEventListener() {
-		countTemp = 0;
+		newEvents = new LinkedList<InputEvent>();
 	}
 	
-	public List<InputEvent> getNewEvents() {
-		throw new NotImplementedException();
+	public void sendKeyPressed(int key, char optionalCharRepresentation) {
+		System.out.println("Key pressed: " + key + " - " + optionalCharRepresentation);
+		switch (key) {
+		case Input.KEY_LEFT:
+			newEvents.add(InputEvent.GO_LEFT);
+			break;
+		case Input.KEY_RIGHT:
+			newEvents.add(InputEvent.GO_RIGHT);
+			break;
+		}
 	}
 	
-	public InputContext getContext() {
-		return this.context;
+	/*
+	 * There are different kind of events: key released, key newly pressed, key stay pressed...
+	 * This function only filter the meaningful ones for us
+	 */
+	public Queue<InputEvent> getNewEvents() {
+		ArrayDeque<InputEvent> events = new ArrayDeque<InputEvent>(newEvents);
+		newEvents.clear();
+		return events;
 	}
 	
-	public void init(final Input input) {
+	public Input getInputContext() {
+		return this.inputContext;
+	}
+	
+	public void init(final Input inputContext) {
+		this.inputContext = inputContext;
 		KeyListener kl = new KeyListener() {
 
 			@Override
@@ -50,65 +62,16 @@ public class InputEventListener {
 
 			@Override
 			public void keyPressed(int code, char c) {
-				InputEventListener.this.context.add(code);
-				
 				System.out.println("A key was pressed! (" + code + ")");
-				System.out.println("Context : " + InputEventListener.this.context);
+				System.out.println("Context : " + InputEventListener.this.inputContext);
 			}
 
 			@Override
 			public void keyReleased(int code, char c) {
-				InputEventListener.this.context.remove(code);
-				
 				System.out.println("A key was released! (" + code + ")");
-				System.out.println("Context : " + InputEventListener.this.context);
+				System.out.println("Context : " + InputEventListener.this.inputContext);
 			}
 		};
-
-		input.addKeyListener(kl);
+		inputContext.addKeyListener(kl);
 	}
-	
-	public final void update(Input input) {
-		boolean moveLeft = input.isKeyDown(Input.KEY_LEFT); 
-		boolean moveRight = input.isKeyDown(Input.KEY_RIGHT);
-		boolean moveup = input.isKeyDown(Input.KEY_UP);
-		boolean movedown = input.isKeyDown(Input.KEY_DOWN);
-		boolean echap = input.isKeyDown(Input.KEY_ESCAPE);
-		boolean jump = input.isKeyPressed(Input.KEY_SPACE);
-		boolean button_1 = input.isKeyDown(Input.KEY_W);
-		boolean button_2 = input.isKeyDown(Input.KEY_X);
-		
-		
-		if (countTemp > 0) {
-//			PhysicsMgr.jump(item);
-			countTemp--;
-		}
-		if (jump) {
-			countTemp = 10;			
-		}
-		if (moveLeft) {
-//			PhysicsMgr.applyForce(item, new Vector2f(-ForceDefinition.x_max, 0));
-		}
-		if (moveRight) {
-//			PhysicsMgr.applyForce(item, new Vector2f(ForceDefinition.x_max, 0));
-		}
-		/*
-		if (jump) {
-			if (item.isContact() == true) {
-				item.setJumping(100);
-				//PhysicsMgr.applyForce(item, new Vector2f( 0, - (float) (ForceDefinition.y_max  )));
-			}
-		}
-		*/
-		if (GameLoop.debug_mode_up_down) {
-			if (movedown) {
-//				PhysicsMgr.applyForce(item, new Vector2f(0, (float) (ForceDefinition.y_max)));
-			}
-			if (moveup) {
-//				PhysicsMgr.applyForce(item, new Vector2f(0, -(float) (ForceDefinition.y_max)));
-			}
-		}
-		
-		
-	}	
 }
