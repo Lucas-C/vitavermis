@@ -2,17 +2,17 @@
 
 [Lucas]
 TODO:
-- 'Entity' classes cleanup
-- sprites rendering cleanup
 - MainCharacter with input control
-- Zoom control
-- diagramme pour lister infos relatives au Hero et leur repartition en classes
+- moving platforms
+- sprites rendering cleanup
 - animation engine : fix "duration"
-- Vector classes (2d, 3d for float, int...) + Localisation
-- level/map loading
+- diagramme pour lister infos relatives au Hero et leur repartition en classes
 - use log system like log4j/slf4j:
     + define a minimum period for logging -> logline will contain a count of "silenced" too frequent messages
+- Zoom control
+- level/map loading
 - on-screen shortcuts help
+- Localisation
 
 DONE:
     - setup base classes (Main...)
@@ -39,4 +39,4 @@ NOTES AGAINST SLICK:
     force using init() methods -> against immutability
     no Renderable.draw(x, y, width, height) // Fixed on Slick repo : patch approved
     use integers for width/height
-
+    le systeme de 'InputProviderListener' est interessant, mais inusable en l'état car l'interface 'Command' est entierement vide, et il est donc impossible de reagir à un evenement sans utiliser de 'switch'

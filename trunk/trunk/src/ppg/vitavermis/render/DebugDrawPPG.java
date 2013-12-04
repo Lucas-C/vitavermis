@@ -25,7 +25,9 @@ public class DebugDrawPPG extends DebugDraw {
 	}
 	
 	private final static boolean INVERT_Y = true;
-	private final static float SCALE = RenderMgr.SCALE;
+	private static float convertCoord(float coord) {
+		return RenderMgr.SCALE / 2 + coord * RenderMgr.SCALE;
+	}
 
 	private List<Shape> debugShapes;
 	private List<RenderString> debugStrings;
@@ -44,10 +46,10 @@ public class DebugDrawPPG extends DebugDraw {
 		for (Shape shape : debugShapes) {
 			graphics.draw(shape);			
 		}
-		debugStrings.add(new RenderString("TIME: " + timeSinceStart / 1000f, 0, 50));
 		for (RenderString renderStr : debugStrings) {
 			graphics.drawString(renderStr.str, renderStr.x, renderStr.y);			
 		}
+		graphics.drawString("TIME: " + timeSinceStart / 1000f, 0, 50);
 		debugRenderedSinceLastAdd = true;
 	}
 	
@@ -61,14 +63,14 @@ public class DebugDrawPPG extends DebugDraw {
 	
 	@Override
 	public void drawSegment(Vec2 p1, Vec2 p2, Color3f color) {
-		Line segment = new Line(p1.x * SCALE, p1.y * SCALE, p2.x * SCALE, p2.y * SCALE);
+		Line segment = new Line(convertCoord(p1.x), convertCoord(p1.y), convertCoord(p2.x), convertCoord(p2.y));
 		preCheckDebugReset();
 		debugShapes.add(segment);
 	}
 
 	@Override
 	public void drawSolidCircle(Vec2 center, float radius, Vec2 axis, Color3f color) {
-		Circle solidCircle = new Circle(center.x * SCALE, center.y * SCALE, radius * SCALE);
+		Circle solidCircle = new Circle(convertCoord(center.x), convertCoord(center.y), radius * RenderMgr.SCALE);
 		preCheckDebugReset();
 		debugShapes.add(solidCircle);
 	}
@@ -77,8 +79,8 @@ public class DebugDrawPPG extends DebugDraw {
 	public void drawSolidPolygon(Vec2[] vertices, int vertexCount, Color3f color) {
 		float[] scaledVertices = new float[2 * vertexCount];
 		for (int i = 0; i < vertexCount; i++) {
-			scaledVertices[2 * i] =  vertices[i].x * SCALE;
-			scaledVertices[2 * i + 1] =  vertices[i].y * SCALE;
+			scaledVertices[2 * i] =  convertCoord(vertices[i].x);
+			scaledVertices[2 * i + 1] =  convertCoord(vertices[i].y);
 		}
 		Polygon solidPolygon = new Polygon(scaledVertices);
 		preCheckDebugReset();
@@ -90,14 +92,14 @@ public class DebugDrawPPG extends DebugDraw {
 		if (INVERT_Y) {
 			y = -y;
 		}
-		RenderString renderStr = new RenderString(s, x * SCALE, y * SCALE);
+		RenderString renderStr = new RenderString(s, convertCoord(x), convertCoord(y));
 		preCheckDebugReset();
 		debugStrings.add(renderStr);
 	}
 
 	@Override
 	public void drawCircle(Vec2 center, float radius, Color3f color) {
-		Circle circle = new Circle(center.x * SCALE, center.y * SCALE, radius * SCALE);
+		Circle circle = new Circle(convertCoord(center.x), convertCoord(center.y), radius * RenderMgr.SCALE);
 		preCheckDebugReset();
 		debugShapes.add(circle);
 	}

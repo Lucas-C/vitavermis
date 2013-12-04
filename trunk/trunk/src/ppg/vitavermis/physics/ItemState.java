@@ -27,4 +27,16 @@ public class ItemState implements PositionProvider {
 	public final float getMassInKg() {
 		return this.body.getMass();
 	}
+	
+	public Vec2 getVelocity() {
+		return this.body.getLinearVelocity();
+	}
+
+	public void setVelocity(Vec2 vel) {
+		this.body.setLinearVelocity(vel);
+	}
+
+	public void applyLinearImpulse(Vec2 impulse) {
+		this.body.applyLinearImpulse(impulse, this.body.getWorldCenter());
+	}
 }

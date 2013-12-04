@@ -39,11 +39,11 @@ public class RenderMgr {
 	}
 	
 	public void render(Graphics graphics, GameState gameState) throws SlickException {
-		renderSpriteList(graphics, gameState);
+		renderSpriteList(graphics, spriteList);
 		debugDraw.renderDebugShapes(graphics, gameState.getTimeSinceStart());
 	}
 
-	private void renderSpriteList(Graphics graphics, GameState gameState) throws SlickException {
+	private static void renderSpriteList(Graphics graphics, List<Sprite> spriteList) throws SlickException {
 		for (Sprite sprite : spriteList) {
 			final Vec2 pos = sprite.posRef.getPos().mul(SCALE);
 			final Vector2f dimensions = sprite.model.dimensions.copy().scale(SCALE);

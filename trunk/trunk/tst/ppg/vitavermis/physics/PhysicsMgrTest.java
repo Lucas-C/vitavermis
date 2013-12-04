@@ -17,7 +17,7 @@ public class PhysicsMgrTest {
 	@Before
 	public final void setUp() {
 		this.physics_mgr = new PhysicsMgr();
-		this.physics_mgr.init();
+		this.physics_mgr.init(null);
 	}
 	
 	private final void setGround() {
